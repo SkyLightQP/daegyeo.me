@@ -37,6 +37,16 @@ const GlobalStyle: React.FC = () => {
         body {
           background-color: #f0f4f5;
         }
+
+        ::selection {
+          background-color: #1c1c1c;
+          color: #f0f4f5;
+        }
+
+        ::-moz-selection {
+          background-color: #1c1c1c;
+          color: #f0f4f5;
+        }
       `}
     />
   );
