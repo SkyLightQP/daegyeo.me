@@ -18,7 +18,9 @@ const Content = styled.div`
 `;
 
 const LinkStyle = styled.a`
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Main: React.FC = () => {
