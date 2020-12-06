@@ -5,7 +5,7 @@ import { keyframes } from '@emotion/react';
 const Keyframe = keyframes`
   from {
     opacity: 1;
-    top: 10px;
+    top: 8px;
   }
   to {
     opacity: 0;
