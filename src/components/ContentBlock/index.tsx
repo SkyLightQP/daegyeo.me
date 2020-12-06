@@ -12,6 +12,10 @@ const ContentTitle = styled.p`
   &:after {
     content: '.';
   }
+
+  @media screen and (max-width: 420px) {
+    font-size: 1.8rem;
+  }
 `;
 
 interface ContentBlockProps {
