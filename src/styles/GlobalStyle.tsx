@@ -33,6 +33,10 @@ const GlobalStyle: React.FC = () => {
 
           font-family: 'IBMPlexSansKR';
         }
+
+        body {
+          background-color: #f0f4f5;
+        }
       `}
     />
   );
