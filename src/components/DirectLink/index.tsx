@@ -8,6 +8,13 @@ interface DirectLinkProps {
 }
 
 const StyledA = styled.a`
+  display: inline-block;
+
+  background-color: #303b4d;
+  color: white;
+
+  margin-top: 5px;
+
   &:hover {
     text-decoration: underline;
   }
