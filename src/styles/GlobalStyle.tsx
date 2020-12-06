@@ -31,7 +31,7 @@ const GlobalStyle: React.FC = () => {
           padding: 0;
           box-sizing: border-box;
 
-          font-family: 'IBMPlexSansKR';
+          font-family: 'IBMPlexSansKR', sans-serif;
         }
 
         body {
