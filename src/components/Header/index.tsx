@@ -4,13 +4,15 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faBlog } from '@fortawesome/free-solid-svg-icons';
+import MouseDownIcon from '../MouseDownIcon';
 
 const TitleContainer = styled.div`
   background-color: #303b4d;
 
-  display: flex;
   width: 100vw;
   height: 100vh;
+
+  display: flex;
   justify-content: center;
   align-items: center;
 
@@ -60,6 +62,12 @@ const IconList = styled.div`
   }
 `;
 
+const StyledMouseDownWrapper = styled.div`
+  position: absolute;
+  top: 98%;
+  transform: translateY(-98%);
+`;
+
 const containerAnimation = {
   before: {},
   after: {
@@ -84,31 +92,37 @@ const textAnimation = {
 
 const Header: React.FC = () => {
   return (
-    <TitleContainer>
-      <motion.div initial="before" animate="after" variants={containerAnimation}>
-        <Title variants={textAnimation}>하늘빛</Title>
-        <SubTitle variants={textAnimation}>Daegyeom Ha</SubTitle>
+    <>
+      <TitleContainer>
+        <motion.div initial="before" animate="after" variants={containerAnimation}>
+          <Title variants={textAnimation}>하늘빛</Title>
+          <SubTitle variants={textAnimation}>Daegyeom Ha</SubTitle>
 
-        <IconList>
-          <motion.a
-            href="https://github.com/SkyLightQP/"
-            target="_blank"
-            rel="noopener noreferrer"
-            variants={textAnimation}
-          >
-            <FontAwesomeIcon icon={faGithub} /> GITHUB
-          </motion.a>
-          <motion.a
-            href="https://blog.skylightqp.kr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            variants={textAnimation}
-          >
-            <FontAwesomeIcon icon={faBlog} /> BLOG
-          </motion.a>
-        </IconList>
-      </motion.div>
-    </TitleContainer>
+          <IconList>
+            <motion.a
+              href="https://github.com/SkyLightQP/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={textAnimation}
+            >
+              <FontAwesomeIcon icon={faGithub} /> GITHUB
+            </motion.a>
+            <motion.a
+              href="https://blog.skylightqp.kr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={textAnimation}
+            >
+              <FontAwesomeIcon icon={faBlog} /> BLOG
+            </motion.a>
+          </IconList>
+        </motion.div>
+
+        <StyledMouseDownWrapper>
+          <MouseDownIcon />
+        </StyledMouseDownWrapper>
+      </TitleContainer>
+    </>
   );
 };
 
