@@ -38,6 +38,11 @@ const GlobalStyle: React.FC = () => {
           background-color: #f0f4f5;
         }
 
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
         ::selection {
           background-color: #1c1c1c;
           color: #f0f4f5;
