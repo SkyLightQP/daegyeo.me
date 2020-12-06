@@ -49,8 +49,6 @@ const IconList = styled.div`
 
   & > a {
     margin-right: 14px;
-    text-decoration: none;
-    color: inherit;
 
     &:hover {
       text-decoration: underline;
