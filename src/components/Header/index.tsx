@@ -95,7 +95,7 @@ const Header: React.FC = () => {
     <>
       <TitleContainer>
         <motion.div initial="before" animate="after" variants={containerAnimation}>
-          <Title variants={textAnimation}>하늘빛</Title>
+          <Title variants={textAnimation}>하대겸</Title>
           <SubTitle variants={textAnimation}>Daegyeom Ha</SubTitle>
 
           <IconList>
