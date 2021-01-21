@@ -39,18 +39,18 @@ const Main: React.FC = () => {
         </ContentBlock>
 
         <ContentBlock title="프로젝트">
-          <ProjectTitle>AskQ (2018~)</ProjectTitle>
-          <ProjectBody>
-            익명 질문 서비스입니다. <br />
-            <b>Vue, Firebase</b>를 사용했습니다. <br />
-          </ProjectBody>
-          <br />
-
           <ProjectTitle>끄투닷컴 (2017~)</ProjectTitle>
           <ProjectBody>
             끄투닷컴은 온라인 웹 환경의 끝말잇기 게임입니다. <br />
             <b>JavaScript, Pug</b>를 사용했습니다. <br />
             <DirectLink href="https://kkutu.club">서비스 바로가기</DirectLink>
+          </ProjectBody>
+          <br />
+
+          <ProjectTitle>AskQ (2018~)</ProjectTitle>
+          <ProjectBody>
+            익명 질문 서비스입니다. <br />
+            <b>Vue, Firebase</b>를 사용했습니다. <br />
           </ProjectBody>
           <br />
 
@@ -72,7 +72,7 @@ const Main: React.FC = () => {
 
           <ProjectTitle>수정과 (2020~2021)</ProjectTitle>
           <ProjectBody>
-            교내 인트라넷 서비스입니다. <br />
+            교내 인트라넷 서비스 개발팀으로 참여했습니다. <br />
             시간표 확인, 방과 후 신청 등 교내 사업을 온라인으로 진행할 수 있습니다. <br />
             <b>TypeScript, React, Express</b>를 사용했습니다.
             <br />
@@ -84,7 +84,7 @@ const Main: React.FC = () => {
           <ProjectBody>
             SW마에스트로에서 진행한 온라인 스터디 플랫폼입니다. <br />
             음성 통화, 자료 공유 및 편집, 자료 필기가 가능합니다. <br />
-            <b>TypeScript, React, AWS</b>를 사용했습니다.
+            <b>TypeScript, React, AWS</b>를 사용하고 <b>WebRTC, Canvas</b> 기술을 사용했습니다.
           </ProjectBody>
         </ContentBlock>
 
@@ -92,6 +92,7 @@ const Main: React.FC = () => {
           <ProjectTitle>제3회 장애인식개선콘텐츠공모전 최우수상 (2019)</ProjectTitle>
           <ProjectBody>영상 분야에 참여했습니다.</ProjectBody>
           <br />
+
           <ProjectTitle>Hello20Thon 장려상 (2020)</ProjectTitle>
           <ProjectBody>할 일을 공유하고 경쟁하는 서비스를 만들었습니다.</ProjectBody>
         </ContentBlock>
@@ -103,14 +104,14 @@ const Main: React.FC = () => {
 
           <ProjectTitle>TeamIF</ProjectTitle>
           <ProjectBody>
-            청소년 프로그래밍 팀. TeamIF 소속 개발자입니다. <br />
+            청소년 프로그래밍 팀, TeamIF 소속 개발자입니다. <br />
             <DirectLink href="https://teamif.io">팀 홈페이지 바로가기</DirectLink>
           </ProjectBody>
         </ContentBlock>
 
         <ContentBlock title="LINK">
           <ProjectTitle>
-            <LinkStyle href="mailto://me@skylightqp.kr">
+            <LinkStyle href="mailto:combbm@gmail.com">
               <FontAwesomeIcon icon={faAt} size="sm" /> Email
             </LinkStyle>
           </ProjectTitle>
