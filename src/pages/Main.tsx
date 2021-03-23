@@ -95,6 +95,10 @@ const Main: React.FC = () => {
 
           <ProjectTitle>Hello20Thon 장려상 (2020)</ProjectTitle>
           <ProjectBody>할 일을 공유하고 경쟁하는 서비스를 만들었습니다.</ProjectBody>
+          <br />
+
+          <ProjectTitle>2020-2 Ajou SOFTCON 고등부문 우수상 (2020)</ProjectTitle>
+          <ProjectBody>인스타그램의 프론트엔드와 백엔드를 클론코딩하는 프로젝트를 진행했습니다.</ProjectBody>
         </ContentBlock>
 
         <ContentBlock title="그 밖에">
