@@ -98,7 +98,11 @@ const Main: React.FC = () => {
           <br />
 
           <ProjectTitle>2020-2 Ajou SOFTCON 고등부문 우수상 (2020)</ProjectTitle>
-          <ProjectBody>인스타그램의 프론트엔드와 백엔드를 클론코딩하는 프로젝트를 진행했습니다.</ProjectBody>
+          <ProjectBody>
+            인스타그램의 프론트엔드와 백엔드를 클론코딩하는 프로젝트를 진행했습니다.
+            <br />
+            <DirectLink href="https://github.com/Sustagram">GitHub 바로가기</DirectLink>
+          </ProjectBody>
         </ContentBlock>
 
         <ContentBlock title="그 밖에">
