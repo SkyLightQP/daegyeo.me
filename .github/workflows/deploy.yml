@@ -31,4 +31,7 @@ jobs:
           NODE_ENV: production
 
       - name: Deploy
-        run: yarn deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GH_PAT }}
+          publish_dir: ./build
