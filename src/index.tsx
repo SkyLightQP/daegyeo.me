@@ -8,7 +8,7 @@ import GlobalStyle from './styles/GlobalStyle';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename="/resume">
       <Main />
     </BrowserRouter>
   </React.StrictMode>,
