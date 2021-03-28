@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import Main from './pages/Main';
 import GlobalStyle from './styles/GlobalStyle';
@@ -7,7 +8,9 @@ import GlobalStyle from './styles/GlobalStyle';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    <Main />
+    <BrowserRouter basename="/resume">
+      <Main />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
