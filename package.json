@@ -1,12 +1,14 @@
 {
   "name": "resume",
   "version": "0.1.0",
+  "homepage": "https://skylightqp.github.io/resume",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.ts[x]"
+    "lint": "eslint src/**/*.ts[x]",
+    "deploy": "gh-pages -d build"
   },
   "license": "MIT",
   "dependencies": {
@@ -28,6 +30,7 @@
     "@types/react-dom": "^16.9.8",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.2.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
