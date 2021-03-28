@@ -1,7 +1,7 @@
 {
   "name": "resume",
   "version": "0.1.0",
-  "homepage": "https://skylightqp.github.io/resume",
+  "homepage": "https://skylightqp.kr",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
