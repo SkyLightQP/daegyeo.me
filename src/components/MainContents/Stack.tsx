@@ -11,8 +11,8 @@ const Stack: React.FC = () => {
       <ProjectTitle>Framework , Library</ProjectTitle>
       <ProjectBody>React, Express.js, Vue2</ProjectBody>
 
-      <ProjectTitle>Infra</ProjectTitle>
-      <ProjectBody>Docker, AWS, NCP(Naver Cloud Platform)</ProjectBody>
+      <ProjectTitle>DevOps</ProjectTitle>
+      <ProjectBody>Ubuntu, Docker, AWS, NCP</ProjectBody>
     </ContentBlock>
   );
 };
