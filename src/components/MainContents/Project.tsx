@@ -7,12 +7,12 @@ const Project: React.FC = () => {
   return (
     <ContentBlock title="프로젝트">
       <ProjectTitle>
-        끄투닷컴 <ProjectDate>(2017~)</ProjectDate>
+        끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
       </ProjectTitle>
       <ProjectBody>
         끄투닷컴은 온라인 웹 환경의 끝말잇기 게임입니다. <br />
         <b>JavaScript, Pug</b>를 사용했습니다. <br />
-        <DirectLink href="https://kkutu.club">서비스 바로가기</DirectLink>
+        <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub 바로가기</DirectLink>
       </ProjectBody>
       <br />
 
