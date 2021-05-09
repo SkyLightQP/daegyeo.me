@@ -13,7 +13,7 @@ const StyledA = styled.a`
   background-color: #303b4d;
   color: white;
 
-  margin-top: 5px;
+  margin: 5px 0;
 
   &:hover {
     text-decoration: underline;

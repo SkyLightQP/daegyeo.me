@@ -3,6 +3,14 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   margin: 3rem 0;
+
+  & div {
+    margin-bottom: 1.7rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const ContentTitle = styled.p`
