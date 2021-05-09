@@ -8,7 +8,7 @@ const Project: React.FC = () => {
     <ContentBlock title="프로젝트">
       <div>
         <ProjectTitle>
-          끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
+          끄투닷컴 <ProjectDate>(2017~2021.서비스종료)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
           끄투닷컴은 온라인 웹 환경의 끝말잇기 게임입니다. <br />
@@ -58,7 +58,8 @@ const Project: React.FC = () => {
           SW마에스트로에서 진행한 온라인 스터디 플랫폼입니다. <br />
           음성 통화, 자료 공유 및 편집, 자료 필기가 가능합니다. <br />
           <b>Amazon S3, Cloudfront</b>를 이용하여 프론트엔드를 배포하고 캐싱하였습니다. <br />
-          <b>TypeScript, React, AWS</b>를 사용하고 <b>WebRTC, Canvas</b> 기술을 사용했습니다.
+          <b>TypeScript, React, AWS</b>를 사용하고 <b>WebRTC, Socket, Canvas</b> 기술을
+          사용했습니다.
           <br />
           <DirectLink href="https://github.com/real-compacted-developer/connect-class">
             GitHub
@@ -77,6 +78,21 @@ const Project: React.FC = () => {
           <b>TypeScript, React, Express, FCM(Web Push)</b>을 사용했습니다.
           <br />
           <DirectLink href="https://github.com/swjb-sinamon">GitHub</DirectLink>
+        </ProjectBody>
+      </div>
+
+      <div>
+        <ProjectTitle>
+          ZUDA <ProjectDate>(2021)</ProjectDate>
+        </ProjectTitle>
+        <ProjectBody>
+          과제제출, 출석체크, 화면공유 등을 <br />
+          제공하는 학습 보조 플랫폼입니다. 백엔드 개발로 참여했습니다. <br />
+          <b>TypeScript, Nestjs, Socket, MariaDB, MongoDB</b>를 사용했습니다.
+          <br />
+          <DirectLink href="https://github.com/zzuda">GitHub</DirectLink>
+          <br />
+          <DirectLink href="https://zuda.space">서비스 (준비중)</DirectLink>
         </ProjectBody>
       </div>
     </ContentBlock>
