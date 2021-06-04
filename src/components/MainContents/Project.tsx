@@ -8,33 +8,12 @@ const Project: React.FC = () => {
     <ContentBlock title="프로젝트">
       <div>
         <ProjectTitle>
-          끄투닷컴 <ProjectDate>(2017~2021.서비스종료)</ProjectDate>
+          끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
           끄투닷컴은 온라인 웹 환경의 끝말잇기 게임입니다. <br />
           <b>JavaScript, Pug</b>를 사용했습니다. <br />
           <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub</DirectLink>
-        </ProjectBody>
-      </div>
-
-      <div>
-        <ProjectTitle>
-          AskQ <ProjectDate>(2018~2021)</ProjectDate>
-        </ProjectTitle>
-        <ProjectBody>
-          Firebase Firestore을 이용한 익명 질문 서비스입니다. <br />
-          <b>Vue, Firebase</b>를 사용했습니다.
-        </ProjectBody>
-      </div>
-
-      <div>
-        <ProjectTitle>
-          Kronos <ProjectDate>(2019~)</ProjectDate>
-        </ProjectTitle>
-        <ProjectBody>
-          교내 시간표 및 급식을 확인할 수 있는 디스코드 봇입니다. <br />
-          <b>Selenium</b>을 이용해서 시간표를 가져옵니다. <br />
-          <b>Kotlin, Discord JDA</b>를 사용했습니다.
         </ProjectBody>
       </div>
 

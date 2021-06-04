@@ -5,7 +5,6 @@ import Stack from '../components/MainContents/Stack';
 import Project from '../components/MainContents/Project';
 import Prize from '../components/MainContents/Prize';
 import LinkSection from '../components/MainContents/Link';
-import Etc from '../components/MainContents/Etc';
 
 const Content = styled.div`
   margin: 3rem 5rem 0 5rem;
@@ -29,7 +28,6 @@ const Main: React.FC = () => {
         <Stack />
         <Project />
         <Prize />
-        <Etc />
         <LinkSection />
       </Content>
     </>

@@ -8,8 +8,8 @@ const Stack: React.FC = () => {
       <ProjectTitle>Language</ProjectTitle>
       <ProjectBody>Java, Kotlin, TypeScript, GraphQL</ProjectBody>
 
-      <ProjectTitle>Framework , Library</ProjectTitle>
-      <ProjectBody>React, Express.js, Vue2</ProjectBody>
+      <ProjectTitle>Framework, Library</ProjectTitle>
+      <ProjectBody>React, Express.js, Nestjs</ProjectBody>
 
       <ProjectTitle>DevOps</ProjectTitle>
       <ProjectBody>Ubuntu, Docker, AWS, NCP</ProjectBody>
