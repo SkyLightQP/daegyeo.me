@@ -22,7 +22,7 @@ const TitleContainer = styled.div`
 const Title = styled(motion.p)`
   font-weight: bold;
   color: white;
-  font-size: 3.5rem;
+  font-size: 3.2rem;
 
   @media screen and (max-width: 420px) {
     font-size: 3rem;
