@@ -48,6 +48,13 @@ const LinkSection: React.FC = () => {
           <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learn
         </LinkStyle>
       </ProjectTitle>
+
+      <br />
+
+      <p>
+        이 페이지는 <LinkStyle href="https://daegyeo.me">daegyeo.me</LinkStyle> 으로도 들어올 수
+        있습니다.
+      </p>
     </ContentBlock>
   );
 };
