@@ -36,6 +36,7 @@ const GlobalStyle: React.FC = () => {
 
         body {
           background-color: #f0f4f5;
+          overflow-x: hidden;
         }
 
         a {
