@@ -14,7 +14,7 @@ const LinkStyle = styled.a`
 
 const LinkSection: React.FC = () => {
   return (
-    <ContentBlock title="LINK">
+    <ContentBlock title="그 밖에">
       <ProjectTitle>
         <LinkStyle href="mailto:combbm@gmail.com">
           <FontAwesomeIcon icon={faAt} size="sm" /> Email

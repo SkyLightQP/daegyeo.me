@@ -12,7 +12,7 @@ const Stack: React.FC = () => {
       <ProjectBody>React, Express.js, Nestjs</ProjectBody>
 
       <ProjectTitle>DevOps</ProjectTitle>
-      <ProjectBody>Ubuntu, Docker, AWS, NCP</ProjectBody>
+      <ProjectBody>Linux, Docker, AWS, NCP</ProjectBody>
     </ContentBlock>
   );
 };

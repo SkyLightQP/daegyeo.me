@@ -11,8 +11,8 @@ const Project: React.FC = () => {
           끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
-          끄투닷컴은 온라인 웹 환경의 끝말잇기 게임입니다. <br />
-          <b>JavaScript, Pug</b>를 사용했습니다. <br />
+          끄투닷컴은 온라인 끝말잇기 게임입니다. <br />
+          <b>JavaScript, Pug, PostgreSQL</b>를 사용했습니다. <br />
           <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub</DirectLink>
         </ProjectBody>
       </div>
@@ -51,10 +51,9 @@ const Project: React.FC = () => {
           수정과 <ProjectDate>(2020~)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
-          교내(학과) 인트라넷 서비스 운영, 개발 담당으로 참여했습니다. <br />
+          학과 인트라넷 서비스 운영 및 개발을 하였습니다. <br />
           시간표 확인, 교내 행사 등 온라인으로 확인하고 참여할 수 있습니다. <br />
-          Swagger를 이용하여 API 문서화를 하였습니다. <br />
-          <b>TypeScript, React, Express, FCM(Web Push)</b>을 사용했습니다.
+          <b>TypeScript, React, Express, Swagger, FCM</b>을 사용했습니다.
           <br />
           <DirectLink href="https://github.com/swjb-sinamon">GitHub</DirectLink>
         </ProjectBody>
@@ -70,8 +69,6 @@ const Project: React.FC = () => {
           <b>TypeScript, Nestjs, Socket, MariaDB, MongoDB</b>를 사용했습니다.
           <br />
           <DirectLink href="https://github.com/zzuda">GitHub</DirectLink>
-          <br />
-          <DirectLink href="https://zuda.space">서비스 (준비중)</DirectLink>
         </ProjectBody>
       </div>
     </ContentBlock>
