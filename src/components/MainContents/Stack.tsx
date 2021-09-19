@@ -6,13 +6,13 @@ const Stack: React.FC = () => {
   return (
     <ContentBlock title="기술스택">
       <ProjectTitle>Language</ProjectTitle>
-      <ProjectBody>Java, Kotlin, TypeScript, GraphQL</ProjectBody>
+      <ProjectBody>Java, Kotlin, TypeScript</ProjectBody>
 
       <ProjectTitle>Framework, Library</ProjectTitle>
-      <ProjectBody>React, Express.js, Nestjs</ProjectBody>
+      <ProjectBody>React, Expressjs, Nestjs</ProjectBody>
 
       <ProjectTitle>DevOps</ProjectTitle>
-      <ProjectBody>Linux, Docker, AWS, NCP</ProjectBody>
+      <ProjectBody>Linux, Docker</ProjectBody>
     </ContentBlock>
   );
 };
