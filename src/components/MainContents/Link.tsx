@@ -13,10 +13,19 @@ const LinkStyle = styled.a`
 `;
 
 const LinkSection: React.FC = () => {
+  const onEmailClick = () => {
+    window.open('mailto:combbm@gmail.com');
+  };
+
   return (
     <ContentBlock title="그 밖에">
       <ProjectTitle>
-        <LinkStyle href="mailto:combbm@gmail.com">
+        <LinkStyle
+          onClick={onEmailClick}
+          style={{
+            cursor: 'pointer'
+          }}
+        >
           <FontAwesomeIcon icon={faAt} size="sm" /> Email
         </LinkStyle>
       </ProjectTitle>
@@ -49,12 +58,16 @@ const LinkSection: React.FC = () => {
         </LinkStyle>
       </ProjectTitle>
 
-      <br />
-
-      <p>
-        이 페이지는 <LinkStyle href="https://daegyeo.me">daegyeo.me</LinkStyle> 으로도 들어올 수
-        있습니다.
-      </p>
+      <div
+        style={{
+          marginTop: '3rem'
+        }}
+      >
+        <p>
+          이 페이지는 <LinkStyle href="https://daegyeo.me">daegyeo.me</LinkStyle> 으로도 들어올 수
+          있습니다.
+        </p>
+      </div>
     </ContentBlock>
   );
 };
