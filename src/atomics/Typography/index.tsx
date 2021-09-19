@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ProjectTitle = styled.p`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
 `;
 

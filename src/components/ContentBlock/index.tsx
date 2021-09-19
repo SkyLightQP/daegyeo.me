@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const ContentTitle = styled.p`
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 28px;
 
   &:after {
     content: '.';
