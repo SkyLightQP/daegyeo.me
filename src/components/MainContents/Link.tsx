@@ -64,8 +64,8 @@ const LinkSection: React.FC = () => {
         }}
       >
         <p>
-          이 페이지는 <LinkStyle href="https://daegyeo.me">daegyeo.me</LinkStyle> 으로도 들어올 수
-          있습니다.
+          이 페이지는 <LinkStyle href="https://skylightqp.kr">skylightqp.kr</LinkStyle> 으로도
+          들어올 수 있습니다.
         </p>
       </div>
     </ContentBlock>
