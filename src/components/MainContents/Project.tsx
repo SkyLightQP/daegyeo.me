@@ -9,26 +9,15 @@ const Project: React.FC = () => {
     <ContentBlock title="프로젝트">
       <div>
         <ProjectTitle>
-          끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
+          수정과 <ProjectDate>(2020~2021)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
-          끝말잇기, 앞말잇기 등 온라인 단어게임 <br />
-          with <b>JavaScript, Pug, PostgreSQL</b> <br />
-          <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub</DirectLink>
-        </ProjectBody>
-      </div>
-
-      <div>
-        <ProjectTitle>
-          수프트 <ProjectDate>(2019~)</ProjectDate>
-        </ProjectTitle>
-        <ProjectBody>
-          커뮤니티형 문제은행 서비스 <br />
-          누구나 문제를 내고 다른 사람의 문제를 풀 수 있습니다. <br />
-          with <b>TypeScript, Expressjs, GraphQL, React</b> <br />
-          <DirectLink href="https://github.com/swsuft">GitHub</DirectLink>
+          학과 인트라넷 서비스 <br />
+          온라인으로 교내 행사를 확인하고 시간표, 급식을 확인할 수 있습니다. <br />
+          with <b>TypeScript, React, Expressjs, Swagger, FCM</b> <br />
+          <DirectLink href="https://github.com/swjb-sinamon">GitHub</DirectLink>
           <HorizontalGap gap={8} />
-          <DirectLink href="https://suft.kr">Link</DirectLink>
+          <DirectLink href="https://snm.itsw.info">Link</DirectLink>
         </ProjectBody>
       </div>
 
@@ -48,20 +37,6 @@ const Project: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          수정과 <ProjectDate>(2020~)</ProjectDate>
-        </ProjectTitle>
-        <ProjectBody>
-          학과 인트라넷 서비스 <br />
-          온라인으로 교내 행사를 확인하고 시간표, 급식을 확인할 수 있습니다. <br />
-          with <b>TypeScript, React, Expressjs, Swagger, FCM</b> <br />
-          <DirectLink href="https://github.com/swjb-sinamon">GitHub</DirectLink>
-          <HorizontalGap gap={8} />
-          <DirectLink href="https://snm.itsw.info">Link</DirectLink>
-        </ProjectBody>
-      </div>
-
-      <div>
-        <ProjectTitle>
           ZUDA <ProjectDate>(2021)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
@@ -70,6 +45,31 @@ const Project: React.FC = () => {
           with <b>TypeScript, Nestjs, Socket, MariaDB, MongoDB</b>
           <br />
           <DirectLink href="https://github.com/zzuda">GitHub</DirectLink>
+        </ProjectBody>
+      </div>
+
+      <div>
+        <ProjectTitle>
+          수프트 <ProjectDate>(2019~)</ProjectDate>
+        </ProjectTitle>
+        <ProjectBody>
+          커뮤니티형 문제은행 서비스 <br />
+          누구나 문제를 내고 다른 사람의 문제를 풀 수 있습니다. <br />
+          with <b>TypeScript, Expressjs, GraphQL, React</b> <br />
+          <DirectLink href="https://github.com/swsuft">GitHub</DirectLink>
+          <HorizontalGap gap={8} />
+          <DirectLink href="https://suft.kr">Link</DirectLink>
+        </ProjectBody>
+      </div>
+
+      <div>
+        <ProjectTitle>
+          끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
+        </ProjectTitle>
+        <ProjectBody>
+          끝말잇기, 앞말잇기 등 온라인 단어게임 <br />
+          with <b>JavaScript, Pug, PostgreSQL</b> <br />
+          <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub</DirectLink>
         </ProjectBody>
       </div>
     </ContentBlock>
