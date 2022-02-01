@@ -51,8 +51,10 @@ const Prize: React.FC = () => {
         <ProjectTitle>
           제3회 장애인식개선콘텐츠공모전 최우수상 <ProjectDate>(2019)</ProjectDate>
         </ProjectTitle>
-        <ProjectBody>영상 분야, 모션 그래픽 제작 담당</ProjectBody> <br />
-        with <b>Adobe After Effects</b>
+        <ProjectBody>
+          영상 분야, 모션 그래픽 제작 담당 <br />
+          with <b>Adobe After Effects</b>
+        </ProjectBody>
       </div>
     </ContentBlock>
   );
