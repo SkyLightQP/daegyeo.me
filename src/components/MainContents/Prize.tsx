@@ -19,7 +19,7 @@ const Prize: React.FC = () => {
         </ProjectTitle>
         <ProjectBody>
           인스타그램의 프론트엔드와 백엔드를 클론코딩하는 프로젝트 <br />
-          with <b>Amazon S3, Python, Django, MariaDB</b> <br />
+          with <b>Python, Django, MariaDB, Amazon S3</b> <br />
           <DirectLink href="https://github.com/Sustagram">GitHub</DirectLink>
         </ProjectBody>
       </div>
@@ -41,6 +41,8 @@ const Prize: React.FC = () => {
         <ProjectBody>
           청소년 프로그래밍 팀, TeamIF 개발자 <br />
           팀사이트 개발 및 리메이크, 인트라넷 개발을 담당했습니다. <br />
+          with <b>TypeScript, React</b>
+          <br />
           <DirectLink href="https://teamif.io">팀 홈페이지</DirectLink>
         </ProjectBody>
       </div>
@@ -49,7 +51,8 @@ const Prize: React.FC = () => {
         <ProjectTitle>
           제3회 장애인식개선콘텐츠공모전 최우수상 <ProjectDate>(2019)</ProjectDate>
         </ProjectTitle>
-        <ProjectBody>영상 분야, 모션 그래픽 제작 담당</ProjectBody>
+        <ProjectBody>영상 분야, 모션 그래픽 제작 담당</ProjectBody> <br />
+        with <b>Adobe After Effects</b>
       </div>
     </ContentBlock>
   );

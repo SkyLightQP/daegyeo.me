@@ -28,7 +28,7 @@ const Project: React.FC = () => {
         <ProjectBody>
           SW마에스트로 11기 온라인 스터디 플랫폼 <br />
           음성 통화, 자료 공유 및 편집, 자료 필기가 가능합니다. <br />
-          with <b>AWS, TypeScript, React, WebRTC, Socket, Canvas</b> <br />
+          with <b>TypeScript, React, WebRTC, WebSocket, AWS</b> <br />
           <DirectLink href="https://github.com/real-compacted-developer/connect-class">
             GitHub
           </DirectLink>
@@ -42,7 +42,7 @@ const Project: React.FC = () => {
         <ProjectBody>
           학습 보조 플랫폼 <br />
           과제제출, 출석체크, 화면공유 기능을 제공합니다. <br />
-          with <b>TypeScript, Nestjs, Socket, MariaDB, MongoDB</b>
+          with <b>TypeScript, Nestjs, WebSocket, MariaDB, MongoDB</b>
           <br />
           <DirectLink href="https://github.com/zzuda">GitHub</DirectLink>
         </ProjectBody>
@@ -55,7 +55,8 @@ const Project: React.FC = () => {
         <ProjectBody>
           커뮤니티형 문제은행 서비스 <br />
           누구나 문제를 내고 다른 사람의 문제를 풀 수 있습니다. <br />
-          with <b>TypeScript, Expressjs, GraphQL, React</b> <br />
+          with <b>TypeScript, Expressjs, React, GraphQL</b>
+          <br />
           <DirectLink href="https://github.com/swsuft">GitHub</DirectLink>
           <HorizontalGap gap={8} />
           <DirectLink href="https://suft.kr">Link</DirectLink>
