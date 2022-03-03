@@ -40,7 +40,7 @@ const Prize: React.FC = () => {
         </ProjectTitle>
         <ProjectBody>
           청소년 프로그래밍 팀, TeamIF 개발자 <br />
-          팀사이트 개발 및 리메이크, 인트라넷 개발을 담당했습니다. <br />
+          팀사이트 개발 및 리메이크를 담당했습니다. <br />
           with <b>TypeScript, React</b>
           <br />
           <DirectLink href="https://teamif.io">팀 홈페이지</DirectLink>
