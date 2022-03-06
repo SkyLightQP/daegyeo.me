@@ -68,8 +68,9 @@ const Project: React.FC = () => {
           끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
         </ProjectTitle>
         <ProjectBody>
-          끝말잇기, 앞말잇기 등 온라인 단어게임 <br />
-          with <b>JavaScript, Pug, PostgreSQL</b> <br />
+          끝말잇기, 타자게임 등 글자를 이용한 웹 게임
+          <br />
+          with <b>JavaScript, PostgreSQL, Redis, WebSocket</b> <br />
           <DirectLink href="https://github.com/SkyLightQP/KKuTuDotCom">GitHub</DirectLink>
         </ProjectBody>
       </div>
