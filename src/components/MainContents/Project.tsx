@@ -13,7 +13,7 @@ const Project: React.FC = () => {
         </ProjectTitle>
         <ProjectBody>
           학과 인트라넷 서비스 <br />
-          온라인으로 교내 행사를 확인하고 시간표, 급식을 확인할 수 있습니다. <br />
+          온라인으로 수강 신청을 하고 시간표, 급식을 확인할 수 있습니다. <br />
           with <b>TypeScript, React, Expressjs, Swagger, FCM</b> <br />
           <DirectLink href="https://github.com/swjb-sinamon">GitHub</DirectLink>
           <HorizontalGap gap={8} />
@@ -42,7 +42,7 @@ const Project: React.FC = () => {
         <ProjectBody>
           학습 보조 플랫폼 <br />
           과제제출, 출석체크, 화면공유 기능을 제공합니다. <br />
-          with <b>TypeScript, Nestjs, WebSocket, MariaDB, MongoDB</b>
+          with <b>TypeScript, Nestjs, WebRTC, WebSocket, MariaDB, MongoDB</b>
           <br />
           <DirectLink href="https://github.com/zzuda">GitHub</DirectLink>
         </ProjectBody>

@@ -9,7 +9,7 @@ const Edu: React.FC = () => {
         <ProjectTitle>
           가천대학교 <ProjectDate>(2022~)</ProjectDate>
         </ProjectTitle>
-        <ProjectBody>AI소프트웨어학부</ProjectBody>
+        <ProjectBody>AI소프트웨어학부 소프트웨어전공</ProjectBody>
       </div>
     </ContentBlock>
   );
