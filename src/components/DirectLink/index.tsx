@@ -20,10 +20,14 @@ const StyledA = styled.a`
   }
 `;
 
+const Text = styled.span`
+  font-size: 16px;
+`;
+
 const DirectLink: React.FC<DirectLinkProps> = ({ href, children }) => {
   return (
-    <StyledA href={href} target="_blank" rel="noopener noreferrer">
-      {children} <FontAwesomeIcon icon={faArrowRight} size="sm" />
+    <StyledA href={href} target='_blank' rel='noopener noreferrer'>
+      <Text>{children}</Text> <FontAwesomeIcon icon={faArrowRight} size='sm' />
     </StyledA>
   );
 };
