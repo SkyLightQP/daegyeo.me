@@ -18,7 +18,7 @@ const LinkSection: React.FC = () => {
   };
 
   return (
-    <ContentBlock title="그 밖에">
+    <ContentBlock title='그 밖에'>
       <ProjectTitle>
         <LinkStyle
           onClick={onEmailClick}
@@ -26,35 +26,35 @@ const LinkSection: React.FC = () => {
             cursor: 'pointer'
           }}
         >
-          <FontAwesomeIcon icon={faAt} size="sm" /> Email
+          <FontAwesomeIcon icon={faAt} size='sm' /> Email
         </LinkStyle>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href="https://github.com/SkyLightQP/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faGithub} size="sm" /> GitHub
+        <LinkStyle href='https://github.com/SkyLightQP/' target='_blank' rel='noopener noreferrer'>
+          <FontAwesomeIcon icon={faGithub} size='sm' /> GitHub
         </LinkStyle>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href="https://blog.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faBlog} size="sm" /> Blog
+        <LinkStyle href='https://blog.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
+          <FontAwesomeIcon icon={faBlog} size='sm' /> Blog
         </LinkStyle>
       </ProjectTitle>
 
       <ProjectTitle>
         <LinkStyle
-          href="https://www.acmicpc.net/user/combbm"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://www.acmicpc.net/user/combbm'
+          target='_blank'
+          rel='noopener noreferrer'
         >
-          <FontAwesomeIcon icon={faCode} size="sm" /> Baekjoon
+          <FontAwesomeIcon icon={faCode} size='sm' /> Baekjoon
         </LinkStyle>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href="https://til.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learn
+        <LinkStyle href='https://til.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
+          <FontAwesomeIcon icon={faPencilAlt} size='sm' /> Today I Learned
         </LinkStyle>
       </ProjectTitle>
 
@@ -64,7 +64,7 @@ const LinkSection: React.FC = () => {
         }}
       >
         <p>
-          이 페이지는 <LinkStyle href="https://skylightqp.kr">skylightqp.kr</LinkStyle> 으로도
+          이 페이지는 <LinkStyle href='https://skylightqp.kr'>skylightqp.kr</LinkStyle> 으로도
           들어올 수 있습니다.
         </p>
       </div>

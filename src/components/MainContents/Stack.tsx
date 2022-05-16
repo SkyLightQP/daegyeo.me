@@ -11,8 +11,8 @@ const Stack: React.FC = () => {
       <ProjectTitle>Framework, Library</ProjectTitle>
       <ProjectBody>React, Expressjs, Nestjs</ProjectBody>
 
-      <ProjectTitle>DevOps</ProjectTitle>
-      <ProjectBody>Linux, Docker</ProjectBody>
+      <ProjectTitle>DevOps and Infrastructure</ProjectTitle>
+      <ProjectBody>Linux, Docker, MySQL, PostgreSQL</ProjectBody>
     </ContentBlock>
   );
 };
