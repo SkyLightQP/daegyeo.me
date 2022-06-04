@@ -57,17 +57,6 @@ const LinkSection: React.FC = () => {
           <FontAwesomeIcon icon={faPencilAlt} size='sm' /> Today I Learned
         </LinkStyle>
       </ProjectTitle>
-
-      <div
-        style={{
-          marginTop: '3rem'
-        }}
-      >
-        <p>
-          이 페이지는 <LinkStyle href='https://skylightqp.kr'>skylightqp.kr</LinkStyle> 으로도
-          들어올 수 있습니다.
-        </p>
-      </div>
     </ContentBlock>
   );
 };

@@ -7,6 +7,7 @@ import Prize from './contents/Prize';
 import LinkSection from './contents/Link';
 import Edu from './contents/Edu';
 import Activity from './contents/Activity';
+import Footer from '../components/Footer';
 
 const Content = styled.div`
   margin: 3rem 5rem 0 5rem;
@@ -33,6 +34,7 @@ const Main: React.FC = () => {
         <Activity />
         <Prize />
         <LinkSection />
+        <Footer />
       </Content>
     </>
   );

@@ -39,6 +39,10 @@ const GlobalStyle: React.FC = () => {
         a {
           text-decoration: none;
           color: inherit;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
 
         ::selection {

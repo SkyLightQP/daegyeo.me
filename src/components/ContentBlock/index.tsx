@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  margin: 4em 0;
+  margin: 4rem 0;
 
   & div {
     margin-bottom: 1.7rem;
@@ -29,13 +29,13 @@ const ContentTitle = styled.p`
 `;
 
 interface ContentBlockProps {
-  readonly title: string;
+  readonly title?: string;
 }
 
 const ContentBlock: React.FC<ContentBlockProps> = ({ title, children }) => {
   return (
     <Container>
-      <ContentTitle>{title}</ContentTitle>
+      {title && <ContentTitle>{title}</ContentTitle>}
       {children}
     </Container>
   );
