@@ -58,7 +58,7 @@ const Project: React.FC = () => {
         </ProjectTitle>
         <ProjectBody>
           학교 시험공부를 위해 제작한 문제은행 서비스입니다. <br />
-          GraphQP을 이용하여 백엔드 API를 구현했습니다. <br />
+          GraphQL을 이용하여 백엔드 API를 구현했습니다. <br />
           with <b>TypeScript, Expressjs, React, GraphQL</b>
           <br />
           <DirectLink href='https://github.com/swsuft'>GitHub</DirectLink>
