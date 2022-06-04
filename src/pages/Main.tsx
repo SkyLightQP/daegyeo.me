@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Header from '../components/Header';
-import Stack from '../components/MainContents/Stack';
-import Project from '../components/MainContents/Project';
-import Prize from '../components/MainContents/Prize';
-import LinkSection from '../components/MainContents/Link';
-import Edu from '../components/MainContents/Edu';
+import Stack from './contents/Stack';
+import Project from './contents/Project';
+import Prize from './contents/Prize';
+import LinkSection from './contents/Link';
+import Edu from './contents/Edu';
 
 const Content = styled.div`
   margin: 3rem 5rem 0 5rem;

@@ -2,7 +2,7 @@ import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
 import { ProjectBody, ProjectDate, ProjectTitle } from '../../atomics/Typography';
 import DirectLink from '../../components/DirectLink';
-import HorizontalGap from '../HorizontalGap';
+import HorizontalGap from '../../components/HorizontalGap';
 
 const Project: React.FC = () => {
   return (
