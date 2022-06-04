@@ -1,16 +1,11 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
-import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faBlog, faCode, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../../components/ContentBlock';
 import { ProjectTitle } from '../../atomics/Typography';
-
-const LinkStyle = styled.a`
-  &:hover {
-    text-decoration: underline;
-  }
-`;
 
 const LinkSection: React.FC = () => {
   const onEmailClick = () => {
@@ -18,44 +13,51 @@ const LinkSection: React.FC = () => {
   };
 
   return (
-    <ContentBlock title='그 밖에'>
+    <ContentBlock title='더 알아보기'>
       <ProjectTitle>
-        <LinkStyle
+        <span
+          role='button'
+          tabIndex={0}
+          onKeyPress={(e) => (e.key === 'Enter' && onEmailClick())}
           onClick={onEmailClick}
-          style={{
-            cursor: 'pointer'
-          }}
+          css={css`
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          `}
         >
           <FontAwesomeIcon icon={faAt} size='sm' /> Email
-        </LinkStyle>
+        </span>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href='https://github.com/SkyLightQP/' target='_blank' rel='noopener noreferrer'>
+        <a href='https://github.com/SkyLightQP/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faGithub} size='sm' /> GitHub
-        </LinkStyle>
+        </a>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href='https://blog.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
+        <a href='https://blog.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faBlog} size='sm' /> Blog
-        </LinkStyle>
+        </a>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle
+        <a
           href='https://www.acmicpc.net/user/combbm'
           target='_blank'
           rel='noopener noreferrer'
         >
           <FontAwesomeIcon icon={faCode} size='sm' /> Baekjoon
-        </LinkStyle>
+        </a>
       </ProjectTitle>
 
       <ProjectTitle>
-        <LinkStyle href='https://til.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
+        <a href='https://til.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faPencilAlt} size='sm' /> Today I Learned
-        </LinkStyle>
+        </a>
       </ProjectTitle>
     </ContentBlock>
   );
