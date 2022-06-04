@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  margin: 3rem 0;
+  margin: 4em 0;
 
   & div {
     margin-bottom: 1.7rem;
