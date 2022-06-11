@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faBlog, faCode, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../../components/ContentBlock';
-import { ProjectTitle } from '../../atomics/Typography';
+import { Title } from '../../atomics/Typography';
 
 const LinkSection: React.FC = () => {
   const onEmailClick = () => {
@@ -14,7 +14,7 @@ const LinkSection: React.FC = () => {
 
   return (
     <ContentBlock title='더 알아보기'>
-      <ProjectTitle>
+      <Title>
         <span
           role='button'
           tabIndex={0}
@@ -30,21 +30,21 @@ const LinkSection: React.FC = () => {
         >
           <FontAwesomeIcon icon={faAt} size='sm' /> Email
         </span>
-      </ProjectTitle>
+      </Title>
 
-      <ProjectTitle>
+      <Title>
         <a href='https://github.com/SkyLightQP/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faGithub} size='sm' /> GitHub
         </a>
-      </ProjectTitle>
+      </Title>
 
-      <ProjectTitle>
+      <Title>
         <a href='https://blog.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faBlog} size='sm' /> Blog
         </a>
-      </ProjectTitle>
+      </Title>
 
-      <ProjectTitle>
+      <Title>
         <a
           href='https://www.acmicpc.net/user/combbm'
           target='_blank'
@@ -52,13 +52,13 @@ const LinkSection: React.FC = () => {
         >
           <FontAwesomeIcon icon={faCode} size='sm' /> Baekjoon
         </a>
-      </ProjectTitle>
+      </Title>
 
-      <ProjectTitle>
+      <Title>
         <a href='https://til.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
           <FontAwesomeIcon icon={faPencilAlt} size='sm' /> Today I Learned
         </a>
-      </ProjectTitle>
+      </Title>
     </ContentBlock>
   );
 };

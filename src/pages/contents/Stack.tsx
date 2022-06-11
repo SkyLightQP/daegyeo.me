@@ -1,18 +1,18 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { ProjectBody, ProjectTitle } from '../../atomics/Typography';
+import { Body, Title } from '../../atomics/Typography';
 
 const Stack: React.FC = () => {
   return (
     <ContentBlock title="기술스택">
-      <ProjectTitle>Language</ProjectTitle>
-      <ProjectBody>Java, Kotlin, TypeScript</ProjectBody>
+      <Title>Language</Title>
+      <Body>Java, Kotlin, TypeScript</Body>
 
-      <ProjectTitle>Framework, Library</ProjectTitle>
-      <ProjectBody>React, Expressjs, Nestjs</ProjectBody>
+      <Title>Framework, Library</Title>
+      <Body>React, Expressjs, Nestjs</Body>
 
-      <ProjectTitle>DevOps and Infrastructure</ProjectTitle>
-      <ProjectBody>Linux, Docker, MySQL, PostgreSQL</ProjectBody>
+      <Title>DevOps and Infrastructure</Title>
+      <Body>Linux, Docker, MySQL, PostgreSQL</Body>
     </ContentBlock>
   );
 };

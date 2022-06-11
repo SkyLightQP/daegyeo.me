@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const ProjectTitle = styled.p`
+export const Title = styled.p`
   font-size: 20px;
   font-weight: bold;
 `;
 
-export const ProjectBody = styled.p`
+export const Body = styled.p`
   font-size: 18px;
 
   @media screen and (max-width: 420px) {
@@ -13,7 +13,7 @@ export const ProjectBody = styled.p`
   }
 `;
 
-export const ProjectSubtitle = styled.span`
+export const Subtitle = styled.span`
   font-size: 16px;
 
   @media screen and (max-width: 420px) {
