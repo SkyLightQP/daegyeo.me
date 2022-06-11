@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { ProjectBody, ProjectDate, ProjectTitle } from '../../atomics/Typography';
+import { ProjectBody, ProjectSubtitle, ProjectTitle } from '../../atomics/Typography';
 import DirectLink from '../../components/DirectLink';
 
 const Activity: React.FC = () => {
@@ -8,7 +8,7 @@ const Activity: React.FC = () => {
     <ContentBlock title='활동'>
       <div>
         <ProjectTitle>
-          SW마에스트로 11기 수료생 <ProjectDate>(2020)</ProjectDate>
+          SW마에스트로 11기 수료생 <ProjectSubtitle>2020</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           소프트웨어마에스트로 과정에 참가했습니다. <br />
@@ -18,7 +18,7 @@ const Activity: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          TeamIF <ProjectDate>(2019~)</ProjectDate>
+          TeamIF <ProjectSubtitle>2019~ / 프론트엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           청소년 프로그래밍 팀, TeamIF 개발자 <br />

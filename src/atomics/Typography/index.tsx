@@ -13,7 +13,7 @@ export const ProjectBody = styled.p`
   }
 `;
 
-export const ProjectDate = styled.span`
+export const ProjectSubtitle = styled.span`
   font-size: 16px;
 
   @media screen and (max-width: 420px) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { ProjectBody, ProjectDate, ProjectTitle } from '../../atomics/Typography';
+import { ProjectBody, ProjectSubtitle, ProjectTitle } from '../../atomics/Typography';
 import DirectLink from '../../components/DirectLink';
 
 const Prize: React.FC = () => {
@@ -8,7 +8,7 @@ const Prize: React.FC = () => {
     <ContentBlock title='수상'>
       <div>
         <ProjectTitle>
-          2020-2 Ajou SOFTCON 고등부문 우수상 <ProjectDate>(2020)</ProjectDate>
+          2020-2 Ajou SOFTCON 고등부문 우수상 <ProjectSubtitle>2020 / 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           Python과 Django를 활용해보기 위해 진행했습니다. <br />
@@ -20,7 +20,7 @@ const Prize: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          Hello20Thon 장려상 <ProjectDate>(2020)</ProjectDate>
+          Hello20Thon 장려상 <ProjectSubtitle>2020 / 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           서로의 목표를 공유하면서 이루는 프로젝트, Seed <br />
@@ -32,7 +32,7 @@ const Prize: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          제3회 장애인식개선콘텐츠공모전 교육부장관상 <ProjectDate>(2019)</ProjectDate>
+          제3회 장애인식개선콘텐츠공모전 교육부장관상 <ProjectSubtitle>2019 / 모션그래픽</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           장애인과 비장애인이 함께하자는 주제를 가지고 참여한 공모전입니다. <br />

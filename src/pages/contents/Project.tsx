@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { ProjectBody, ProjectDate, ProjectTitle } from '../../atomics/Typography';
+import { ProjectBody, ProjectSubtitle, ProjectTitle } from '../../atomics/Typography';
 import DirectLink from '../../components/DirectLink';
 import HorizontalGap from '../../components/HorizontalGap';
 
@@ -9,7 +9,7 @@ const Project: React.FC = () => {
     <ContentBlock title='프로젝트'>
       <div>
         <ProjectTitle>
-          수정과 <ProjectDate>(2020~2021)</ProjectDate>
+          수정과 <ProjectSubtitle>2020~2021 / 프론트엔드, 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           고교학점제 수강신청, 우산 대여, 시간표 확인 등이 가능한 인트라넷 프로젝트입니다. <br />
@@ -23,7 +23,7 @@ const Project: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          커넥트클래스 <ProjectDate>(2020)</ProjectDate>
+          커넥트클래스 <ProjectSubtitle>2020 / 프론트엔드, 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           SW마에스트로 11기에서 진행한 온라인 스터디 플랫폼입니다. <br />
@@ -38,7 +38,7 @@ const Project: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          ZUDA <ProjectDate>(2021)</ProjectDate>
+          ZUDA <ProjectSubtitle>2020 / 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           과제제출, 출석체크, 화면공유를 제공하는 학습 보조 플랫폼입니다.<br />
@@ -54,7 +54,7 @@ const Project: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          수프트 <ProjectDate>(2019~)</ProjectDate>
+          수프트 <ProjectSubtitle>2019~ / 프론트엔드, 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           학교 시험공부를 위해 제작한 문제은행 서비스입니다. <br />
@@ -69,7 +69,7 @@ const Project: React.FC = () => {
 
       <div>
         <ProjectTitle>
-          끄투닷컴 <ProjectDate>(2017~2021)</ProjectDate>
+          끄투닷컴 <ProjectSubtitle>2017~2021 / 프론트엔드, 백엔드</ProjectSubtitle>
         </ProjectTitle>
         <ProjectBody>
           끝말잇기, 타자게임 등 글자를 이용한 웹 게임
