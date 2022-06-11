@@ -9,7 +9,7 @@ const Edu: React.FC = () => {
         <Title>
           가천대학교 <Subtitle>2022~ / 학부생</Subtitle>
         </Title>
-        <Body>AI소프트웨어학부 소프트웨어전공</Body>
+        <Body>AI&middot;소프트웨어학부 소프트웨어전공</Body>
       </div>
     </ContentBlock>
   );
