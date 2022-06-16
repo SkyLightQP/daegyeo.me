@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://skylightqp.kr",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "next dev",
+    "build": "next build",
     "lint": "eslint src/**/*.ts[x]",
     "lint:fix": "yarn lint --fix"
   },
@@ -20,6 +18,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.13",
     "framer-motion": "^2.9.5",
+    "next": "^12.1.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1"
@@ -31,7 +30,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",
     "prettier": "^2.2.1",
-    "typescript": "^4.0.3",
+    "typescript": "4.3.2",
     "web-vitals": "^0.2.4"
   },
   "browserslist": {
