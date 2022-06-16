@@ -5,7 +5,7 @@ const Container = styled.div`
   margin: 4rem 0;
 
   & div {
-    margin-bottom: 1.7rem;
+    margin-bottom: 2.8rem;
 
     &:last-child {
       margin-bottom: 0;
