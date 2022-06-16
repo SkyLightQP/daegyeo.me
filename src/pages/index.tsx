@@ -22,7 +22,7 @@ const Content = styled.div`
   }
 `;
 
-const Main: React.FC = () => {
+const Index: React.FC = () => {
   return (
     <>
       <Header />
@@ -40,4 +40,4 @@ const Main: React.FC = () => {
   );
 };
 
-export default Main;
+export default Index;
