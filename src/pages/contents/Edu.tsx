@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { Body, Subtitle, Title } from '../../atomics/Typography';
+import { Body, Subtitle, Title } from '../../components/Typography';
 
 const Edu: React.FC = () => {
   return (

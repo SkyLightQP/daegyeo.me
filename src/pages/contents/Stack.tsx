@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentBlock from '../../components/ContentBlock';
-import { Body, Title } from '../../atomics/Typography';
+import { Body, Title } from '../../components/Typography';
 
 const Stack: React.FC = () => {
   return (
