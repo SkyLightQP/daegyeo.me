@@ -1,8 +1,8 @@
 import React from 'react';
-import ContentBlock from '../../components/ContentBlock';
-import { Body, Subtitle, Title } from '../../components/Typography';
-import DirectLink from '../../components/DirectLink';
-import HorizontalGap from '../../components/HorizontalGap';
+import ContentBlock from '../ContentBlock';
+import { Body, Subtitle, Title } from '../Typography';
+import DirectLink from '../DirectLink';
+import HorizontalGap from '../HorizontalGap';
 
 const Project: React.FC = () => {
   return (

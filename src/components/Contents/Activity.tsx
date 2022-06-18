@@ -1,7 +1,7 @@
 import React from 'react';
-import ContentBlock from '../../components/ContentBlock';
-import { Body, Subtitle, Title } from '../../components/Typography';
-import DirectLink from '../../components/DirectLink';
+import ContentBlock from '../ContentBlock';
+import { Body, Subtitle, Title } from '../Typography';
+import DirectLink from '../DirectLink';
 
 const Activity: React.FC = () => {
   return (

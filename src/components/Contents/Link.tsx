@@ -4,8 +4,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faBlog, faCode, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import ContentBlock from '../../components/ContentBlock';
-import { Title } from '../../components/Typography';
+import ContentBlock from '../ContentBlock';
+import { Title } from '../Typography';
 
 const LinkSection: React.FC = () => {
   const onEmailClick = () => {
