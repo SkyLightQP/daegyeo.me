@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 
 import { DataSource } from 'typeorm';
-import Section from '../entity/Section';
-import Content from '../entity/Content';
-import Link from '../entity/Link';
-import logger from './logger';
+import Section from './entity/Section';
+import Content from './entity/Content';
+import Link from './entity/Link';
+import logger from '../utils/logger';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
@@ -21,7 +21,6 @@ const AppDataSource = new DataSource({
 export const initDataSource = () => {
   return AppDataSource.initialize()
     .then((datasource) => {
-      logger.info('Data source has been initialized.');
       return datasource;
     })
     .catch((err) => {
