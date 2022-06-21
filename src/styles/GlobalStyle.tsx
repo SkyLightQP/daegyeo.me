@@ -1,5 +1,6 @@
 import React from 'react';
 import { Global, css } from '@emotion/react';
+import Colors from './Colors';
 
 const GlobalStyle: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const GlobalStyle: React.FC = () => {
         }
 
         body {
-          background-color: #f0f4f5;
+          background-color: ${Colors.BACKGROUND};
           overflow-x: hidden;
         }
 
@@ -46,13 +47,13 @@ const GlobalStyle: React.FC = () => {
         }
 
         ::selection {
-          background-color: #1c1c1c;
-          color: #f0f4f5;
+          background-color: ${Colors.BACKGROUND_DARK};
+          color: ${Colors.BACKGROUND};
         }
 
         ::-moz-selection {
-          background-color: #1c1c1c;
-          color: #f0f4f5;
+          background-color: ${Colors.BACKGROUND_DARK};
+          color: ${Colors.BACKGROUND};
         }
       `}
     />

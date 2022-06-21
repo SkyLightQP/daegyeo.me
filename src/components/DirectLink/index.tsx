@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
+import Colors from '../../styles/Colors';
 
 interface DirectLinkProps {
   readonly href: string;
@@ -10,7 +11,7 @@ interface DirectLinkProps {
 const StyledA = styled.a`
   display: inline-block;
 
-  background-color: #303b4d;
+  background-color: ${Colors.PRIMARY};
   color: white;
 
   margin: 4px 0;

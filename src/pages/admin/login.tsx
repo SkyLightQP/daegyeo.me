@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Title } from '../../components/Typography';
 import firebaseAuth from '../../utils/firebase';
 import VerticalGap from '../../components/VerticalGap';
+import Colors from '../../styles/Colors';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -14,7 +15,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: #303b4d;
+  color: ${Colors.PRIMARY};
 `;
 
 const Input = styled.input`
@@ -32,7 +33,7 @@ const LoginButton = styled.button`
   height: 40px;
 
   color: white;
-  background-color: #303b4d;
+  background-color: ${Colors.PRIMARY};
 
   border: none;
   border-radius: 10px;

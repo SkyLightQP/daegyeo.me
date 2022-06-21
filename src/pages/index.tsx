@@ -1,19 +1,18 @@
-import 'reflect-metadata';
-
 import React from 'react';
 import styled from '@emotion/styled';
 import Header from '../components/Header';
-import Stack from './contents/Stack';
-import Project from './contents/Project';
-import Prize from './contents/Prize';
-import LinkSection from './contents/Link';
-import Edu from './contents/Edu';
-import Activity from './contents/Activity';
+import Stack from '../components/Contents/Stack';
+import Project from '../components/Contents/Project';
+import Prize from '../components/Contents/Prize';
+import LinkSection from '../components/Contents/Link';
+import Edu from '../components/Contents/Edu';
+import Activity from '../components/Contents/Activity';
 import Footer from '../components/Footer';
+import Colors from '../styles/Colors';
 
 const Content = styled.div`
   margin: 3rem 5rem 0 5rem;
-  color: #303b4d;
+  color: ${Colors.PRIMARY};
 
   :lang(ko) {
     word-break: keep-all;
