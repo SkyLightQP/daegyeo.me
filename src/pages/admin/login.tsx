@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useRouter } from 'next/router';
 import { Title } from '../../components/Typography';
 import firebaseAuth from '../../utils/firebase';
 import VerticalGap from '../../components/VerticalGap';
@@ -44,6 +45,7 @@ const LoginButton = styled.button`
 `;
 
 const Login: React.FC = () => {
+  const router = useRouter();
   const [input, setInput] = useState<{ email: string; password: string; }>({
     email: '',
     password: ''
@@ -54,6 +56,7 @@ const Login: React.FC = () => {
     try {
       const info = await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
       localStorage.setItem('accessToken', await info.user.getIdToken());
+      router.push('/admin');
     } catch (e) {
       setError(e.message);
     }
