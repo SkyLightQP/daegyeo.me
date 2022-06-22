@@ -8,16 +8,23 @@ import MouseDownIcon from '../MouseDownIcon';
 import Colors from '../../styles/Colors';
 
 const TitleContainer = styled.div`
-  background-color: ${Colors.PRIMARY};
-
+  position: relative;
   width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: ${Colors.PRIMARY};
+  text-align: center;
+`;
+
+const TextContainer = styled.div`
   height: 100vh;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  text-align: center;
 `;
 
 const Title = styled(motion.p)`
@@ -45,10 +52,8 @@ const IconList = styled.div`
   justify-content: center;
 
   color: white;
-
-  margin-top: 2rem;
-
   cursor: pointer;
+  margin-top: 2rem;
 
   & > a {
     margin-right: 14px;
@@ -63,10 +68,11 @@ const IconList = styled.div`
   }
 `;
 
-const StyledMouseDownWrapper = styled.div`
+const MouseDownContainer = styled.div`
   position: absolute;
-  top: 98%;
-  transform: translateY(-98%);
+  top: 94%;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 const containerAnimation = {
@@ -93,8 +99,8 @@ const textAnimation = {
 
 const Header: React.FC = () => {
   return (
-    <>
-      <TitleContainer>
+    <TitleContainer>
+      <TextContainer>
         <motion.div initial='before' animate='after' variants={containerAnimation}>
           <Title variants={textAnimation}>하대겸</Title>
           <SubTitle variants={textAnimation}>Daegyeom Ha</SubTitle>
@@ -118,12 +124,12 @@ const Header: React.FC = () => {
             </motion.a>
           </IconList>
         </motion.div>
+      </TextContainer>
 
-        <StyledMouseDownWrapper>
-          <MouseDownIcon />
-        </StyledMouseDownWrapper>
-      </TitleContainer>
-    </>
+      <MouseDownContainer>
+        <MouseDownIcon />
+      </MouseDownContainer>
+    </TitleContainer>
   );
 };
 
