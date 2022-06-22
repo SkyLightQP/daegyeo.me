@@ -17,10 +17,10 @@ const Container = styled.div`
 
   color: white;
 
-  padding: 0 5rem;
+  padding: 0 80px;
 
   @media screen and (max-width: 420px) {
-    padding: 0 2rem;
+    padding: 0 32px;
   }
 `;
 
