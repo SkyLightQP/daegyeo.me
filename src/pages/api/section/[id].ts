@@ -38,6 +38,25 @@ const handlePut: NextApiWithDB = async (req, res, datasource) => {
   res.status(200).json({ data: true });
 };
 
+const handleDelete: NextApiWithDB = async (req, res, datasource) => {
+  const id = Number(req.query.id);
+  const sectionRepository = datasource.getRepository(Section);
+  const data = await sectionRepository.findOneBy({ id });
+
+  if (data === null) {
+    res.status(404).json({ error: 'Not Found', data: null });
+    return;
+  }
+  if (data.contents && data.contents.length > 0) {
+    res.status(400).json({ error: 'Do make empty to contents before delete section.', data: null });
+    return;
+  }
+
+  await sectionRepository.delete({ id });
+
+  res.status(200).json({ data: true });
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const datasource = await initDataSource();
   if (datasource === undefined) {
@@ -51,8 +70,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'PUT':
       await handlePut(req, res, datasource);
       break;
+    case 'DELETE':
+      await handleDelete(req, res, datasource);
+      break;
     default:
-      res.setHeader('Allow', ['GET', 'PUT']);
+      res.setHeader('Allow', ['GET', 'PUT', 'DELETE']);
       res.status(405).end();
   }
   await datasource.destroy();
