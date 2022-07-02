@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { initDataSource } from '../../../database/data-source';
 import Section from '../../../database/entity/Section';
+import withAuth from '../../../utils/withAuth';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
     res.status(405).end();
@@ -28,3 +29,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   await datasource.destroy();
 }
+
+export default withAuth(handler);
