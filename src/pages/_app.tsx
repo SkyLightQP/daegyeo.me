@@ -13,7 +13,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ChakraProvider>
         <GlobalStyle />
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </ChakraProvider>
     </>
