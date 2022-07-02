@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DataSource } from 'typeorm';
 import { initDataSource } from '../../../database/data-source';
 import Section from '../../../database/entity/Section';
 import withAuth from '../../../utils/withAuth';
+import { NextApiWithDB } from '../../../types/api-type';
 
-const handleGet = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
+const handleGet: NextApiWithDB = async (req, res, datasource) => {
   const sectionRepository = datasource.getRepository(Section);
   const data = await sectionRepository.find({
     order: {
@@ -15,7 +15,7 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse, datasource: 
   res.status(200).json({ data });
 };
 
-const handlePost = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
+const handlePost: NextApiWithDB = async (req, res, datasource) => {
   const { title, order } = req.body;
 
   const sectionRepository = datasource.getRepository(Section);

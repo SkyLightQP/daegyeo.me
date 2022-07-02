@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { DataSource } from 'typeorm';
 import { initDataSource } from '../../../database/data-source';
 import Section from '../../../database/entity/Section';
 import withAuth from '../../../utils/withAuth';
+import { NextApiWithDB } from '../../../types/api-type';
 
-const handleGet = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
+const handleGet: NextApiWithDB = async (req, res, datasource) => {
   const sectionRepository = datasource.getRepository(Section);
   const data = await sectionRepository.findOneBy({
     id: Number(req.query.id)
@@ -18,7 +18,7 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse, datasource: 
   res.status(200).json({ data });
 };
 
-const handlePut = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
+const handlePut: NextApiWithDB = async (req, res, datasource) => {
   const id = Number(req.query.id);
   const { title, order } = req.body;
   const sectionRepository = datasource.getRepository(Section);
@@ -37,7 +37,6 @@ const handlePut = async (req: NextApiRequest, res: NextApiResponse, datasource: 
 
   res.status(200).json({ data: true });
 };
-
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const datasource = await initDataSource();
