@@ -5,6 +5,11 @@ export const Title = styled.p`
   font-weight: bold;
 `;
 
+export const HugeTitle = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+`;
+
 export const Body = styled.p`
   font-size: 18px;
 
@@ -20,3 +25,4 @@ export const Subtitle = styled.span`
     font-size: 14px;
   }
 `;
+
