@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
+import Axios from '../api';
 
 const useUserVerify = () => {
   const [uid, setUid] = useState<string | null | undefined>(undefined);
@@ -8,11 +8,7 @@ const useUserVerify = () => {
 
   const fetchUid = useCallback(async () => {
     try {
-      const { data } = await axios.get('/api/user/verify', {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`
-        }
-      });
+      const { data } = await Axios.get('/api/user/verify');
       setUid(data.data.uid);
     } catch (e) {
       const code = e.request.status;
