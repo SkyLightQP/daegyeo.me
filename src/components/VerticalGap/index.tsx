@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const VerticalGap = styled.span<{ gap: number }>`
+const VerticalGap = styled.div<{ gap: number }>`
   margin-bottom: ${({ gap }) => gap}px;
 `;
 
