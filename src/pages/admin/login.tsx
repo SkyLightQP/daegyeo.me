@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { useToast } from '@chakra-ui/react';
 import { Title } from '../../components/Typography';
 import firebaseAuth from '../../utils/firebase';
 import VerticalGap from '../../components/VerticalGap';
@@ -51,7 +52,10 @@ const Login: React.FC = () => {
     email: '',
     password: ''
   });
-  const [err, setError] = useState<string>('');
+  const toast = useToast({
+    isClosable: true,
+    position: 'top-left'
+  });
 
   const login = async () => {
     try {
@@ -59,7 +63,11 @@ const Login: React.FC = () => {
       localStorage.setItem('accessToken', await info.user.getIdToken());
       router.push('/admin');
     } catch (e) {
-      setError(e.message);
+      toast({
+        title: 'Error',
+        description: e.message,
+        status: 'error'
+      });
     }
   };
 
@@ -85,8 +93,6 @@ const Login: React.FC = () => {
       />
       <VerticalGap gap={10} />
       <LoginButton onClick={login}>Login</LoginButton>
-      <VerticalGap gap={16} />
-      <p>{err}</p>
     </Container>
   );
 };
