@@ -1,20 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { DataSource } from 'typeorm';
 import { initDataSource } from '../../../database/data-source';
 import Section from '../../../database/entity/Section';
 import withAuth from '../../../utils/withAuth';
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end();
-  }
-
-  const datasource = await initDataSource();
-  if (datasource === undefined) {
-    res.status(500).end();
-    return;
-  }
-
+const handleGet = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
   const sectionRepository = datasource.getRepository(Section);
   const data = await sectionRepository.findOneBy({
     id: Number(req.query.id)
@@ -26,8 +16,47 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   res.status(200).json({ data });
+};
 
+const handlePut = async (req: NextApiRequest, res: NextApiResponse, datasource: DataSource) => {
+  const id = Number(req.query.id);
+  const { title, order } = req.body;
+  const sectionRepository = datasource.getRepository(Section);
+  const { affected } = await sectionRepository.update({
+      id
+    },
+    {
+      title, order
+    }
+  );
+
+  if (affected === 0) {
+    res.status(404).json({ error: 'Not Found', data: null });
+    return;
+  }
+
+  res.status(200).json({ data: true });
+};
+
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  const datasource = await initDataSource();
+  if (datasource === undefined) {
+    res.status(500).end();
+    return;
+  }
+  switch (req.method) {
+    case 'GET':
+      await handleGet(req, res, datasource);
+      break;
+    case 'PUT':
+      await handlePut(req, res, datasource);
+      break;
+    default:
+      res.setHeader('Allow', ['GET', 'PUT']);
+      res.status(405).end();
+  }
   await datasource.destroy();
-}
+};
 
 export default withAuth(handler);
