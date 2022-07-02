@@ -30,7 +30,10 @@ const Navigation: React.FC = () => {
   const onLogoutClick = () => {
     // eslint-disable-next-line no-restricted-globals
     const isLogout = confirm('로그아웃?');
-    if (isLogout) localStorage.removeItem('accessToken');
+    if (isLogout) {
+      localStorage.removeItem('accessToken');
+      router.push('/admin/login');
+    }
   };
 
   return (
