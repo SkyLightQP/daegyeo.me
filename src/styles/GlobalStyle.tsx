@@ -33,7 +33,6 @@ const GlobalStyle: React.FC = () => {
         html, body {
           font-family: 'IBMPlexSansKR', sans-serif;
           background-color: ${Colors.BACKGROUND};
-          overflow-x: hidden;
         }
 
         a {
