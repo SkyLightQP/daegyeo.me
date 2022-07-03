@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Stack from '../components/Contents/Stack';
 import Project from '../components/Contents/Project';
@@ -24,6 +26,11 @@ const Content = styled.div`
 `;
 
 const Index: React.FC = () => {
+  const router = useRouter();
+  useHotkeys('a+d', () => {
+    router.push('/admin');
+  });
+
   return (
     <>
       <Header />
