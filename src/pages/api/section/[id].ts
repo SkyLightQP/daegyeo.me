@@ -18,15 +18,15 @@ const handleGet: NextApiWithDB = async (req, res, datasource) => {
   res.status(200).json({ data });
 };
 
-const handlePut: NextApiWithDB = async (req, res, datasource) => {
+const handlePatch: NextApiWithDB = async (req, res, datasource) => {
   const id = Number(req.query.id);
-  const { title, order } = req.body;
+  const { title } = req.body;
   const sectionRepository = datasource.getRepository(Section);
   const { affected } = await sectionRepository.update({
       id
     },
     {
-      title, order
+      title
     }
   );
 
@@ -67,8 +67,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'GET':
       await handleGet(req, res, datasource);
       break;
-    case 'PUT':
-      await handlePut(req, res, datasource);
+    case 'PATCH':
+      await handlePatch(req, res, datasource);
       break;
     case 'DELETE':
       await handleDelete(req, res, datasource);
