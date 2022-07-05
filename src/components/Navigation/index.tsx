@@ -12,12 +12,12 @@ const Container = styled.div`
   background-color: ${Colors.PRIMARY};
 
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
 
   color: white;
 
-  padding: 0 80px;
+  padding: 0 80px 0 200px;
 
   @media screen and (max-width: 420px) {
     padding: 0 32px;
@@ -38,11 +38,11 @@ const Navigation: React.FC = () => {
 
   return (
     <Container>
+      <Link href='/'>
+        <NavigationItem tabIndex={0}>홈</NavigationItem>
+      </Link>
       <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>섹션</NavigationItem>
       <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>컨텐츠</NavigationItem>
-      <Link href='/'>
-        <NavigationItem tabIndex={0}>HOME</NavigationItem>
-      </Link>
       <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}>링크</NavigationItem>
       <NavigationItem tabIndex={0} onClick={onLogoutClick}>로그아웃</NavigationItem>
     </Container>
