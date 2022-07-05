@@ -34,10 +34,10 @@ const SectionDeleteModal: React.FC<SectionDeleteModalProps> = ({ modalController
           섹션 내 컨텐츠가 없을 때만 삭제가 가능합니다.
         </ModalBody>
         <ModalFooter>
-          <Button onClick={onClose}>
+          <Button onClick={onClose} fontWeight='normal'>
             취소
           </Button>
-          <Button colorScheme='red' ml={3} onClick={onDeleteClick}>
+          <Button colorScheme='red' ml={3} fontWeight='normal' onClick={onDeleteClick}>
             삭제
           </Button>
         </ModalFooter>

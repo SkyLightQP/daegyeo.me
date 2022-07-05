@@ -10,7 +10,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, useDisclosure
+  ModalOverlay,
+  useDisclosure
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -49,10 +50,10 @@ const SectionUpdateModal: React.FC<SectionUpdateAlertProps> = ({ modalController
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={handleSubmit(onUpdateClick)}>
+          <Button colorScheme='blue' mr={3} fontWeight='normal' onClick={handleSubmit(onUpdateClick)}>
             수정
           </Button>
-          <Button onClick={onClose}>취소</Button>
+          <Button fontWeight='normal' onClick={onClose}>취소</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
