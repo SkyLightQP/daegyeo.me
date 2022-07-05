@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ChakraProvider } from '@chakra-ui/react';
 import GlobalStyle from '../styles/GlobalStyle';
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => setReady(true), []);
+
+  if (!ready) return <>Loading...</>;
+
   return (
     <>
       <Head>
