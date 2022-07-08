@@ -10,14 +10,14 @@ import {
   ModalOverlay,
   useDisclosure
 } from '@chakra-ui/react';
-import { SubmitHandler } from 'react-hook-form';
 
-interface SectionDeleteModalProps {
+interface DeleteModalProps {
+  readonly title: string;
   readonly modalController: ReturnType<typeof useDisclosure>;
   readonly onDeleteClick: () => void;
 }
 
-const SectionDeleteModal: React.FC<SectionDeleteModalProps> = ({ modalController, onDeleteClick }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ title, modalController, onDeleteClick, children }) => {
   const { isOpen, onClose } = modalController;
 
   return (
@@ -28,10 +28,10 @@ const SectionDeleteModal: React.FC<SectionDeleteModalProps> = ({ modalController
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>섹션 삭제하기</ModalHeader>
+        <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          섹션 내 컨텐츠가 없을 때만 삭제가 가능합니다.
+          {children}
         </ModalBody>
         <ModalFooter>
           <Button onClick={onClose} fontWeight='normal'>
@@ -46,4 +46,4 @@ const SectionDeleteModal: React.FC<SectionDeleteModalProps> = ({ modalController
   );
 };
 
-export default SectionDeleteModal;
+export default DeleteModal;

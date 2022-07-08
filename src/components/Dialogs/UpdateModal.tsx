@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   Button,
   FormControl,
@@ -15,19 +15,27 @@ import {
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-interface SectionUpdateAlertProps {
-  readonly modalController: ReturnType<typeof useDisclosure>;
-  readonly defaultValue: string;
-  readonly onUpdateClick: SubmitHandler<{ title: string; }>;
+interface FieldType {
+  readonly id: string;
+  readonly label: string;
 }
 
-const SectionUpdateModal: React.FC<SectionUpdateAlertProps> = ({ modalController, defaultValue, onUpdateClick }) => {
+interface UpdateModalProps {
+  readonly modalController: ReturnType<typeof useDisclosure>;
+  readonly fields: FieldType[];
+  readonly defaultValue: string[];
+  readonly onUpdateClick: SubmitHandler<Record<string, any>>;
+}
+
+const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defaultValue, onUpdateClick }) => {
   const { isOpen, onClose } = modalController;
-  const { register, handleSubmit, setValue } = useForm<{ title: string; }>();
+  const { register, handleSubmit, setValue } = useForm<Record<string, string>>();
 
   useEffect(() => {
-    setValue('title', defaultValue);
-  }, [defaultValue]);
+    fields.map(({ id }) => id).forEach((i, index) => {
+      setValue(i, defaultValue[index]);
+    });
+  }, [setValue, fields, defaultValue]);
 
   return (
     <Modal
@@ -41,11 +49,17 @@ const SectionUpdateModal: React.FC<SectionUpdateAlertProps> = ({ modalController
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
-            <FormLabel>제목</FormLabel>
-            <Input
-              placeholder='제목'
-              {...register('title')}
-            />
+            {
+              fields.map(({ id, label }) => (
+                <Fragment key={id}>
+                  <FormLabel>{label}</FormLabel>
+                  <Input
+                    placeholder={label}
+                    {...register(id)}
+                  />
+                </Fragment>
+              ))
+            }
           </FormControl>
         </ModalBody>
 
@@ -60,4 +74,4 @@ const SectionUpdateModal: React.FC<SectionUpdateAlertProps> = ({ modalController
   );
 };
 
-export default SectionUpdateModal;
+export default UpdateModal;

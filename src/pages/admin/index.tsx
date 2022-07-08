@@ -12,8 +12,8 @@ import Axios from '../../api';
 import Section from '../../database/entity/Section';
 import HorizontalGap from '../../components/HorizontalGap';
 import SectionTable from '../../components/Section/Table';
-import SectionDeleteModal from '../../components/Section/Dialogs/DeleteModal';
-import SectionUpdateModal from '../../components/Section/Dialogs/UpdateModal';
+import DeleteModal from '../../components/Dialogs/DeleteModal';
+import UpdateModal from '../../components/Dialogs/UpdateModal';
 
 const Container = styled.div`
   color: ${Colors.PRIMARY};
@@ -124,17 +124,26 @@ const Admin: React.FC = () => {
         </Footer>
       </Container>
 
-      <SectionDeleteModal
+      <DeleteModal
+        title='섹션 삭제하기'
         modalController={deleteDialog}
         onDeleteClick={async () => {
           await Axios.delete(`/api/section/${modalData.id}`);
           await fetchData();
           deleteDialog.onClose();
         }}
-      />
-      <SectionUpdateModal
+      >
+        섹션 내 컨텐츠가 없을 때만 삭제가 가능합니다.
+      </DeleteModal>
+      <UpdateModal
         modalController={updateDialog}
-        defaultValue={modalData.title}
+        fields={[
+          {
+            id: 'title',
+            label: '제목'
+          }
+        ]}
+        defaultValue={[modalData.title]}
         onUpdateClick={async (values) => {
           if (values.title.trim() === '') return;
           await Axios.patch(`/api/section/${modalData.id}`, {
