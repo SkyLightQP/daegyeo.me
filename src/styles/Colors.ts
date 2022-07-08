@@ -4,5 +4,4 @@ const Colors = {
   BACKGROUND_DARK: '#1c1c1c'
 };
 
-
 export default Object.freeze(Colors);

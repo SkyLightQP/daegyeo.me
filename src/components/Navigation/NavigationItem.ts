@@ -4,7 +4,7 @@ const NavigationItem = styled.div<{ active?: boolean; }>`
   cursor: pointer;
 
   padding: 10px;
-  
+
   ${(props) => props.active ? 'font-weight: bold;' : ''};
 
   &:hover {

@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
   const router = useRouter();
 
   const onLogoutClick = () => {
-    // eslint-disable-next-line no-restricted-globals
+    // eslint-disable-next-line no-restricted-globals,no-alert
     const isLogout = confirm('로그아웃?');
     if (isLogout) {
       localStorage.removeItem('accessToken');
@@ -41,12 +41,22 @@ const Navigation: React.FC = () => {
   return (
     <Container>
       <Link href='/'>
-        <NavigationItem tabIndex={0}><FontAwesomeIcon icon={faHome} size='sm' /> 홈</NavigationItem>
+        <NavigationItem tabIndex={0}>
+          <FontAwesomeIcon icon={faHome} size='sm' /> 홈
+        </NavigationItem>
       </Link>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin'}><FontAwesomeIcon icon={faHeading} size='sm' /> 섹션</NavigationItem>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}><FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠</NavigationItem>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}><FontAwesomeIcon icon={faLink} size='sm' /> 링크</NavigationItem>
-      <NavigationItem tabIndex={0} onClick={onLogoutClick}><FontAwesomeIcon icon={faSignOutAlt} size='sm' /> 로그아웃</NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
+        <FontAwesomeIcon icon={faHeading} size='sm' /> 섹션
+      </NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
+        <FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠
+      </NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}>
+        <FontAwesomeIcon icon={faLink} size='sm' /> 링크
+      </NavigationItem>
+      <NavigationItem tabIndex={0} onClick={onLogoutClick}>
+        <FontAwesomeIcon icon={faSignOutAlt} size='sm' /> 로그아웃
+      </NavigationItem>
     </Container>
   );
 };

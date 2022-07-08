@@ -4,7 +4,7 @@ import { Body, Title } from '../Typography';
 
 const Stack: React.FC = () => {
   return (
-    <ContentBlock title="기술스택">
+    <ContentBlock title='기술스택'>
       <Title>Language</Title>
       <Body>Java, Kotlin, TypeScript</Body>
 
