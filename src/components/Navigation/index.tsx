@@ -2,6 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAlignJustify, faHeading, faHome, faLink, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
 
@@ -39,12 +41,12 @@ const Navigation: React.FC = () => {
   return (
     <Container>
       <Link href='/'>
-        <NavigationItem tabIndex={0}>홈</NavigationItem>
+        <NavigationItem tabIndex={0}><FontAwesomeIcon icon={faHome} size='sm' /> 홈</NavigationItem>
       </Link>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>섹션</NavigationItem>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>컨텐츠</NavigationItem>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}>링크</NavigationItem>
-      <NavigationItem tabIndex={0} onClick={onLogoutClick}>로그아웃</NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin'}><FontAwesomeIcon icon={faHeading} size='sm' /> 섹션</NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}><FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠</NavigationItem>
+      <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}><FontAwesomeIcon icon={faLink} size='sm' /> 링크</NavigationItem>
+      <NavigationItem tabIndex={0} onClick={onLogoutClick}><FontAwesomeIcon icon={faSignOutAlt} size='sm' /> 로그아웃</NavigationItem>
     </Container>
   );
 };
