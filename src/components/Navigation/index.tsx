@@ -45,12 +45,16 @@ const Navigation: React.FC = () => {
           <FontAwesomeIcon icon={faHome} size='sm' /> 홈
         </NavigationItem>
       </Link>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
-        <FontAwesomeIcon icon={faHeading} size='sm' /> 섹션
-      </NavigationItem>
-      <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
-        <FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠
-      </NavigationItem>
+      <Link href='/admin'>
+        <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
+          <FontAwesomeIcon icon={faHeading} size='sm' /> 섹션
+        </NavigationItem>
+      </Link>
+      <Link href='/admin/content'>
+        <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
+          <FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠
+        </NavigationItem>
+      </Link>
       <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}>
         <FontAwesomeIcon icon={faLink} size='sm' /> 링크
       </NavigationItem>
