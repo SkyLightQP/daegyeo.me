@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure } from '@chakra-ui/react';
 import { DropResult } from 'react-beautiful-dnd';
@@ -145,7 +145,8 @@ const Admin: React.FC = () => {
         fields={[
           {
             id: 'title',
-            label: '제목'
+            label: '제목',
+            component: forwardRef<HTMLInputElement>((_, ref) => <Input ref={ref} />)
           }
         ]}
         defaultValue={[modalData.title]}

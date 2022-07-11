@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, RefAttributes, useEffect } from 'react';
 import {
   Button,
   FormControl,
   FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -18,6 +17,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 interface FieldType {
   readonly id: string;
   readonly label: string;
+  readonly component: React.ForwardRefExoticComponent<React.InputHTMLAttributes<unknown> & RefAttributes<HTMLInputElement>>;
 }
 
 interface UpdateModalProps {
@@ -50,10 +50,10 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         <ModalBody>
           <FormControl>
             {
-              fields.map(({ id, label }) => (
+              fields.map(({ id, label, component: Component }) => (
                 <Fragment key={id}>
                   <FormLabel>{label}</FormLabel>
-                  <Input
+                  <Component
                     placeholder={label}
                     {...register(id)}
                   />
