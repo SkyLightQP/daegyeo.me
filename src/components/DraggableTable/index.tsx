@@ -56,11 +56,11 @@ const DraggableTable = <T extends { id: number; }>({
                         {
                           columns.map(({ key, isDate }) => {
                             if (isDate) return (
-                              <Td key={`column-${key}`}>
+                              <Td key={`column-${key}-${item.id}`}>
                                 {new Date(item[key] as unknown as string).toLocaleDateString()}
                               </Td>
                             );
-                            return <Td key={`column-${key}`}>{item[key]}</Td>;
+                            return <Td key={`column-${key}-${item.id}`}>{item[key]}</Td>;
                           })
                         }
                         <Td isNumeric>
