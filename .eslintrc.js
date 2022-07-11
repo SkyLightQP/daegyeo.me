@@ -1,12 +1,15 @@
 module.exports = {
   extends: ['react-app', 'airbnb', 'eslint-config-prettier'],
+  globals: {
+    JSX: true
+  },
   rules: {
     'arrow-body-style': 'off',
     'jsx-quotes': 'off',
     'comma-dangle': 'off',
     'object-curly-newline': 'off',
     'linebreak-style': 'off',
-    
+
     'react/jsx-filename-extension': 'off',
     'react/no-unescaped-entities': 'off',
     'react/jsx-tag-spacing': 'off',
