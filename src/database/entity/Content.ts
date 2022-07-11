@@ -24,6 +24,9 @@ class Content {
   subtitle!: string;
 
   @Column()
+  description!: string;
+
+  @Column()
   stack!: string;
 
   @Column()
