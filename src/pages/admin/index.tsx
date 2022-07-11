@@ -146,7 +146,7 @@ const Admin: React.FC = () => {
           {
             id: 'title',
             label: '제목',
-            component: forwardRef<HTMLInputElement>((_, ref) => <Input ref={ref} />)
+            component: Input
           }
         ]}
         defaultValue={[modalData.title]}

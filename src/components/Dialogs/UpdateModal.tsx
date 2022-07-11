@@ -1,6 +1,7 @@
-import React, { Fragment, RefAttributes, useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   Button,
+  ComponentWithAs,
   FormControl,
   FormLabel,
   Modal,
@@ -17,7 +18,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 interface FieldType {
   readonly id: string;
   readonly label: string;
-  readonly component: React.ForwardRefExoticComponent<React.InputHTMLAttributes<unknown> & RefAttributes<HTMLInputElement>>;
+  readonly component: ComponentWithAs<any>;
 }
 
 interface UpdateModalProps {
