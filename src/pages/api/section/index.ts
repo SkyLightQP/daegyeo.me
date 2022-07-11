@@ -47,4 +47,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   await datasource.destroy();
 };
 
-export default withAuth(handler);
+export default withAuth(handler, ['GET']);
