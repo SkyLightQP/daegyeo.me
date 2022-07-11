@@ -3,25 +3,39 @@ import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, T
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Section from '../../../database/entity/Section';
 
-interface SectionTableProps {
-  readonly data: Section[];
-  readonly onDragEnd: (result: DropResult) => void;
-  readonly onTableUpdateClick: (snapshot: Section) => void;
-  readonly onTableDeleteClick: (snapshot: Section) => void;
+interface Column<T> {
+  readonly label: string;
+  readonly key: keyof T;
+  readonly isDate?: boolean;
 }
 
-const SectionTable: React.FC<SectionTableProps> = ({ data, onDragEnd, onTableUpdateClick, onTableDeleteClick }) => {
+interface DraggableTableProps<T> {
+  readonly data: T[];
+  readonly columns: Column<T>[];
+  readonly onDragEnd: (result: DropResult) => void;
+  readonly onTableUpdateClick: (snapshot: T) => void;
+  readonly onTableDeleteClick: (snapshot: T) => void;
+}
+
+const DraggableTable = <T extends { id: number; }>({
+                                                     data,
+                                                     columns,
+                                                     onDragEnd,
+                                                     onTableUpdateClick,
+                                                     onTableDeleteClick
+                                                   }: DraggableTableProps<T>) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <TableContainer background='white'>
         <Table variant='simple'>
           <Thead>
             <Tr>
-              <Th>#</Th>
-              <Th>제목</Th>
-              <Th>생성일</Th>
+              {
+                columns.map(({ key, label }) => (
+                  <Th key={`label-${key}`}>{label}</Th>
+                ))
+              }
               <Th />
             </Tr>
           </Thead>
@@ -33,15 +47,22 @@ const SectionTable: React.FC<SectionTableProps> = ({ data, onDragEnd, onTableUpd
               >
                 {data.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-                    {(provided2) => (
+                    {(innerProvided) => (
                       <Tr
-                        ref={provided2.innerRef}
-                        {...provided2.draggableProps}
-                        {...provided2.dragHandleProps}
+                        ref={innerProvided.innerRef}
+                        {...innerProvided.draggableProps}
+                        {...innerProvided.dragHandleProps}
                       >
-                        <Td>{item.id}</Td>
-                        <Td>{item.title}</Td>
-                        <Td>{new Date(item.createdAt).toLocaleDateString()}</Td>
+                        {
+                          columns.map(({ key, isDate }) => {
+                            if (isDate) return (
+                              <Td key={`column-${key}`}>
+                                {new Date(item[key] as unknown as string).toLocaleDateString()}
+                              </Td>
+                            );
+                            return <Td key={`column-${key}`}>{item[key]}</Td>;
+                          })
+                        }
                         <Td isNumeric>
                           <ButtonGroup isAttached>
                             <IconButton
@@ -72,4 +93,4 @@ const SectionTable: React.FC<SectionTableProps> = ({ data, onDragEnd, onTableUpd
   );
 };
 
-export default SectionTable;
+export default DraggableTable;

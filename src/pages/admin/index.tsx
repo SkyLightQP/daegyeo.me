@@ -11,7 +11,7 @@ import VerticalGap from '../../components/VerticalGap';
 import Axios from '../../api';
 import Section from '../../database/entity/Section';
 import HorizontalGap from '../../components/HorizontalGap';
-import SectionTable from '../../components/Section/Table';
+import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 
@@ -99,8 +99,13 @@ const Admin: React.FC = () => {
           <Button colorScheme='blue' fontWeight='normal' onClick={handleSubmit(onAddClick)}>섹션 추가</Button>
         </Header>
         <VerticalGap gap={10} />
-        <SectionTable
+        <DraggableTable
           data={data}
+          columns={[
+            { key: 'id', label: '#' },
+            { key: 'title', label: '제목' },
+            { key: 'createdAt', label: '생성일', isDate: true }
+          ]}
           onDragEnd={onChangeData}
           onTableUpdateClick={(item) => {
             setModalData({ id: item.id, title: item.title });
