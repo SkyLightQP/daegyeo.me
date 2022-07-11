@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure } from '@chakra-ui/react';
 import { DropResult } from 'react-beautiful-dnd';
