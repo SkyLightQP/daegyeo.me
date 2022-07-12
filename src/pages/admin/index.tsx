@@ -29,8 +29,8 @@ const Admin: React.FC = () => {
   useUserVerify();
   const [data, setData] = useState<Section[]>([]);
   const [isChange, setBeChange] = useState(false);
-  const [modalData, setModalData] = useState<{ id: number; title: string; }>({ id: -1, title: '' });
-  const { register, handleSubmit, reset } = useForm<{ title: string; }>();
+  const [modalData, setModalData] = useState<{ id: number; title: string }>({ id: -1, title: '' });
+  const { register, handleSubmit, reset } = useForm<{ title: string }>();
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
 
@@ -43,7 +43,7 @@ const Admin: React.FC = () => {
     fetchData().then();
   }, []);
 
-  const onAddClick: SubmitHandler<{ title: string; }> = async (values) => {
+  const onAddClick: SubmitHandler<{ title: string }> = async (values) => {
     if (values.title.trim() === '') return;
     await Axios.post('/api/section', {
       title: values.title,
@@ -75,14 +75,16 @@ const Admin: React.FC = () => {
         <VerticalGap gap={10} />
         <Header>
           <Input
-            placeholder='섹션 이름'
-            background='white'
-            {...register('title')}
+            placeholder="섹션 이름"
+            background="white"
+            {...register('title', { required: true })}
             onKeyPress={(e) => {
               if (e.key === 'Enter') handleSubmit(onAddClick)();
             }}
           />
-          <Button colorScheme='blue' fontWeight='normal' onClick={handleSubmit(onAddClick)}>섹션 추가</Button>
+          <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
+            섹션 추가
+          </Button>
         </Header>
         <VerticalGap gap={10} />
         <DraggableTable
@@ -104,19 +106,18 @@ const Admin: React.FC = () => {
         />
         <VerticalGap gap={10} />
         <Footer>
-          <Button
-            colorScheme='green'
-            fontWeight='normal'
-            onClick={() => fetchData().then(() => setBeChange(false))}
-          >새로고침
+          <Button colorScheme="green" fontWeight="normal" onClick={() => fetchData().then(() => setBeChange(false))}>
+            새로고침
           </Button>
           <HorizontalGap gap={10} />
-          <Button disabled={!isChange} colorScheme='blue' fontWeight='normal' onClick={onApplyClick}>적용</Button>
+          <Button disabled={!isChange} colorScheme="blue" fontWeight="normal" onClick={onApplyClick}>
+            적용
+          </Button>
         </Footer>
       </AdminLayout>
 
       <DeleteModal
-        title='섹션 삭제하기'
+        title="섹션 삭제하기"
         modalController={deleteDialog}
         onDeleteClick={async () => {
           await Axios.delete(`/api/section/${modalData.id}`);
