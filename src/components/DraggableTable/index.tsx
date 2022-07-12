@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ interface Column<T> {
   readonly label: string;
   readonly key: keyof T;
   readonly isDate?: boolean;
+  readonly render?: (item: T) => JSX.Element;
 }
 
 interface DraggableTableProps<T> {
@@ -54,12 +55,19 @@ const DraggableTable = <T extends { id: number; }>({
                         {...innerProvided.dragHandleProps}
                       >
                         {
-                          columns.map(({ key, isDate }) => {
+                          columns.map(({ key, isDate, render }) => {
                             if (isDate) return (
                               <Td key={`column-${key}-${item.id}`}>
                                 {new Date(item[key] as unknown as string).toLocaleDateString()}
                               </Td>
                             );
+                            if (render) {
+                              return (
+                                <Fragment key={`column-${key}-${item.id}`}>
+                                  {render(item)}
+                                </Fragment>
+                              );
+                            }
                             return <Td key={`column-${key}-${item.id}`}>{item[key]}</Td>;
                           })
                         }
