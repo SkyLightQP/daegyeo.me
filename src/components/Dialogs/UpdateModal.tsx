@@ -14,11 +14,13 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import VerticalGap from '../VerticalGap';
 
 interface FieldType {
   readonly id: string;
   readonly label: string;
   readonly component: ComponentWithAs<any>;
+  readonly option?: JSX.Element;
 }
 
 interface UpdateModalProps {
@@ -51,13 +53,17 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         <ModalBody>
           <FormControl>
             {
-              fields.map(({ id, label, component: Component }) => (
+              fields.map(({ id, label, component: Component, option }) => (
                 <Fragment key={id}>
-                  <FormLabel>{label}</FormLabel>
+                  <FormLabel htmlFor={id}>{label}</FormLabel>
                   <Component
+                    id={id}
                     placeholder={label}
                     {...register(id)}
-                  />
+                  >
+                    {option && option}
+                  </Component>
+                  <VerticalGap gap={10} />
                 </Fragment>
               ))
             }
