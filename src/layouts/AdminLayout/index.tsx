@@ -20,9 +20,7 @@ const AdminLayout: React.FC = ({ children }) => {
     <>
       <Navigation />
       <VerticalGap gap={30} />
-      <Container>
-        {children}
-      </Container>
+      <Container>{children}</Container>
     </>
   );
 };

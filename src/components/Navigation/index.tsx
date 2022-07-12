@@ -40,26 +40,26 @@ const Navigation: React.FC = () => {
 
   return (
     <Container>
-      <Link href='/'>
+      <Link href="/">
         <NavigationItem tabIndex={0}>
-          <FontAwesomeIcon icon={faHome} size='sm' /> 홈
+          <FontAwesomeIcon icon={faHome} size="sm" /> 홈
         </NavigationItem>
       </Link>
-      <Link href='/admin'>
+      <Link href="/admin">
         <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
-          <FontAwesomeIcon icon={faHeading} size='sm' /> 섹션
+          <FontAwesomeIcon icon={faHeading} size="sm" /> 섹션
         </NavigationItem>
       </Link>
-      <Link href='/admin/content'>
+      <Link href="/admin/content">
         <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
-          <FontAwesomeIcon icon={faAlignJustify} size='sm' /> 컨텐츠
+          <FontAwesomeIcon icon={faAlignJustify} size="sm" /> 컨텐츠
         </NavigationItem>
       </Link>
       <NavigationItem tabIndex={0} active={router.pathname === '/admin/link'}>
-        <FontAwesomeIcon icon={faLink} size='sm' /> 링크
+        <FontAwesomeIcon icon={faLink} size="sm" /> 링크
       </NavigationItem>
       <NavigationItem tabIndex={0} onClick={onLogoutClick}>
-        <FontAwesomeIcon icon={faSignOutAlt} size='sm' /> 로그아웃
+        <FontAwesomeIcon icon={faSignOutAlt} size="sm" /> 로그아웃
       </NavigationItem>
     </Container>
   );

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Input, Select, Td, Textarea, useDisclosure } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { DropResult } from 'react-beautiful-dnd';
@@ -50,7 +50,7 @@ const AdminContent: React.FC = () => {
   const [section, setSection] = useState<Section[]>([]);
   const [isChange, setBeChange] = useState(false);
   const { register, handleSubmit, reset } = useForm<AddForm>();
-  const [modalData, setModalData] = useState<{ id: number; value: AddForm; }>({ id: -1, value: DEFAULT_VALUE });
+  const [modalData, setModalData] = useState<{ id: number; value: AddForm }>({ id: -1, value: DEFAULT_VALUE });
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
 
@@ -88,17 +88,24 @@ const AdminContent: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchData().then(() => {
-      return Axios.get<{ data: Section[] }>('/api/section');
-    }).then((res) => setSection(res.data.data));
+    fetchData()
+      .then(() => {
+        return Axios.get<{ data: Section[] }>('/api/section');
+      })
+      .then((res) => setSection(res.data.data));
   }, []);
 
-  const SectionOptions = () => (
-    <>
-      {section.map((item) => (
-        <option key={item.id} value={item.id}>{item.title}</option>
-      ))}
-    </>
+  const SectionOptions = useCallback(
+    () => (
+      <>
+        {section.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.title}
+          </option>
+        ))}
+      </>
+    ),
+    [section]
   );
 
   return (
@@ -108,36 +115,51 @@ const AdminContent: React.FC = () => {
         <VerticalGap gap={10} />
         <Header>
           <Input
-            placeholder='제목'
-            background='white'
-            css={css`grid-column: 1 / 3;`}
+            placeholder="제목"
+            background="white"
+            css={css`
+              grid-column: 1 / 3;
+            `}
             {...register('title', { required: true })}
           />
           <Input
-            placeholder='부제목 (날짜, 역할)'
-            background='white'
-            css={css`grid-column: 3 / 5;`}
+            placeholder="부제목 (날짜, 역할)"
+            background="white"
+            css={css`
+              grid-column: 3 / 5;
+            `}
             {...register('subtitle')}
           />
           <Textarea
-            placeholder='내용'
-            background='white'
+            placeholder="내용"
+            background="white"
             css={css`
               grid-column: 1 / 5;
               resize: none;
             `}
             {...register('description')}
           />
-          <Input placeholder='스택' background='white' css={css`grid-column: 1 / 3;`} {...register('stack')} />
+          <Input
+            placeholder="스택"
+            background="white"
+            css={css`
+              grid-column: 1 / 3;
+            `}
+            {...register('stack')}
+          />
           <Select
-            placeholder='섹션'
-            background='white'
-            css={css`grid-column: 2 / 4;`}
+            placeholder="섹션"
+            background="white"
+            css={css`
+              grid-column: 2 / 4;
+            `}
             {...register('section', { required: true })}
           >
             <SectionOptions />
           </Select>
-          <Button colorScheme='blue' fontWeight='normal' onClick={handleSubmit(onAddClick)}>컨텐츠 추가</Button>
+          <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
+            컨텐츠 추가
+          </Button>
         </Header>
         <VerticalGap gap={10} />
         <DraggableTable
@@ -153,7 +175,8 @@ const AdminContent: React.FC = () => {
           onDragEnd={onChangeData}
           onTableUpdateClick={(item) => {
             setModalData({
-              id: item.id, value: {
+              id: item.id,
+              value: {
                 title: item.title,
                 subtitle: item.subtitle,
                 description: item.description,
@@ -165,7 +188,8 @@ const AdminContent: React.FC = () => {
           }}
           onTableDeleteClick={(item) => {
             setModalData({
-              id: item.id, value: {
+              id: item.id,
+              value: {
                 title: item.title,
                 subtitle: item.subtitle,
                 description: item.description,
@@ -178,20 +202,18 @@ const AdminContent: React.FC = () => {
         />
         <VerticalGap gap={10} />
         <Footer>
-          <Button
-            colorScheme='green'
-            fontWeight='normal'
-            onClick={() => fetchData().then(() => setBeChange(false))}
-          >
+          <Button colorScheme="green" fontWeight="normal" onClick={() => fetchData().then(() => setBeChange(false))}>
             새로고침
           </Button>
           <HorizontalGap gap={10} />
-          <Button disabled={!isChange} colorScheme='blue' fontWeight='normal' onClick={onApplyClick}>적용</Button>
+          <Button disabled={!isChange} colorScheme="blue" fontWeight="normal" onClick={onApplyClick}>
+            적용
+          </Button>
         </Footer>
       </AdminLayout>
 
       <DeleteModal
-        title='컨텐츠 삭제하기'
+        title="컨텐츠 삭제하기"
         modalController={deleteDialog}
         onDeleteClick={async () => {
           await Axios.delete(`/api/content/${modalData.id}`);
@@ -215,7 +237,13 @@ const AdminContent: React.FC = () => {
             option: <SectionOptions />
           }
         ]}
-        defaultValue={[modalData.value.title, modalData.value.subtitle, modalData.value.description, modalData.value.stack, modalData.value.section]}
+        defaultValue={[
+          modalData.value.title,
+          modalData.value.subtitle,
+          modalData.value.description,
+          modalData.value.stack,
+          modalData.value.section
+        ]}
         onUpdateClick={async (values) => {
           await Axios.patch(`/api/content/${modalData.id}`, {
             title: values.title,

@@ -25,4 +25,3 @@ export const Subtitle = styled.span`
     font-size: 14px;
   }
 `;
-

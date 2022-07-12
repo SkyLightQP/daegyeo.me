@@ -35,46 +35,40 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
   const { register, handleSubmit, setValue } = useForm<Record<string, string>>();
 
   useEffect(() => {
-    fields.map(({ id }) => id).forEach((i, index) => {
-      setValue(i, defaultValue[index]);
-    });
+    fields
+      .map(({ id }) => id)
+      .forEach((i, index) => {
+        setValue(i, defaultValue[index]);
+      });
   }, [setValue, fields, defaultValue]);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
-    >
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>수정하기</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
-            {
-              fields.map(({ id, label, component: Component, option }) => (
-                <Fragment key={id}>
-                  <FormLabel htmlFor={id}>{label}</FormLabel>
-                  <Component
-                    id={id}
-                    placeholder={label}
-                    {...register(id)}
-                  >
-                    {option && option}
-                  </Component>
-                  <VerticalGap gap={10} />
-                </Fragment>
-              ))
-            }
+            {fields.map(({ id, label, component: Component, option }) => (
+              <Fragment key={id}>
+                <FormLabel htmlFor={id}>{label}</FormLabel>
+                <Component id={id} placeholder={label} {...register(id)}>
+                  {option && option}
+                </Component>
+                <VerticalGap gap={10} />
+              </Fragment>
+            ))}
           </FormControl>
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3} fontWeight='normal' onClick={handleSubmit(onUpdateClick)}>
+          <Button colorScheme="blue" mr={3} fontWeight="normal" onClick={handleSubmit(onUpdateClick)}>
             수정
           </Button>
-          <Button fontWeight='normal' onClick={onClose}>취소</Button>
+          <Button fontWeight="normal" onClick={onClose}>
+            취소
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

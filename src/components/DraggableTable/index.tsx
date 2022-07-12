@@ -19,33 +19,28 @@ interface DraggableTableProps<T> {
   readonly onTableDeleteClick: (snapshot: T) => void;
 }
 
-const DraggableTable = <T extends { id: number; }>({
-                                                     data,
-                                                     columns,
-                                                     onDragEnd,
-                                                     onTableUpdateClick,
-                                                     onTableDeleteClick
-                                                   }: DraggableTableProps<T>) => {
+const DraggableTable = <T extends { id: number }>({
+  data,
+  columns,
+  onDragEnd,
+  onTableUpdateClick,
+  onTableDeleteClick
+}: DraggableTableProps<T>) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <TableContainer background='white'>
-        <Table variant='simple'>
+      <TableContainer background="white">
+        <Table variant="simple">
           <Thead>
             <Tr>
-              {
-                columns.map(({ key, label }) => (
-                  <Th key={`label-${key}`}>{label}</Th>
-                ))
-              }
+              {columns.map(({ key, label }) => (
+                <Th key={`label-${key}`}>{label}</Th>
+              ))}
               <Th />
             </Tr>
           </Thead>
-          <Droppable droppableId='droppable'>
+          <Droppable droppableId="droppable">
             {(provided) => (
-              <Tbody
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
+              <Tbody {...provided.droppableProps} ref={provided.innerRef}>
                 {data.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id.toString()} index={index}>
                     {(innerProvided) => (
@@ -54,34 +49,29 @@ const DraggableTable = <T extends { id: number; }>({
                         {...innerProvided.draggableProps}
                         {...innerProvided.dragHandleProps}
                       >
-                        {
-                          columns.map(({ key, isDate, render }) => {
-                            if (isDate) return (
+                        {columns.map(({ key, isDate, render }) => {
+                          if (isDate)
+                            return (
                               <Td key={`column-${key}-${item.id}`}>
                                 {new Date(item[key] as unknown as string).toLocaleDateString()}
                               </Td>
                             );
-                            if (render) {
-                              return (
-                                <Fragment key={`column-${key}-${item.id}`}>
-                                  {render(item)}
-                                </Fragment>
-                              );
-                            }
-                            return <Td key={`column-${key}-${item.id}`}>{item[key]}</Td>;
-                          })
-                        }
+                          if (render) {
+                            return <Fragment key={`column-${key}-${item.id}`}>{render(item)}</Fragment>;
+                          }
+                          return <Td key={`column-${key}-${item.id}`}>{item[key]}</Td>;
+                        })}
                         <Td isNumeric>
                           <ButtonGroup isAttached>
                             <IconButton
-                              aria-label='Edit'
-                              size='xs'
+                              aria-label="Edit"
+                              size="xs"
                               icon={<FontAwesomeIcon icon={faEdit} />}
                               onClick={() => onTableUpdateClick(item)}
                             />
                             <IconButton
-                              aria-label='Delete'
-                              size='xs'
+                              aria-label="Delete"
+                              size="xs"
                               icon={<FontAwesomeIcon icon={faTrash} />}
                               onClick={() => onTableDeleteClick(item)}
                             />

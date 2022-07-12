@@ -27,8 +27,8 @@ const Text = styled.span`
 
 const DirectLink: React.FC<DirectLinkProps> = ({ href, children }) => {
   return (
-    <StyledA href={href} target='_blank' rel='noopener noreferrer'>
-      <Text>{children}</Text> <FontAwesomeIcon icon={faArrowRight} size='sm' />
+    <StyledA href={href} target="_blank" rel="noopener noreferrer">
+      <Text>{children}</Text> <FontAwesomeIcon icon={faArrowRight} size="sm" />
     </StyledA>
   );
 };

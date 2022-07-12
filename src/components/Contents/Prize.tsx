@@ -5,7 +5,7 @@ import DirectLink from '../DirectLink';
 
 const Prize: React.FC = () => {
   return (
-    <ContentBlock title='수상'>
+    <ContentBlock title="수상">
       <div>
         <Title>
           2020-2 Ajou SOFTCON 고등부문 우수상 <Subtitle>2020 / 백엔드</Subtitle>
@@ -14,7 +14,7 @@ const Prize: React.FC = () => {
           Python과 Django를 활용해보기 위해 진행했습니다. <br />
           Amazon S3를 이용하여 사진 리소스를 관리했습니다. <br />
           with <b>Python, Django, MariaDB, Amazon S3</b> <br />
-          <DirectLink href='https://github.com/Sustagram'>GitHub</DirectLink>
+          <DirectLink href="https://github.com/Sustagram">GitHub</DirectLink>
         </Body>
       </div>
 

@@ -13,12 +13,12 @@ const LinkSection: React.FC = () => {
   };
 
   return (
-    <ContentBlock title='더 알아보기'>
+    <ContentBlock title="더 알아보기">
       <Title>
         <span
-          role='button'
+          role="button"
           tabIndex={0}
-          onKeyPress={(e) => (e.key === 'Enter' && onEmailClick())}
+          onKeyPress={(e) => e.key === 'Enter' && onEmailClick()}
           onClick={onEmailClick}
           css={css`
             cursor: pointer;
@@ -28,35 +28,31 @@ const LinkSection: React.FC = () => {
             }
           `}
         >
-          <FontAwesomeIcon icon={faAt} size='sm' /> Email
+          <FontAwesomeIcon icon={faAt} size="sm" /> Email
         </span>
       </Title>
 
       <Title>
-        <a href='https://github.com/SkyLightQP/' target='_blank' rel='noopener noreferrer'>
-          <FontAwesomeIcon icon={faGithub} size='sm' /> GitHub
+        <a href="https://github.com/SkyLightQP/" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faGithub} size="sm" /> GitHub
         </a>
       </Title>
 
       <Title>
-        <a href='https://blog.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
-          <FontAwesomeIcon icon={faBlog} size='sm' /> Blog
+        <a href="https://blog.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faBlog} size="sm" /> Blog
         </a>
       </Title>
 
       <Title>
-        <a
-          href='https://www.acmicpc.net/user/combbm'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <FontAwesomeIcon icon={faCode} size='sm' /> Baekjoon
+        <a href="https://www.acmicpc.net/user/combbm" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faCode} size="sm" /> Baekjoon
         </a>
       </Title>
 
       <Title>
-        <a href='https://til.skylightqp.kr/' target='_blank' rel='noopener noreferrer'>
-          <FontAwesomeIcon icon={faPencilAlt} size='sm' /> Today I Learned
+        <a href="https://til.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learned
         </a>
       </Title>
     </ContentBlock>

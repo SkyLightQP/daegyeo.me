@@ -100,23 +100,23 @@ const Header: React.FC = () => {
   return (
     <TitleContainer>
       <TextContainer>
-        <motion.div initial='before' animate='after' variants={containerAnimation}>
+        <motion.div initial="before" animate="after" variants={containerAnimation}>
           <Title variants={textAnimation}>하대겸</Title>
           <SubTitle variants={textAnimation}>Daegyeom Ha</SubTitle>
 
           <IconList>
             <motion.a
-              href='https://github.com/SkyLightQP/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://github.com/SkyLightQP/"
+              target="_blank"
+              rel="noopener noreferrer"
               variants={textAnimation}
             >
               <FontAwesomeIcon icon={faGithub} /> GITHUB
             </motion.a>
             <motion.a
-              href='https://blog.skylightqp.kr/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://blog.skylightqp.kr/"
+              target="_blank"
+              rel="noopener noreferrer"
               variants={textAnimation}
             >
               <FontAwesomeIcon icon={faBlog} /> BLOG

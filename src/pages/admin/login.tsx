@@ -48,7 +48,7 @@ const LoginButton = styled.button`
 
 const Login: React.FC = () => {
   const router = useRouter();
-  const [input, setInput] = useState<{ email: string; password: string; }>({
+  const [input, setInput] = useState<{ email: string; password: string }>({
     email: '',
     password: ''
   });
@@ -76,15 +76,15 @@ const Login: React.FC = () => {
       <Title>Admin Login</Title>
       <VerticalGap gap={16} />
       <Input
-        type='email'
-        placeholder='Email'
+        type="email"
+        placeholder="Email"
         value={input.email}
         onChange={(e) => setInput((prev) => ({ ...prev, email: e.target.value }))}
       />
       <VerticalGap gap={10} />
       <Input
-        type='password'
-        placeholder='Password'
+        type="password"
+        placeholder="Password"
         value={input.password}
         onChange={(e) => setInput((prev) => ({ ...prev, password: e.target.value }))}
         onKeyPress={(e) => {

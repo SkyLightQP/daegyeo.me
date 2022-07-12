@@ -21,23 +21,17 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ title, modalController, onDel
   const { isOpen, onClose } = modalController;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
-    >
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          {children}
-        </ModalBody>
+        <ModalBody>{children}</ModalBody>
         <ModalFooter>
-          <Button onClick={onClose} fontWeight='normal'>
+          <Button onClick={onClose} fontWeight="normal">
             취소
           </Button>
-          <Button colorScheme='red' ml={3} fontWeight='normal' onClick={onDeleteClick}>
+          <Button colorScheme="red" ml={3} fontWeight="normal" onClick={onDeleteClick}>
             삭제
           </Button>
         </ModalFooter>

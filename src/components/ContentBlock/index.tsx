@@ -29,7 +29,7 @@ const ContentTitle = styled.p`
 `;
 
 interface ContentBlockProps {
-  readonly title?: string;
+  readonly title: string;
 }
 
 const ContentBlock: React.FC<ContentBlockProps> = ({ title, children }) => {
