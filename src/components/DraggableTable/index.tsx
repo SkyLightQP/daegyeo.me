@@ -53,13 +53,13 @@ const DraggableTable = <T extends { id: number }>({
                           if (isDate)
                             return (
                               <Td key={`column-${key}-${item.id}`}>
-                                {new Date(item[key] as unknown as string).toLocaleDateString()}
+                                {new Date(String(item[key])).toLocaleDateString()}
                               </Td>
                             );
                           if (render) {
                             return <Fragment key={`column-${key}-${item.id}`}>{render(item)}</Fragment>;
                           }
-                          return <Td key={`column-${key}-${item.id}`}>{item[key]}</Td>;
+                          return <Td key={`column-${key}-${item.id}`}>{String(item[key])}</Td>;
                         })}
                         <Td isNumeric>
                           <ButtonGroup isAttached>

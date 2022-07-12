@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -32,7 +32,7 @@ interface ContentBlockProps {
   readonly title: string;
 }
 
-const ContentBlock: React.FC<ContentBlockProps> = ({ title, children }) => {
+const ContentBlock: React.FC<PropsWithChildren<ContentBlockProps>> = ({ title, children }) => {
   return (
     <Container>
       {title && <ContentTitle>{title}</ContentTitle>}

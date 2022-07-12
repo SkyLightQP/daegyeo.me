@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
@@ -25,7 +25,7 @@ const Text = styled.span`
   font-size: 16px;
 `;
 
-const DirectLink: React.FC<DirectLinkProps> = ({ href, children }) => {
+const DirectLink: React.FC<PropsWithChildren<DirectLinkProps>> = ({ href, children }) => {
   return (
     <StyledA href={href} target="_blank" rel="noopener noreferrer">
       <Text>{children}</Text> <FontAwesomeIcon icon={faArrowRight} size="sm" />

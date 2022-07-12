@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
   Button,
   Modal,
@@ -17,7 +17,12 @@ interface DeleteModalProps {
   readonly onDeleteClick: () => void;
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ title, modalController, onDeleteClick, children }) => {
+const DeleteModal: React.FC<PropsWithChildren<DeleteModalProps>> = ({
+  title,
+  modalController,
+  onDeleteClick,
+  children
+}) => {
   const { isOpen, onClose } = modalController;
 
   return (

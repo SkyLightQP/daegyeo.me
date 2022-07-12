@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import Navigation from '../../components/Navigation';
 import VerticalGap from '../../components/VerticalGap';
@@ -15,7 +15,7 @@ const Container = styled.div`
   }
 `;
 
-const AdminLayout: React.FC = ({ children }) => {
+const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Navigation />
