@@ -55,8 +55,8 @@ const AdminContent: React.FC = () => {
   const updateDialog = useDisclosure();
 
   const fetchData = async () => {
-    const res = await Axios.get<{ data: Content[] }>('/api/content');
-    setData(res.data.data.sort((a, b) => a.order - b.order));
+    const res = await Axios.get<{ data: Array<Content & { section: Section }> }>('/api/content');
+    setData(res.data.data.sort((a, b) => a.order - b.order && a.section.order - b.section.order));
   };
 
   const onAddClick: SubmitHandler<AddForm> = async (values) => {
