@@ -22,7 +22,8 @@ const handlePatch: NextApiWithDB = async (req, res, datasource) => {
   const id = Number(req.query.id);
   const { title } = req.body;
   const sectionRepository = datasource.getRepository(Section);
-  const { affected } = await sectionRepository.update({
+  const { affected } = await sectionRepository.update(
+    {
       id
     },
     {

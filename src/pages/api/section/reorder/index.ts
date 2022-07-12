@@ -9,9 +9,12 @@ const handlePatch: NextApiWithDB = async (req, res, datasource) => {
   const sectionRepository = datasource.getRepository(Section);
 
   const promisedMap = (ids as number[]).map(async (id, index) => {
-    await sectionRepository.update({ id }, {
-      order: index + 1
-    });
+    await sectionRepository.update(
+      { id },
+      {
+        order: index + 1
+      }
+    );
   });
   await Promise.all(promisedMap);
 

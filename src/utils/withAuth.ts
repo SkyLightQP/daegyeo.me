@@ -5,7 +5,7 @@ type NextHandler = (req: NextApiRequest, res: NextApiResponse) => Promise<void> 
 
 const withAuth = (handler: NextHandler, exclude?: string[]) => {
   return async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-    if (exclude && (req.method && exclude.includes(req.method))) {
+    if (exclude && req.method && exclude.includes(req.method)) {
       return handler(req, res);
     }
 

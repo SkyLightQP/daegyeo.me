@@ -31,7 +31,8 @@ const handlePatch: NextApiWithDB = async (req, res, datasource) => {
     return;
   }
 
-  const { affected } = await repository.update({
+  const { affected } = await repository.update(
+    {
       id
     },
     {

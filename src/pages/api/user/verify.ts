@@ -22,4 +22,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } catch (e) {
     res.status(401).json({ error: 'Unauthorized', data: null });
   }
-}
+};
