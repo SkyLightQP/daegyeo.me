@@ -10,6 +10,9 @@ const handleGet: NextApiWithDB = async (req, res, datasource) => {
   const data = await repository.find({
     order: {
       id: 'ASC'
+    },
+    relations: {
+      section: true
     }
   });
 
