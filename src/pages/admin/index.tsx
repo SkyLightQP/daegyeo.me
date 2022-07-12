@@ -4,9 +4,7 @@ import { Button, Input, useDisclosure } from '@chakra-ui/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUserVerify from '../../hooks/useUserVerify';
-import Navigation from '../../components/Navigation';
 import { HugeTitle } from '../../components/Typography';
-import Colors from '../../styles/Colors';
 import VerticalGap from '../../components/VerticalGap';
 import Axios from '../../api';
 import Section from '../../database/entity/Section';
@@ -14,17 +12,7 @@ import HorizontalGap from '../../components/HorizontalGap';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
-
-const Container = styled.div`
-  color: ${Colors.PRIMARY};
-
-  max-width: 960px;
-  margin: 0 auto;
-
-  @media screen and (max-width: 420px) {
-    max-width: 360px;
-  }
-`;
+import AdminLayout from '../../layouts/AdminLayout';
 
 const Header = styled.div`
   display: grid;
@@ -82,9 +70,7 @@ const Admin: React.FC = () => {
 
   return (
     <>
-      <Navigation />
-      <VerticalGap gap={30} />
-      <Container>
+      <AdminLayout>
         <HugeTitle>섹션 관리</HugeTitle>
         <VerticalGap gap={10} />
         <Header>
@@ -127,7 +113,7 @@ const Admin: React.FC = () => {
           <HorizontalGap gap={10} />
           <Button disabled={!isChange} colorScheme='blue' fontWeight='normal' onClick={onApplyClick}>적용</Button>
         </Footer>
-      </Container>
+      </AdminLayout>
 
       <DeleteModal
         title='섹션 삭제하기'
