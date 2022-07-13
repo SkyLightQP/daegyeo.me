@@ -23,7 +23,7 @@ class Link {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @ManyToOne('Content', 'links')
+  @ManyToOne('Content', 'links', { onDelete: 'CASCADE' })
   content!: Content;
 }
 
