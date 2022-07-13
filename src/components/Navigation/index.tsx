@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faHeading, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
+import firebaseAuth from '../../utils/firebase';
 
 const Container = styled.div`
   width: 100vw;
@@ -31,10 +32,13 @@ const Navigation: React.FC = () => {
 
   const onLogoutClick = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
-    const isLogout = confirm('로그아웃?');
+    const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
     if (isLogout) {
       localStorage.removeItem('accessToken');
-      router.push('/admin/login');
+      firebaseAuth
+        .signOut()
+        .then(() => router.push('/admin/login'))
+        .then();
     }
   };
 
