@@ -61,7 +61,7 @@ const Login: React.FC = () => {
     try {
       const info = await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
       localStorage.setItem('accessToken', await info.user.getIdToken());
-      router.push('/admin');
+      await router.push('/admin');
     } catch (e) {
       toast({
         title: 'Error',
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
         placeholder="Password"
         value={input.password}
         onChange={(e) => setInput((prev) => ({ ...prev, password: e.target.value }))}
-        onKeyPress={(e) => {
+        onKeyUp={(e) => {
           if (e.key === 'Enter') login();
         }}
       />
