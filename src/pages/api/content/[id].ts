@@ -7,10 +7,15 @@ import Section from '../../../database/entity/Section';
 
 const handleGet: NextApiWithDB = async (req, res, datasource) => {
   const repository = datasource.getRepository(Content);
-  const data = await repository.findOneBy({
-    id: Number(req.query.id)
+  const data = await repository.findOne({
+    where: {
+      id: Number(req.query.id)
+    },
+    relations: {
+      section: true,
+      links: true
+    }
   });
-
   if (data === null) {
     res.status(404).json({ error: 'Not Found', data: null });
     return;

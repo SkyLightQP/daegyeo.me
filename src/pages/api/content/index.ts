@@ -12,7 +12,8 @@ const handleGet: NextApiWithDB = async (req, res, datasource) => {
       id: 'ASC'
     },
     relations: {
-      section: true
+      section: true,
+      links: true
     }
   });
 
