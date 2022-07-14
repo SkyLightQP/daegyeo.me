@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Column<T> {
   readonly label: string;
@@ -17,6 +17,9 @@ interface DraggableTableProps<T> {
   readonly onDragEnd: (result: DropResult) => void;
   readonly onTableUpdateClick: (snapshot: T) => void;
   readonly onTableDeleteClick: (snapshot: T) => void;
+  /* eslint-disable react/require-default-props */
+  readonly useLinkControl?: boolean;
+  readonly onTableLinkClick?: (snapshot: T) => void;
 }
 
 const DraggableTable = <T extends { id: number }>({
@@ -24,7 +27,9 @@ const DraggableTable = <T extends { id: number }>({
   columns,
   onDragEnd,
   onTableUpdateClick,
-  onTableDeleteClick
+  onTableDeleteClick,
+  useLinkControl,
+  onTableLinkClick
 }: DraggableTableProps<T>) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -63,6 +68,14 @@ const DraggableTable = <T extends { id: number }>({
                         })}
                         <Td isNumeric>
                           <ButtonGroup isAttached>
+                            {useLinkControl && (
+                              <IconButton
+                                aria-label="Edit"
+                                size="xs"
+                                icon={<FontAwesomeIcon icon={faLink} />}
+                                onClick={() => onTableLinkClick && onTableLinkClick(item)}
+                              />
+                            )}
                             <IconButton
                               aria-label="Edit"
                               size="xs"
