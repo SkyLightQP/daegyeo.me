@@ -1,8 +1,9 @@
 import axios from 'axios';
 
+const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : '';
 const Axios = axios.create({
   headers: {
-    authorization: `Bearer ${typeof window !== 'undefined' ? localStorage.getItem('accessToken') : ''}`
+    Authorization: `Bearer ${token ?? 'NOT_FOUND_TOKEN'}`
   }
 });
 

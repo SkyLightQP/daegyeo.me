@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Axios from '../api';
+import axios from 'axios';
 
 const useUserVerify = () => {
   const [uid, setUid] = useState<string | null | undefined>(undefined);
   const router = useRouter();
 
   useEffect(() => {
-    Axios.get('/api/user/verify')
+    axios
+      .get('/api/user/verify', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken') ?? 'NOT_FOUND_TOKEN'}`
+        }
+      })
       .then(({ data }) => {
         setUid(data.data.uid);
       })
