@@ -20,6 +20,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json({ data: { uid: decode.uid } });
   } catch (e) {
-    res.status(401).json({ error: 'Unauthorized', data: null });
+    res.status(401).json({ error: 'Unauthorized', cause: e.message, data: null });
   }
 };
