@@ -123,7 +123,7 @@ const AdminContent: React.FC = () => {
             {...register('title', { required: true })}
           />
           <Input
-            placeholder="부제목 (날짜, 역할)"
+            placeholder="부제목 (2022 / 프론트엔드)"
             background="white"
             css={css`
               grid-column: 3 / 5;
