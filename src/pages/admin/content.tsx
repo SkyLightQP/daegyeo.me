@@ -16,6 +16,7 @@ import Section from '../../database/entity/Section';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
+import LinkModal from '../../components/Dialogs/LinkModal';
 
 const Header = styled.div`
   display: grid;
@@ -53,10 +54,20 @@ const AdminContent: React.FC = () => {
   const [modalData, setModalData] = useState<{ id: number; value: AddForm }>({ id: -1, value: DEFAULT_VALUE });
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
+  const linkDialog = useDisclosure();
 
   const fetchData = async () => {
     const res = await Axios.get<{ data: Array<Content & { section: Section }> }>('/api/content');
     setData(res.data.data.sort((a, b) => a.order - b.order && a.section.order - b.section.order));
+  };
+
+  const onChangeData = (result: DropResult) => {
+    if (!result.destination) return;
+    const items = [...data];
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setData(items);
+    setBeChange(true);
   };
 
   const onAddClick: SubmitHandler<AddForm> = async (values) => {
@@ -72,15 +83,6 @@ const AdminContent: React.FC = () => {
     reset(DEFAULT_VALUE);
   };
 
-  const onChangeData = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
-    setBeChange(true);
-  };
-
   const onApplyClick = async () => {
     if (!isChange) return;
     await Axios.patch('/api/content/reorder', { ids: data.map((item) => item.id) });
@@ -89,9 +91,7 @@ const AdminContent: React.FC = () => {
 
   useEffect(() => {
     fetchData()
-      .then(() => {
-        return Axios.get<{ data: Section[] }>('/api/section');
-      })
+      .then(() => Axios.get<{ data: Section[] }>('/api/section'))
       .then((res) => setSection(res.data.data));
   }, []);
 
@@ -163,6 +163,7 @@ const AdminContent: React.FC = () => {
         </Header>
         <VerticalGap gap={10} />
         <DraggableTable
+          useLinkControl
           data={data}
           columns={[
             { key: 'id', label: '#' },
@@ -199,6 +200,10 @@ const AdminContent: React.FC = () => {
             });
             deleteDialog.onOpen();
           }}
+          onTableLinkClick={(item) => {
+            setModalData((prev) => ({ ...prev, id: item.id }));
+            linkDialog.onOpen();
+          }}
         />
         <VerticalGap gap={10} />
         <Footer>
@@ -221,7 +226,7 @@ const AdminContent: React.FC = () => {
           deleteDialog.onClose();
         }}
       >
-        섹션 내 컨텐츠가 없을 때만 삭제가 가능합니다.
+        컨텐츠 삭제 시 링크와 함께 삭제됩니다.
       </DeleteModal>
       <UpdateModal
         modalController={updateDialog}
@@ -256,6 +261,7 @@ const AdminContent: React.FC = () => {
           updateDialog.onClose();
         }}
       />
+      <LinkModal modalController={linkDialog} dataId={modalData.id} />
     </>
   );
 };
