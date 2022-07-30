@@ -37,6 +37,32 @@ const handlePost: NextApiWithDB = async (req, res, datasource) => {
   res.status(201).json({ data: true });
 };
 
+const handlePatch: NextApiWithDB = async (req, res, datasource) => {
+  const { update } = req.body as { update: Array<Pick<Link, 'id' | 'name' | 'href'>> };
+  const repository = datasource.getRepository(Link);
+  const promisedMap = update.map(async ({ id, name, href }) => {
+    const { affected } = await repository.update(
+      {
+        id
+      },
+      {
+        name,
+        href
+      }
+    );
+    return affected;
+  });
+  const result = await Promise.all(promisedMap);
+  const affected = result.reduce((a, b) => (a ?? 0) + (b ?? 0));
+
+  if (affected === 0) {
+    res.status(404).json({ error: 'Not Found', data: null });
+    return;
+  }
+
+  res.status(200).json({ data: true });
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const datasource = await initDataSource();
   if (datasource === undefined) {
@@ -50,8 +76,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case 'POST':
       await handlePost(req, res, datasource);
       break;
+    case 'PATCH':
+      await handlePatch(req, res, datasource);
+      break;
     default:
-      res.setHeader('Allow', ['GET', 'POST']);
+      res.setHeader('Allow', ['GET', 'POST', 'PATCH']);
       res.status(405).end();
   }
   await datasource.destroy();
