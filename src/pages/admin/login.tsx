@@ -62,6 +62,7 @@ const Login: React.FC = () => {
       const info = await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
       localStorage.setItem('accessToken', await info.user.getIdToken());
       await router.push('/admin');
+      window.location.reload();
     } catch (e) {
       toast({
         title: 'Error',
