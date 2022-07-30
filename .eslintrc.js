@@ -5,6 +5,7 @@ module.exports = {
   globals: {
     JSX: true
   },
+  ignorePatterns: ['src/database/entity/*.ts'],
   rules: {
     'arrow-body-style': 'off',
     'jsx-quotes': 'off',
@@ -23,7 +24,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'import/no-cycle': 'warn',
 
     'prettier/prettier': 'error'
   }
