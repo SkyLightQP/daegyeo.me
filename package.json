@@ -1,10 +1,11 @@
 {
-  "name": "resume",
+  "name": "daegyeo.me",
   "version": "1.0.0",
-  "homepage": "https://skylightqp.kr",
+  "homepage": "https://daegyeo.me",
   "scripts": {
     "start": "next dev",
     "build": "next build",
+    "prod": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix"
   },
