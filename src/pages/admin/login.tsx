@@ -59,8 +59,9 @@ const Login: React.FC = () => {
 
   const login = async () => {
     try {
-      const info = await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
-      localStorage.setItem('accessToken', await info.user.getIdToken());
+      await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
+      const token = await firebaseAuth.currentUser?.getIdToken();
+      localStorage.setItem('accessToken', token ?? 'token');
       await router.push('/admin');
       window.location.reload();
     } catch (e) {
