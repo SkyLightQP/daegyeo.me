@@ -11,12 +11,14 @@ const ContentLink: React.FC<LinkProps> = ({ links }) => {
   if (links && links.length > 0) {
     return (
       <>
-        {links.map((link) => (
-          <Fragment key={link.id}>
-            <DirectLink href={link.href}>{link.name}</DirectLink>
-            <HorizontalGap gap={8} />
-          </Fragment>
-        ))}
+        {links
+          .sort((a, b) => a.order - b.order)
+          .map((link) => (
+            <Fragment key={link.id}>
+              <DirectLink href={link.href}>{link.name}</DirectLink>
+              <HorizontalGap gap={8} />
+            </Fragment>
+          ))}
       </>
     );
   }

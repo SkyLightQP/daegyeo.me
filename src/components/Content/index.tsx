@@ -15,21 +15,25 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = ({ sections }) => {
   return (
     <>
-      {(sections as Section[]).map((section) => (
-        <ContentBlock key={section.id} title={section.title}>
-          {section.contents.map((content) => (
-            <div key={content.id}>
-              <ContentTitle content={content} />
-              <Body>
-                <ContentDescription content={content} />
-                <ContentStack content={content} />
-                <ContentLink links={content.links} />
-              </Body>
-              {content.description !== '' && content.stack !== '' ? <VerticalGap gap={40} /> : <></>}
-            </div>
-          ))}
-        </ContentBlock>
-      ))}
+      {sections
+        .sort((a, b) => a.order - b.order)
+        .map((section) => (
+          <ContentBlock key={section.id} title={section.title}>
+            {section.contents
+              .sort((a, b) => a.order - b.order)
+              .map((content) => (
+                <div key={content.id}>
+                  <ContentTitle content={content} />
+                  <Body>
+                    <ContentDescription content={content} />
+                    <ContentStack content={content} />
+                    <ContentLink links={content.links} />
+                  </Body>
+                  {content.description !== '' && content.stack !== '' ? <VerticalGap gap={40} /> : <></>}
+                </div>
+              ))}
+          </ContentBlock>
+        ))}
     </>
   );
 };
