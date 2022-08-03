@@ -7,7 +7,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../ContentBlock';
 import { Title } from '../Typography';
 
-const LinkSection: React.FC = () => {
+const MoreLink: React.FC = () => {
   const onEmailClick = () => {
     window.open('mailto:combbm@gmail.com');
   };
@@ -59,4 +59,4 @@ const LinkSection: React.FC = () => {
   );
 };
 
-export default LinkSection;
+export default MoreLink;

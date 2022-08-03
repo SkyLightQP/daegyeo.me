@@ -9,6 +9,7 @@ import Prize from '../components/Contents/Prize';
 import LinkSection from '../components/Contents/Link';
 import Edu from '../components/Contents/Edu';
 import Activity from '../components/Contents/Activity';
+import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
 
@@ -41,7 +42,7 @@ const Index: React.FC = () => {
         <Project />
         <Activity />
         <Prize />
-        <LinkSection />
+        <MoreLink />
         <Footer />
       </Content>
     </>
