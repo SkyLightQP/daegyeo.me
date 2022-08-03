@@ -20,6 +20,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/function-component-definition': 'off',
+    'react/jsx-no-useless-fragment': 'off',
 
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
