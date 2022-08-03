@@ -3,17 +3,9 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   margin: 4rem 0;
-
-  & div {
-    margin-bottom: 2.8rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
 `;
 
-const ContentTitle = styled.p`
+const Title = styled.p`
   font-weight: bold;
   font-size: 28px;
 
@@ -35,7 +27,7 @@ interface ContentBlockProps {
 const ContentBlock: React.FC<PropsWithChildren<ContentBlockProps>> = ({ title, children }) => {
   return (
     <Container>
-      {title && <ContentTitle>{title}</ContentTitle>}
+      <Title>{title}</Title>
       {children}
     </Container>
   );
