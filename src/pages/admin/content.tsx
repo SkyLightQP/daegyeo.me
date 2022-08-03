@@ -168,8 +168,6 @@ const AdminContent: React.FC = () => {
           columns={[
             { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
-            { key: 'subtitle', label: '부제목' },
-            { key: 'stack', label: '스택' },
             { key: 'section', label: '섹션', render: (item) => <Td>{item.section.title}</Td> },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
