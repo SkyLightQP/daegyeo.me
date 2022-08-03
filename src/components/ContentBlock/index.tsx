@@ -1,22 +1,14 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
   margin: 4rem 0;
-
-  & div {
-    margin-bottom: 1.7rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
 `;
 
-const ContentTitle = styled.p`
+const Title = styled.p`
   font-weight: bold;
   font-size: 28px;
-  
+
   margin-bottom: 4px;
 
   &:after {
@@ -29,13 +21,13 @@ const ContentTitle = styled.p`
 `;
 
 interface ContentBlockProps {
-  readonly title?: string;
+  readonly title: string;
 }
 
-const ContentBlock: React.FC<ContentBlockProps> = ({ title, children }) => {
+const ContentBlock: React.FC<PropsWithChildren<ContentBlockProps>> = ({ title, children }) => {
   return (
     <Container>
-      {title && <ContentTitle>{title}</ContentTitle>}
+      {title && <Title>{title}</Title>}
       {children}
     </Container>
   );
