@@ -2,18 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Header from '../components/Header';
-import Stack from '../components/Contents/Stack';
-import Project from '../components/Contents/Project';
-import Prize from '../components/Contents/Prize';
-import LinkSection from '../components/Contents/Link';
-import Edu from '../components/Contents/Edu';
-import Activity from '../components/Contents/Activity';
 import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
+import Axios from '../api';
+import Section from '../database/entity/Section';
+import Content from '../components/Content';
 
-const Content = styled.div`
+const Container = styled.div`
   margin: 3rem 5rem 0 5rem;
   color: ${Colors.PRIMARY};
 
@@ -26,7 +24,19 @@ const Content = styled.div`
   }
 `;
 
-const Index: React.FC = () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { host } = req.headers;
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  const res = await Axios.get<{ data: Section[] }>(`${protocol}://${host}/api/section`);
+
+  return {
+    props: {
+      sections: res.data.data
+    }
+  };
+};
+
+const Index: React.FC = ({ sections }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   useHotkeys('a+d', () => {
     router.push('/admin');
@@ -36,15 +46,11 @@ const Index: React.FC = () => {
     <>
       <Header />
 
-      <Content>
-        <Stack />
-        <Edu />
-        <Project />
-        <Activity />
-        <Prize />
+      <Container>
+        <Content sections={sections} />
         <MoreLink />
         <Footer />
-      </Content>
+      </Container>
     </>
   );
 };
