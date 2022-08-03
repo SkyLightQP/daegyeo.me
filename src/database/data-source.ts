@@ -4,7 +4,6 @@ import { DataSource } from 'typeorm';
 import Section from './entity/Section';
 import Content from './entity/Content';
 import Link from './entity/Link';
-import logger from '../utils/logger';
 
 const appDataSource = new DataSource({
   type: 'postgres',
@@ -25,7 +24,7 @@ export const initDataSource = async () => {
     }
     return appDataSource;
   } catch (err) {
-    logger.error({ error: err.message }, 'Error during data source initialization.');
+    console.error(`Error during data source initialization. ${err.message}`);
     return undefined;
   }
 };
