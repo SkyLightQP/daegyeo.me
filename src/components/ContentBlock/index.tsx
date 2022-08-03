@@ -27,7 +27,7 @@ interface ContentBlockProps {
 const ContentBlock: React.FC<PropsWithChildren<ContentBlockProps>> = ({ title, children }) => {
   return (
     <Container>
-      <Title>{title}</Title>
+      {title && <Title>{title}</Title>}
       {children}
     </Container>
   );
