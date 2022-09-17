@@ -91,6 +91,7 @@ const Admin: React.FC = () => {
           data={data}
           columns={[
             { key: 'id', label: '#' },
+            { key: 'order', label: '순서' },
             { key: 'title', label: '제목' },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
