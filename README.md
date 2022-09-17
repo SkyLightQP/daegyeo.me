@@ -1,27 +1,25 @@
 # daegyeo.me
 
+> My Portfolio for Daegyeom Ha
+
 - [daegyeo.me](https://daegyeo.me/)
 - [skylightqp.kr](https://skylightqp.kr/)
 
 ## Getting Started
 
-- Use npm or yarn to start the project. (with development mode)
+- Use yarn package manager to start the project. (with development mode)
 
 ```shell
+# Install dependencies
 yarn install
-```  
 
-```shell
-yarn dev
-```
+# Start project with development mode
+yarn start
 
-```shell
+# Build project and start with production mode
 yarn build
-```
-
-```shell
 yarn prod
-```
+```  
 
 ## Environment Variables
 
