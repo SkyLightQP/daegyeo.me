@@ -58,7 +58,7 @@ const AdminContent: React.FC = () => {
 
   const fetchData = async () => {
     const res = await Axios.get<{ data: Array<Content & { section: Section }> }>('/api/content');
-    setData(res.data.data.sort((a, b) => a.order - b.order && a.section.order - b.section.order));
+    setData(res.data.data.sort((a, b) => a.order - b.order).sort((a, b) => a.section.order - b.section.order));
   };
 
   const onChangeData = (result: DropResult) => {
