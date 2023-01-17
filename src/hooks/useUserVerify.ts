@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
 const useUserVerify = () => {
   const [uid, setUid] = useState<string | null | undefined>(undefined);
   const router = useRouter();
+  const token = useMemo(() => localStorage.getItem('accessToken'), []);
 
   useEffect(() => {
     axios
       .get('/api/user/verify', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken') ?? 'NOT_FOUND_TOKEN'}`
+          Authorization: `Bearer ${token}`
         }
       })
       .then(({ data }) => {
@@ -23,7 +24,7 @@ const useUserVerify = () => {
         }
         return Promise.reject(err);
       });
-  }, [router, uid]);
+  }, [router, token, uid]);
 
   return uid;
 };
