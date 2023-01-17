@@ -21,6 +21,15 @@ yarn build
 yarn prod
 ```  
 
+### Using Docker
+```shell
+# Build docker image (change tag name)
+docker build -t resume .
+
+# Run docker container
+docker run -d -p 3000:3000 --env-file .env resume
+```
+
 ## Environment Variables
 
 - Require Postgresql and Firebase for database and authentication.
