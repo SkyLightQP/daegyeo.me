@@ -21,7 +21,7 @@ const handleGet: NextApiWithDB = async (req, res, datasource) => {
 };
 
 const handlePost: NextApiWithDB = async (req, res, datasource) => {
-  const { title, subtitle, description, stack, order, section: sectionId } = req.body;
+  const { title, subtitle, description, stack, order, section: sectionId, hasMargin } = req.body;
   const repository = datasource.getRepository(Content);
   const sectionRepository = datasource.getRepository(Section);
 
@@ -37,7 +37,8 @@ const handlePost: NextApiWithDB = async (req, res, datasource) => {
     description,
     stack,
     order,
-    section
+    section,
+    hasMargin
   });
 
   res.status(201).json({ data: true });

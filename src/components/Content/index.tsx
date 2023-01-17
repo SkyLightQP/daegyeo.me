@@ -29,7 +29,7 @@ const Content: React.FC<ContentProps> = ({ sections }) => {
                     <ContentStack content={content} />
                     <ContentLink links={content.links} />
                   </Body>
-                  {content.subtitle !== '' && content.description !== '' ? <VerticalGap gap={40} /> : <></>}
+                  {content.hasMargin ? <VerticalGap gap={40} /> : <></>}
                 </div>
               ))}
           </ContentBlock>

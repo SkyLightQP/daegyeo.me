@@ -32,6 +32,9 @@ class Content {
   @Column()
   order!: number;
 
+  @Column({ default: true })
+  hasMargin!: boolean;
+
   @CreateDateColumn()
   createdAt!: Date;
 

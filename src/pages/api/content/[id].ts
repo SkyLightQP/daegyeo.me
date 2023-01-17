@@ -26,7 +26,7 @@ const handleGet: NextApiWithDB = async (req, res, datasource) => {
 
 const handlePatch: NextApiWithDB = async (req, res, datasource) => {
   const id = Number(req.query.id);
-  const { title, subtitle, description, stack, section: sectionId } = req.body;
+  const { title, subtitle, description, stack, section: sectionId, hasMargin } = req.body;
   const repository = datasource.getRepository(Content);
   const sectionRepository = datasource.getRepository(Section);
 
@@ -45,7 +45,8 @@ const handlePatch: NextApiWithDB = async (req, res, datasource) => {
       subtitle,
       description,
       stack,
-      section: sectionId !== undefined && section !== null ? section : undefined
+      section: sectionId !== undefined && section !== null ? section : undefined,
+      hasMargin
     }
   );
 

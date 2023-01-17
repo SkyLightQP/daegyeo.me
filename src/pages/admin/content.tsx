@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Input, Select, Td, Textarea, useDisclosure } from '@chakra-ui/react';
+import { Button, Checkbox, Input, Select, Td, Textarea, useDisclosure } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -20,7 +20,7 @@ import LinkModal from '../../components/Dialogs/LinkModal';
 
 const Header = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
 `;
 
@@ -35,6 +35,7 @@ interface AddForm {
   readonly description: string;
   readonly stack: string;
   readonly section: string;
+  readonly hasMargin: boolean;
 }
 
 const DEFAULT_VALUE: AddForm = {
@@ -42,7 +43,8 @@ const DEFAULT_VALUE: AddForm = {
   subtitle: '',
   description: '',
   stack: '',
-  section: ''
+  section: '',
+  hasMargin: true
 };
 
 const AdminContent: React.FC = () => {
@@ -50,7 +52,7 @@ const AdminContent: React.FC = () => {
   const [data, setData] = useState<Array<Content & { section: Section }>>([]);
   const [section, setSection] = useState<Section[]>([]);
   const [isChange, setBeChange] = useState(false);
-  const { register, handleSubmit, reset } = useForm<AddForm>();
+  const { register, handleSubmit, reset } = useForm<AddForm>({ defaultValues: { hasMargin: DEFAULT_VALUE.hasMargin } });
   const [modalData, setModalData] = useState<{ id: number; value: AddForm }>({ id: -1, value: DEFAULT_VALUE });
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
@@ -77,7 +79,8 @@ const AdminContent: React.FC = () => {
       description: values.description,
       stack: values.stack,
       section: values.section,
-      order: data.length + 1
+      order: data.length + 1,
+      hasMargin: values.hasMargin
     });
     await fetchData();
     reset(DEFAULT_VALUE);
@@ -118,7 +121,7 @@ const AdminContent: React.FC = () => {
             placeholder="제목"
             background="white"
             css={css`
-              grid-column: 1 / 3;
+              grid-column: 1 / 4;
             `}
             {...register('title', { required: true })}
           />
@@ -126,7 +129,7 @@ const AdminContent: React.FC = () => {
             placeholder="부제목 (2022 / 프론트엔드)"
             background="white"
             css={css`
-              grid-column: 3 / 5;
+              grid-column: 4 / 6;
             `}
             {...register('subtitle')}
           />
@@ -134,7 +137,7 @@ const AdminContent: React.FC = () => {
             placeholder="내용"
             background="white"
             css={css`
-              grid-column: 1 / 5;
+              grid-column: 1 / 6;
               resize: none;
             `}
             {...register('description')}
@@ -151,12 +154,20 @@ const AdminContent: React.FC = () => {
             placeholder="섹션"
             background="white"
             css={css`
-              grid-column: 2 / 4;
+              grid-column: 3 / 4;
             `}
             {...register('section', { required: true })}
           >
             <SectionOptions />
           </Select>
+          <Checkbox
+            css={css`
+              grid-column: 4 / 5;
+            `}
+            {...register('hasMargin')}
+          >
+            간격 추가
+          </Checkbox>
           <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
             컨텐츠 추가
           </Button>
@@ -180,7 +191,8 @@ const AdminContent: React.FC = () => {
                 subtitle: item.subtitle,
                 description: item.description,
                 stack: item.stack,
-                section: String(item.section.id)
+                section: String(item.section.id),
+                hasMargin: item.hasMargin
               }
             });
             updateDialog.onOpen();
@@ -193,7 +205,8 @@ const AdminContent: React.FC = () => {
                 subtitle: item.subtitle,
                 description: item.description,
                 stack: item.stack,
-                section: String(item.section.id)
+                section: String(item.section.id),
+                hasMargin: item.hasMargin
               }
             });
             deleteDialog.onOpen();
@@ -233,19 +246,16 @@ const AdminContent: React.FC = () => {
           { id: 'subtitle', label: '부제목', component: Input },
           { id: 'description', label: '내용', component: Textarea },
           { id: 'stack', label: '스택', component: Input },
-          {
-            id: 'section',
-            label: '섹션',
-            component: Select,
-            option: <SectionOptions />
-          }
+          { id: 'section', label: '섹션', component: Select, option: <SectionOptions /> },
+          { id: 'hasMargin', label: '간격 추가', component: Checkbox }
         ]}
         defaultValue={[
           modalData.value.title,
           modalData.value.subtitle,
           modalData.value.description,
           modalData.value.stack,
-          modalData.value.section
+          modalData.value.section,
+          modalData.value.hasMargin
         ]}
         onUpdateClick={async (values) => {
           await Axios.patch(`/api/content/${modalData.id}`, {
@@ -253,7 +263,8 @@ const AdminContent: React.FC = () => {
             subtitle: values.subtitle,
             description: values.description,
             stack: values.stack,
-            section: values.section
+            section: values.section,
+            hasMargin: values.hasMargin
           });
           await fetchData();
           updateDialog.onClose();

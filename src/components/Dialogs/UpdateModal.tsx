@@ -26,7 +26,7 @@ interface FieldType {
 interface UpdateModalProps {
   readonly modalController: ReturnType<typeof useDisclosure>;
   readonly fields: FieldType[];
-  readonly defaultValue: string[];
+  readonly defaultValue: any[];
   readonly onUpdateClick: SubmitHandler<Record<string, any>>;
 }
 
