@@ -12,7 +12,7 @@ import Section from '../database/entity/Section';
 import Content from '../components/Content';
 
 const Container = styled.div`
-  margin: 3rem 5rem 0 5rem;
+  margin: 3rem 10rem 0;
   color: ${Colors.PRIMARY};
 
   :lang(ko) {
