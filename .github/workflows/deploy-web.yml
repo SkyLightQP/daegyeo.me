@@ -1,0 +1,19 @@
+name: deploy-web
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the source code.
+        uses: actions/checkout@master
+
+      - name: Build a Dockerfile
+        run: docker build -t daegyeome:latest .
+
+      - name: Start a docker container
+        run: docker run -d -p 80:3000 --env-file="$ENV_PATH" daegyeome:latest
