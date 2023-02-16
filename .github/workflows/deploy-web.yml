@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  NAME: daegyeome
+
 jobs:
   deploy:
     runs-on: self-hosted
@@ -13,7 +16,10 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build a Dockerfile
-        run: docker build -t daegyeome:latest .
+        run: docker build -t $NAME:latest .
+
+      - name: If running a container, remove it
+        run: docker ps -q --filter "name=$NAME" | grep -q . && docker stop $NAME && docker rm $NAME || true
 
       - name: Start a docker container
-        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --name daegyeome daegyeome:latest
+        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --name $NAME $NAME:latest

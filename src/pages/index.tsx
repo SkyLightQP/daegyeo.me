@@ -27,7 +27,7 @@ const Container = styled.div`
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { host } = req.headers;
   const protocol = process.env.USE_HTTPS === 'true' ? 'https' : 'http';
-  const res = await Axios.get<{ data: Section[] }>(`http://${host}/api/section`);
+  const res = await Axios.get<{ data: Section[] }>(`${protocol}://${host}/api/section`);
 
   return {
     props: {
