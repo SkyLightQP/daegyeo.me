@@ -13,8 +13,6 @@ USER node
 
 FROM node:16 as runner
 
-COPY --chown=node:node --from=builder /workspace/node_modules ./node_modules
-COPY --chown=node:node --from=builder /workspace/.next ./.next
-COPY --chown=node:node --from=builder /workspace/package.json ./package.json
+COPY --chown=node:node --from=builder /workspace/ ./
 
-CMD ["yarn", "start"]
+CMD ["yarn", "prod"]
