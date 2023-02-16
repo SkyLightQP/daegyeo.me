@@ -1,4 +1,4 @@
-FROM node:16 as builder
+FROM node:18 as builder
 
 COPY / /workspace
 WORKDIR /workspace
@@ -11,7 +11,7 @@ RUN yarn && yarn build
 ENV NODE_ENV production
 USER node
 
-FROM node:16 as runner
+FROM node:18 as runner
 
 COPY --chown=node:node --from=builder /workspace/ ./
 
