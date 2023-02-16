@@ -16,4 +16,4 @@ jobs:
         run: docker build -t daegyeome:latest .
 
       - name: Start a docker container
-        run: docker run -d -p "$PORT":3000 --env-file="$ENV_PATH" --name daegyeome daegyeome:latest
+        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --name daegyeome daegyeome:latest
