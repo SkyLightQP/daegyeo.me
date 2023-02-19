@@ -9,7 +9,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => setReady(true), []);
 
-  if (!ready) return <>Loading...</>;
+  if (!ready) return <h2 style={{ textAlign: 'center' }}>페이지를 불러오는 중...</h2>;
 
   return (
     <>
