@@ -50,9 +50,5 @@ FIREBASE_CLIENT_EMAIL=
 FIREBASE_PRIVATE_KEY=
 ```
 
-## Deployment
-
-- Deploy by [Vercel](https://vercel.com/)
-
 ## License
 [`MIT License`](https://github.com/SkyLightQP/resume/blob/master/LICENSE)
