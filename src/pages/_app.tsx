@@ -16,6 +16,11 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Daegyeom Ha</title>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
+          crossOrigin="anonymous"
+        />
       </Head>
       <ChakraProvider>
         <GlobalStyle />
