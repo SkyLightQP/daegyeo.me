@@ -22,4 +22,4 @@ jobs:
         run: docker ps -q --filter "name=$NAME" | grep -q . && docker stop $NAME && docker rm $NAME || true
 
       - name: Start a docker container
-        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --name $NAME $NAME:latest
+        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --restart=unless-stopped --name $NAME $NAME:latest
