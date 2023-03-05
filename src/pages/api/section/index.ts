@@ -7,6 +7,11 @@ import { NextApiWithDB } from '../../../types/api-type';
 const handleGet: NextApiWithDB = async (req, res, datasource) => {
   const sectionRepository = datasource.getRepository(Section);
   const data = await sectionRepository.find({
+    where: {
+      contents: {
+        isHidden: false
+      }
+    },
     order: {
       id: 'ASC'
     },
