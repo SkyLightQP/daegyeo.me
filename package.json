@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
     "react-hotkeys-hook": "^3.4.6",
+    "react-markdown": "^8.0.5",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.6"
   },
