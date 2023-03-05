@@ -133,15 +133,6 @@ const AdminContent: React.FC = () => {
             `}
             {...register('subtitle')}
           />
-          <Textarea
-            placeholder="내용"
-            background="white"
-            css={css`
-              grid-column: 1 / 6;
-              resize: none;
-            `}
-            {...register('description')}
-          />
           <Input
             placeholder="스택"
             background="white"
@@ -168,7 +159,23 @@ const AdminContent: React.FC = () => {
           >
             간격 추가
           </Checkbox>
-          <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
+          <Textarea
+            placeholder="내용"
+            background="white"
+            css={css`
+              grid-column: 1 / 6;
+              resize: none;
+            `}
+            {...register('description')}
+          />
+          <Button
+            colorScheme="blue"
+            fontWeight="normal"
+            onClick={handleSubmit(onAddClick)}
+            css={css`
+              grid-column: 1/6;
+            `}
+          >
             컨텐츠 추가
           </Button>
         </Header>
