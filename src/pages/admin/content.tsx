@@ -179,7 +179,7 @@ const AdminContent: React.FC = () => {
             컨텐츠 추가
           </Button>
         </Header>
-        <VerticalGap gap={10} />
+        <VerticalGap gap={20} />
         <DraggableTable
           useLinkControl
           data={data}
