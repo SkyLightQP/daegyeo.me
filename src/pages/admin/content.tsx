@@ -157,7 +157,7 @@ const AdminContent: React.FC = () => {
             `}
             {...register('hasMargin')}
           >
-            간격 추가
+            컨텐츠 간 간격 추가
           </Checkbox>
           <Textarea
             placeholder="내용"
