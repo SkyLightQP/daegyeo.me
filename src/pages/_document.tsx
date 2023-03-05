@@ -10,18 +10,27 @@ const Document = () => {
         <link rel="icon" href="favicon.ico" />
 
         <meta name="theme-color" content="#f0f4f5" />
-        <meta name="description" content="Daegyeom Ha" />
+        <meta name="description" content="Portfolio of Daegyeom Ha" />
 
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-4D5DB39K0B" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-J0FQZH7MNY" strategy="afterInteractive" />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
             window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-4D5DB39K0B');
-            `}
-        </Script>
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+  
+            gtag('config', 'G-J0FQZH7MNY');
+            `
+          }}
+        />
       </Head>
       <body>
         <Main />
