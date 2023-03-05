@@ -36,6 +36,7 @@ interface AddForm {
   readonly stack: string;
   readonly section: string;
   readonly hasMargin: boolean;
+  readonly isHidden: boolean;
 }
 
 const DEFAULT_VALUE: AddForm = {
@@ -44,7 +45,8 @@ const DEFAULT_VALUE: AddForm = {
   description: '',
   stack: '',
   section: '',
-  hasMargin: true
+  hasMargin: true,
+  isHidden: false
 };
 
 const AdminContent: React.FC = () => {
@@ -80,7 +82,8 @@ const AdminContent: React.FC = () => {
       stack: values.stack,
       section: values.section,
       order: data.length + 1,
-      hasMargin: values.hasMargin
+      hasMargin: values.hasMargin,
+      isHidden: values.isHidden
     });
     await fetchData();
     reset(DEFAULT_VALUE);
@@ -159,6 +162,14 @@ const AdminContent: React.FC = () => {
           >
             컨텐츠 간 간격 추가
           </Checkbox>
+          <Checkbox
+            css={css`
+              grid-column: 5 / 6;
+            `}
+            {...register('isHidden')}
+          >
+            숨김
+          </Checkbox>
           <Textarea
             placeholder="내용"
             background="white"
@@ -199,7 +210,8 @@ const AdminContent: React.FC = () => {
                 description: item.description,
                 stack: item.stack,
                 section: String(item.section.id),
-                hasMargin: item.hasMargin
+                hasMargin: item.hasMargin,
+                isHidden: item.isHidden
               }
             });
             updateDialog.onOpen();
@@ -213,7 +225,8 @@ const AdminContent: React.FC = () => {
                 description: item.description,
                 stack: item.stack,
                 section: String(item.section.id),
-                hasMargin: item.hasMargin
+                hasMargin: item.hasMargin,
+                isHidden: item.isHidden
               }
             });
             deleteDialog.onOpen();
@@ -254,7 +267,8 @@ const AdminContent: React.FC = () => {
           { id: 'description', label: '내용', component: Textarea },
           { id: 'stack', label: '스택', component: Input },
           { id: 'section', label: '섹션', component: Select, option: <SectionOptions /> },
-          { id: 'hasMargin', label: '간격 추가', component: Checkbox }
+          { id: 'hasMargin', label: '컨텐츠 간 간격 추가', component: Checkbox },
+          { id: 'isHidden', label: '숨김', component: Checkbox }
         ]}
         defaultValue={[
           modalData.value.title,
@@ -262,7 +276,8 @@ const AdminContent: React.FC = () => {
           modalData.value.description,
           modalData.value.stack,
           modalData.value.section,
-          modalData.value.hasMargin
+          modalData.value.hasMargin,
+          modalData.value.isHidden
         ]}
         onUpdateClick={async (values) => {
           await Axios.patch(`/api/content/${modalData.id}`, {
@@ -271,7 +286,8 @@ const AdminContent: React.FC = () => {
             description: values.description,
             stack: values.stack,
             section: values.section,
-            hasMargin: values.hasMargin
+            hasMargin: values.hasMargin,
+            isHidden: values.isHidden
           });
           await fetchData();
           updateDialog.onClose();
