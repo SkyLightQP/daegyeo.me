@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAt, faBlog, faCode, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faCode, faLink, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../ContentBlock';
 import { Title } from '../Typography';
@@ -40,7 +40,7 @@ const MoreLink: React.FC = () => {
 
       <Title>
         <a href="https://blog.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faBlog} size="sm" /> Blog
+          <FontAwesomeIcon icon={faLink} size="sm" /> Blog
         </a>
       </Title>
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faBlog } from '@fortawesome/free-solid-svg-icons';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
 import MouseDownIcon from '../MouseDownIcon';
 import Colors from '../../styles/Colors';
 
@@ -119,7 +119,7 @@ const Header: React.FC = () => {
               rel="noopener noreferrer"
               variants={textAnimation}
             >
-              <FontAwesomeIcon icon={faBlog} /> BLOG
+              <FontAwesomeIcon icon={faLink} /> BLOG
             </motion.a>
           </IconList>
         </motion.div>
