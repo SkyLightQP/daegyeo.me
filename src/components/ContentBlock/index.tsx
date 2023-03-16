@@ -7,7 +7,7 @@ const Container = styled.div`
 
 const Title = styled.p`
   font-weight: bold;
-  font-size: 28px;
+  font-size: 26px;
 
   margin-bottom: 4px;
 
@@ -16,7 +16,7 @@ const Title = styled.p`
   }
 
   @media screen and (max-width: 420px) {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 `;
 
