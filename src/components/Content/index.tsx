@@ -25,8 +25,10 @@ const Content: React.FC<ContentProps> = ({ sections }) => {
                 <div key={content.id}>
                   <ContentTitle content={content} />
                   <Body>
+                    <VerticalGap gap={4} />
                     <ContentDescription content={content} />
                     <ContentStack content={content} />
+                    <VerticalGap gap={4} />
                     <ContentLink links={content.links} />
                   </Body>
                   {content.hasMargin ? <VerticalGap gap={40} /> : <></>}

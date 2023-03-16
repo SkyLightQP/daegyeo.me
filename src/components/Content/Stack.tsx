@@ -10,9 +10,7 @@ const ContentStack: React.FC<StackProps> = ({ content }) => {
   if (content.stack) {
     return (
       <>
-        <VerticalGap gap={4} />
         with <b>{content.stack}</b> <br />
-        <VerticalGap gap={4} />
       </>
     );
   }
