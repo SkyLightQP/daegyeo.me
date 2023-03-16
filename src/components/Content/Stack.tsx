@@ -1,5 +1,6 @@
 import React from 'react';
 import Content from '../../database/entity/Content';
+import VerticalGap from '../VerticalGap';
 
 interface StackProps {
   readonly content: Content;

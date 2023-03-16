@@ -35,6 +35,9 @@ class Content {
   @Column({ default: true })
   hasMargin!: boolean;
 
+  @Column({ default: false })
+  isHidden!: boolean;
+
   @CreateDateColumn()
   createdAt!: Date;
 

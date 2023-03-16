@@ -10,7 +10,7 @@ export const HugeTitle = styled.p`
   font-weight: bold;
 `;
 
-export const Body = styled.p`
+export const Body = styled.div`
   font-size: 18px;
 
   @media screen and (max-width: 420px) {
