@@ -175,6 +175,7 @@ const AdminContent: React.FC = () => {
             background="white"
             css={css`
               grid-column: 1 / 6;
+              height: 200px;
               resize: none;
             `}
             {...register('description')}
