@@ -22,7 +22,7 @@ interface DraggableTableProps<T> {
   readonly onTableLinkClick?: (snapshot: T) => void;
 }
 
-const DraggableTable = <T extends { id: number }>({
+const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
   data,
   columns,
   onDragEnd,
@@ -53,6 +53,7 @@ const DraggableTable = <T extends { id: number }>({
                         ref={innerProvided.innerRef}
                         {...innerProvided.draggableProps}
                         {...innerProvided.dragHandleProps}
+                        opacity={item.isHidden ? 0.4 : 1}
                       >
                         {columns.map(({ key, isDate, render }) => {
                           if (isDate)
