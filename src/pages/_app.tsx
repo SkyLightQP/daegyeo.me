@@ -16,7 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>daegyeo.me</title>
+        <title>Daegyeom Ha | daegyeo.me</title>
       </Head>
       <Script
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
