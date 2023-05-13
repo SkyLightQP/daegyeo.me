@@ -3,13 +3,14 @@ import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import GlobalStyle from '../styles/GlobalStyle';
+import Colors from '../styles/Colors';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => setReady(true), []);
 
-  if (!ready) return <h2>페이지를 불러오는 중...</h2>;
+  if (!ready) return <div style={{ backgroundColor: Colors.PRIMARY }} />;
 
   return (
     <>
