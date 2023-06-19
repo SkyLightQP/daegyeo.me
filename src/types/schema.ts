@@ -8,7 +8,7 @@ export interface Database {
           createdAt: string;
           description: string;
           hasMargin: boolean;
-          id: string;
+          id: number;
           isHidden: boolean;
           order: number;
           sectionId: number;
@@ -21,7 +21,7 @@ export interface Database {
           createdAt?: string;
           description: string;
           hasMargin: boolean;
-          id: string;
+          id?: number;
           isHidden: boolean;
           order: number;
           sectionId: number;
@@ -34,7 +34,7 @@ export interface Database {
           createdAt?: string;
           description?: string;
           hasMargin?: boolean;
-          id?: string;
+          id?: number;
           isHidden?: boolean;
           order?: number;
           sectionId?: number;
@@ -54,7 +54,7 @@ export interface Database {
       };
       links: {
         Row: {
-          contentId: string;
+          contentId: number;
           createdAt: string;
           href: string;
           id: number;
@@ -63,7 +63,7 @@ export interface Database {
           updatedAt: string;
         };
         Insert: {
-          contentId: string;
+          contentId: number;
           createdAt?: string;
           href: string;
           id?: number;
@@ -72,7 +72,7 @@ export interface Database {
           updatedAt?: string;
         };
         Update: {
-          contentId?: string;
+          contentId?: number;
           createdAt?: string;
           href?: string;
           id?: number;
