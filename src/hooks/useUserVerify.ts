@@ -1,30 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import useSupabase from './useSupabase';
 
 const useUserVerify = () => {
   const [uid, setUid] = useState<string | null | undefined>(undefined);
   const router = useRouter();
-  const token = useMemo(() => localStorage.getItem('accessToken'), []);
+  const supabase = useSupabase();
 
   useEffect(() => {
-    axios
-      .get('/api/user/verify', {
-        headers: {
-          Authorization: `Bearer ${token}`
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        if (session === null) {
+          router.push('/admin/login');
         }
+
+        setUid(session?.user.id);
       })
-      .then(({ data }) => {
-        setUid(data.data.uid);
-      })
-      .catch((err) => {
-        if (err.request.status === 401) {
-          setUid(null);
-          return router.push('/admin/login');
-        }
-        return Promise.reject(err);
-      });
-  }, [router, token, uid]);
+      .catch((err) => Promise.reject(err));
+  }, [supabase, router, uid]);
 
   return uid;
 };
