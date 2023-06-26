@@ -7,9 +7,8 @@ import Header from '../components/Header';
 import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
-import Axios from '../api';
-import Section from '../database/entity/Section';
 import Content from '../components/Content';
+import { supabaseClient } from '../hooks/useSupabase';
 
 const Container = styled.div`
   margin: 3rem 10rem 0;
@@ -25,12 +24,15 @@ const Container = styled.div`
 `;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { host } = req.headers;
-  const res = await Axios.get<{ data: Section[] }>(`http://${host}/api/section`);
-
+  const { data, error } = await supabaseClient
+    .from('sections')
+    .select('*, contents(*, links(*))')
+    .eq('contents.isHidden', false)
+    .order('id', { ascending: true });
+  console.log(error);
   return {
     props: {
-      sections: res.data.data
+      sections: data
     }
   };
 };

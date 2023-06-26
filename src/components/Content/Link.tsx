@@ -2,9 +2,10 @@ import React, { Fragment } from 'react';
 import Link from '../../database/entity/Link';
 import DirectLink from '../DirectLink';
 import HorizontalGap from '../HorizontalGap';
+import { SchemaType } from '../../types/type-util';
 
 interface LinkProps {
-  readonly links: Link[];
+  readonly links: SchemaType<'links'>[];
 }
 
 const ContentLink: React.FC<LinkProps> = ({ links }) => {

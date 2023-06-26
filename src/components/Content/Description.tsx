@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from '@emotion/styled';
-import Content from '../../database/entity/Content';
+import { SchemaType } from '../../types/type-util';
 
 const MarkdownWrapper = styled.div`
   li {
@@ -22,7 +22,7 @@ const MarkdownWrapper = styled.div`
 `;
 
 interface DescriptionProps {
-  readonly content: Content;
+  readonly content: SchemaType<'contents'>;
 }
 
 const ContentDescription: React.FC<DescriptionProps> = ({ content }) => {
