@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "homepage": "https://daegyeo.me",
   "scripts": {
-    "start": "next dev",
+    "dev": "next dev",
     "build": "next build",
-    "prod": "next start",
+    "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix"
   },
