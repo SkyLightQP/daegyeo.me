@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     .select('*, contents(*, links(*))')
     .eq('contents.isHidden', false)
     .order('id', { ascending: true });
-  console.log(error);
   return {
     props: {
       sections: data
