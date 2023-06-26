@@ -1,6 +1,4 @@
 import React from 'react';
-import Content from '../../database/entity/Content';
-import VerticalGap from '../VerticalGap';
 import { SchemaType } from '../../types/type-util';
 
 interface StackProps {

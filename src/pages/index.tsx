@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useToast } from '@chakra-ui/react';
 import Header from '../components/Header';
 import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
 import Content from '../components/Content';
 import { supabaseClient } from '../hooks/useSupabase';
-import { useToast } from '@chakra-ui/react';
 
 const Container = styled.div`
   margin: 3rem 10rem 0;
@@ -24,7 +24,7 @@ const Container = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { data, error } = await supabaseClient
     .from('sections')
     .select('*, contents(*, links(*))')
@@ -57,7 +57,7 @@ const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof
         status: 'error'
       });
     }
-  }, []);
+  }, [error, toast]);
 
   return (
     <>

@@ -119,7 +119,7 @@ const AdminContent: React.FC = () => {
   useEffect(() => {
     fetchData()
       .then(() => supabase.from('sections').select('*'))
-      .then(({ data: sections, error }) => {
+      .then(({ data: sections }) => {
         if (sections !== null) setSection(sections);
       });
   }, [supabase]);

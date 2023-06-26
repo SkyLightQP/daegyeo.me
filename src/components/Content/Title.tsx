@@ -1,5 +1,4 @@
 import React from 'react';
-import Content from '../../database/entity/Content';
 import { Subtitle, Title } from '../Typography';
 import { SchemaType } from '../../types/type-util';
 
