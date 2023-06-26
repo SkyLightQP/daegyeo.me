@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, useDisclosure } from '@chakra-ui/react';
+import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUserVerify from '../../hooks/useUserVerify';
 import { HugeTitle } from '../../components/Typography';
 import VerticalGap from '../../components/VerticalGap';
-import Axios from '../../api';
-import Section from '../../database/entity/Section';
 import HorizontalGap from '../../components/HorizontalGap';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
+import useSupabase from '../../hooks/useSupabase';
+import { SchemaType } from '../../types/type-util';
 
 const Header = styled.div`
   display: grid;
@@ -27,16 +27,29 @@ const Footer = styled.div`
 
 const Admin: React.FC = () => {
   useUserVerify();
-  const [data, setData] = useState<Section[]>([]);
+  const [data, setData] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
   const [modalData, setModalData] = useState<{ id: number; title: string }>({ id: -1, title: '' });
   const { register, handleSubmit, reset } = useForm<{ title: string }>();
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
+  const supabase = useSupabase();
+  const toast = useToast({
+    isClosable: true,
+    position: 'top-left'
+  });
 
   const fetchData = async () => {
-    const res = await Axios.get<{ data: Section[] }>('/api/section');
-    setData(res.data.data.sort((a, b) => a.order - b.order));
+    const { data: sections, error } = await supabase.from('sections').select('*');
+    if (sections === null || error !== null) {
+      toast({
+        title: 'Database Error',
+        description: error?.message ?? 'Unknown Error',
+        status: 'error'
+      });
+      return;
+    }
+    setData(sections.sort((a, b) => a.order - b.order));
   };
 
   useEffect(() => {
@@ -45,10 +58,7 @@ const Admin: React.FC = () => {
 
   const onAddClick: SubmitHandler<{ title: string }> = async (values) => {
     if (values.title.trim() === '') return;
-    await Axios.post('/api/section', {
-      title: values.title,
-      order: data.length + 1
-    });
+    await supabase.from('sections').insert({ title: values.title, order: data.length + 1 });
     await fetchData();
     reset({ title: '' });
   };
@@ -64,7 +74,15 @@ const Admin: React.FC = () => {
 
   const onApplyClick = async () => {
     if (!isChange) return;
-    await Axios.patch('/api/section/reorder', { ids: data.map((item) => item.id) });
+    const promised = data
+      .map((item) => item.id)
+      .map(async (id, index) => {
+        await supabase
+          .from('sections')
+          .update({ order: index + 1 })
+          .match({ id });
+      });
+    await Promise.all(promised);
     setBeChange(false);
   };
 
@@ -120,7 +138,7 @@ const Admin: React.FC = () => {
         title="섹션 삭제하기"
         modalController={deleteDialog}
         onDeleteClick={async () => {
-          await Axios.delete(`/api/section/${modalData.id}`);
+          await supabase.from('sections').delete().match({ id: modalData.id });
           await fetchData();
           deleteDialog.onClose();
         }}
@@ -139,9 +157,7 @@ const Admin: React.FC = () => {
         defaultValue={[modalData.title]}
         onUpdateClick={async (values) => {
           if (values.title.trim() === '') return;
-          await Axios.patch(`/api/section/${modalData.id}`, {
-            title: values.title
-          });
+          await supabase.from('sections').update({ title: values.title }).match({ id: modalData.id });
           await fetchData();
           updateDialog.onClose();
         }}
