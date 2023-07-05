@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useUser } from '@supabase/auth-helpers-react';
+import { useSupabase } from '../utils/supabase';
 
 const useUserVerify = () => {
   const [uid, setUid] = useState<string | null | undefined>(undefined);
   const router = useRouter();
-  const user = useUser();
+  const supabase = useSupabase();
 
   useEffect(() => {
-    if (user === null) {
-      router.push('/admin/login');
-    } else {
-      setUid(user.id);
-    }
-  }, [user, router]);
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        if (session === null) {
+          router.push('/admin/login');
+        }
+
+        setUid(session?.user.id);
+      })
+      .catch((err) => Promise.reject(err));
+  }, [supabase, router]);
 
   return uid;
 };
