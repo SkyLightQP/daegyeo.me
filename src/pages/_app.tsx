@@ -3,11 +3,10 @@ import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import Script from 'next/script';
-import { Session } from '@supabase/auth-helpers-nextjs';
+import { createPagesBrowserClient, Session } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import GlobalStyle from '../styles/GlobalStyle';
 import Colors from '../styles/Colors';
-import { supabaseClient } from '../utils/supabase';
 
 const App = ({
   Component,
@@ -16,6 +15,7 @@ const App = ({
   initialSession: Session;
 }>) => {
   const [ready, setReady] = useState(false);
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
 
   useEffect(() => setReady(true), []);
 
