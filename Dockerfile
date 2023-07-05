@@ -19,4 +19,4 @@ COPY --chown=node:node --from=builder /workspace/ ./
 
 ENV NODE_ENV production
 
-CMD ["yarn", "prod"]
+CMD ["yarn", "start"]
