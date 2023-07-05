@@ -11,7 +11,7 @@ import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
-import useSupabase from '../../hooks/useSupabase';
+import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
 
 const Header = styled.div`

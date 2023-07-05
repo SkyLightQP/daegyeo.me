@@ -5,7 +5,7 @@ import { useToast } from '@chakra-ui/react';
 import { Title } from '../../components/Typography';
 import VerticalGap from '../../components/VerticalGap';
 import Colors from '../../styles/Colors';
-import useSupabase from '../../hooks/useSupabase';
+import { useSupabase } from '../../utils/supabase';
 
 const Container = styled.div`
   min-height: 100vh;

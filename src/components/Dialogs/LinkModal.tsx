@@ -21,8 +21,8 @@ import { faArrowRight, faBars, faTrash } from '@fortawesome/free-solid-svg-icons
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import VerticalGap from '../VerticalGap';
 import Colors from '../../styles/Colors';
-import useSupabase from '../../hooks/useSupabase';
 import { SchemaType } from '../../types/type-util';
+import { useSupabase } from '../../utils/supabase';
 
 const LinkList = styled.div`
   display: flex;

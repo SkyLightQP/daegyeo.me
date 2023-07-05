@@ -9,7 +9,7 @@ import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
 import Content from '../components/Content';
-import { supabaseClient } from '../hooks/useSupabase';
+import { supabaseClient } from '../utils/supabase';
 
 const Container = styled.div`
   margin: 3rem 10rem 0;

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faHeading, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
-import useSupabase from '../../hooks/useSupabase';
+import { useSupabase } from '../../utils/supabase';
 
 const Container = styled.div`
   width: 100vw;
