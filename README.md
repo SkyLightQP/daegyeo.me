@@ -30,26 +30,15 @@ docker run -d -p 3000:3000 --env-file=.env --restart=unless-stopeed resume
 
 ## Environment Variables
 
-- Require PostgreSQL and Firebase for database and authentication.
-- PostgreSQL is used to store portfolio contents.
+- Require Supabase API key for database and authentication.
 
 ```shell
 cp .env.example .env
 ```
 
 ```
-DB_USERNAME=
-DB_PASSWORD=
-DB_HOST=localhost
-DB_PORT=5432
-DB_DATABASE=resume
-
-FIREBASE_PROJECT_ID=
-FIREBASE_CLIENT_EMAIL=
-FIREBASE_PRIVATE_KEY=
-
-NEXT_PUBLIC_SUPABASE_PROJECT_URL=
-NEXT_PUBLIC_SUPABASE_API_KEY=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
 ```
 
 ## License
