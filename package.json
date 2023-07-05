@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "homepage": "https://daegyeo.me",
   "scripts": {
-    "start": "next dev",
+    "dev": "next dev",
     "build": "next build",
-    "prod": "next start",
+    "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix"
   },
@@ -19,20 +19,17 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "axios": "^0.27.2",
-    "firebase": "^9.8.3",
-    "firebase-admin": "^11.0.0",
+    "@supabase/auth-helpers-nextjs": "^0.7.2",
+    "@supabase/auth-helpers-react": "^0.4.0",
+    "@supabase/supabase-js": "^2.26.0",
     "framer-motion": "^6.3.12",
-    "next": "^12.1.6",
-    "pg": "^8.7.3",
+    "next": "^12.2.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
     "react-hotkeys-hook": "^3.4.6",
-    "react-markdown": "^8.0.5",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.6"
+    "react-markdown": "^8.0.5"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",

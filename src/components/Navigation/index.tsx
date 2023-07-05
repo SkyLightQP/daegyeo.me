@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAlignJustify, faHeading, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
-import firebaseAuth from '../../utils/firebase';
+import { useSupabase } from '../../utils/supabase';
 
 const Container = styled.div`
   width: 100vw;
@@ -29,13 +29,14 @@ const Container = styled.div`
 
 const Navigation: React.FC = () => {
   const router = useRouter();
+  const supabase = useSupabase();
 
   const onLogoutClick = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
     const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
     if (isLogout) {
       localStorage.removeItem('accessToken');
-      firebaseAuth
+      supabase.auth
         .signOut()
         .then(() => router.push('/admin/login'))
         .then();

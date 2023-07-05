@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useToast } from '@chakra-ui/react';
 import Header from '../components/Header';
 import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
-import Axios from '../api';
-import Section from '../database/entity/Section';
 import Content from '../components/Content';
+import { supabaseClient } from '../utils/supabase';
 
 const Container = styled.div`
   margin: 3rem 10rem 0;
@@ -24,22 +24,40 @@ const Container = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { host } = req.headers;
-  const res = await Axios.get<{ data: Section[] }>(`http://${host}/api/section`);
-
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data, error } = await supabaseClient
+    .from('sections')
+    .select('*, contents(*, links(*))')
+    .eq('contents.isHidden', false)
+    .order('id', { ascending: true });
   return {
     props: {
-      sections: res.data.data
+      sections: data,
+      error
     }
   };
 };
 
-const Index: React.FC = ({ sections }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
+  const toast = useToast({
+    isClosable: true,
+    position: 'top-left'
+  });
+
   useHotkeys('a+d', () => {
     router.push('/admin');
   });
+
+  useEffect(() => {
+    if (error !== null) {
+      toast({
+        title: '오류',
+        description: '정보를 불러올 수 없습니다. 잠시후 다시 시도해주세요.',
+        status: 'error'
+      });
+    }
+  }, [error, toast]);
 
   return (
     <>

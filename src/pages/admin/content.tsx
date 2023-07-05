@@ -1,22 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Checkbox, Input, Select, Td, Textarea, useDisclosure } from '@chakra-ui/react';
+import { Button, Checkbox, Input, Select, Td, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
 import { css } from '@emotion/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUserVerify from '../../hooks/useUserVerify';
-import Axios from '../../api';
 import VerticalGap from '../../components/VerticalGap';
 import { HugeTitle } from '../../components/Typography';
 import HorizontalGap from '../../components/HorizontalGap';
-import Content from '../../database/entity/Content';
 import DraggableTable from '../../components/DraggableTable';
-import Section from '../../database/entity/Section';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
 import LinkModal from '../../components/Dialogs/LinkModal';
+import { useSupabase } from '../../utils/supabase';
+import { SchemaType } from '../../types/type-util';
 
 const Header = styled.div`
   display: grid;
@@ -51,18 +50,32 @@ const DEFAULT_VALUE: AddForm = {
 
 const AdminContent: React.FC = () => {
   useUserVerify();
-  const [data, setData] = useState<Array<Content & { section: Section }>>([]);
-  const [section, setSection] = useState<Section[]>([]);
+  const [data, setData] = useState<Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>>([]);
+  const [section, setSection] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
   const { register, handleSubmit, reset } = useForm<AddForm>({ defaultValues: { hasMargin: DEFAULT_VALUE.hasMargin } });
   const [modalData, setModalData] = useState<{ id: number; value: AddForm }>({ id: -1, value: DEFAULT_VALUE });
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
   const linkDialog = useDisclosure();
+  const supabase = useSupabase();
+  const toast = useToast({
+    isClosable: true,
+    position: 'top-left'
+  });
 
   const fetchData = async () => {
-    const res = await Axios.get<{ data: Array<Content & { section: Section }> }>('/api/content');
-    setData(res.data.data.sort((a, b) => a.order - b.order).sort((a, b) => a.section.order - b.section.order));
+    const { data: response, error } = await supabase.from('contents').select('*, sections(*)');
+    if (error !== null) {
+      toast({
+        title: 'Database Error',
+        description: error?.message ?? 'Unknown Error',
+        status: 'error'
+      });
+      return;
+    }
+    const contents = response as Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>;
+    setData(contents.sort((a, b) => a.order - b.order).sort((a, b) => a.sections.order - b.sections.order));
   };
 
   const onChangeData = (result: DropResult) => {
@@ -75,12 +88,12 @@ const AdminContent: React.FC = () => {
   };
 
   const onAddClick: SubmitHandler<AddForm> = async (values) => {
-    await Axios.post('/api/content', {
+    await supabase.from('contents').insert({
       title: values.title,
       subtitle: values.subtitle,
       description: values.description,
       stack: values.stack,
-      section: values.section,
+      sectionId: Number(values.section),
       order: data.length + 1,
       hasMargin: values.hasMargin,
       isHidden: values.isHidden
@@ -91,15 +104,25 @@ const AdminContent: React.FC = () => {
 
   const onApplyClick = async () => {
     if (!isChange) return;
-    await Axios.patch('/api/content/reorder', { ids: data.map((item) => item.id) });
+    const promised = data
+      .map((item) => item.id)
+      .map(async (id, index) => {
+        await supabase
+          .from('contents')
+          .update({ order: index + 1 })
+          .match({ id });
+      });
+    await Promise.all(promised);
     setBeChange(false);
   };
 
   useEffect(() => {
     fetchData()
-      .then(() => Axios.get<{ data: Section[] }>('/api/section'))
-      .then((res) => setSection(res.data.data));
-  }, []);
+      .then(() => supabase.from('sections').select('*'))
+      .then(({ data: sections }) => {
+        if (sections !== null) setSection(sections);
+      });
+  }, [supabase]);
 
   const SectionOptions = useCallback(
     () => (
@@ -198,7 +221,7 @@ const AdminContent: React.FC = () => {
           columns={[
             { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
-            { key: 'section', label: '섹션', render: (item) => <Td>{item.section.title}</Td> },
+            { key: 'sections', label: '섹션', render: (item) => <Td>{item.sections.title}</Td> },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
           onDragEnd={onChangeData}
@@ -210,7 +233,7 @@ const AdminContent: React.FC = () => {
                 subtitle: item.subtitle,
                 description: item.description,
                 stack: item.stack,
-                section: String(item.section.id),
+                section: String(item.sections.id),
                 hasMargin: item.hasMargin,
                 isHidden: item.isHidden
               }
@@ -225,7 +248,7 @@ const AdminContent: React.FC = () => {
                 subtitle: item.subtitle,
                 description: item.description,
                 stack: item.stack,
-                section: String(item.section.id),
+                section: String(item.sections.id),
                 hasMargin: item.hasMargin,
                 isHidden: item.isHidden
               }
@@ -253,7 +276,7 @@ const AdminContent: React.FC = () => {
         title="컨텐츠 삭제하기"
         modalController={deleteDialog}
         onDeleteClick={async () => {
-          await Axios.delete(`/api/content/${modalData.id}`);
+          await supabase.from('contents').delete().match({ id: modalData.id });
           await fetchData();
           deleteDialog.onClose();
         }}
@@ -281,15 +304,18 @@ const AdminContent: React.FC = () => {
           modalData.value.isHidden
         ]}
         onUpdateClick={async (values) => {
-          await Axios.patch(`/api/content/${modalData.id}`, {
-            title: values.title,
-            subtitle: values.subtitle,
-            description: values.description,
-            stack: values.stack,
-            section: values.section,
-            hasMargin: values.hasMargin,
-            isHidden: values.isHidden
-          });
+          await supabase
+            .from('contents')
+            .update({
+              title: values.title,
+              subtitle: values.subtitle,
+              description: values.description,
+              stack: values.stack,
+              sectionId: Number(values.section),
+              hasMargin: values.hasMargin,
+              isHidden: values.isHidden
+            })
+            .match({ id: modalData.id });
           await fetchData();
           updateDialog.onClose();
         }}

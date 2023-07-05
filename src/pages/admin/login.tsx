@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
 import { Title } from '../../components/Typography';
-import firebaseAuth from '../../utils/firebase';
 import VerticalGap from '../../components/VerticalGap';
 import Colors from '../../styles/Colors';
+import { useSupabase } from '../../utils/supabase';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -48,6 +47,7 @@ const LoginButton = styled.button`
 
 const Login: React.FC = () => {
   const router = useRouter();
+  const supabase = useSupabase();
   const [input, setInput] = useState<{ email: string; password: string }>({
     email: '',
     password: ''
@@ -59,10 +59,16 @@ const Login: React.FC = () => {
 
   const login = async () => {
     try {
-      const info = await signInWithEmailAndPassword(firebaseAuth, input.email, input.password);
-      localStorage.setItem('accessToken', await info.user.getIdToken());
-      await router.push('/admin');
-      window.location.reload();
+      const { data, error } = await supabase.auth.signInWithPassword({ email: input.email, password: input.password });
+      if (error !== null) {
+        toast({
+          title: 'Credential Error',
+          description: error.message,
+          status: 'error'
+        });
+        return;
+      }
+      if (data.user !== null && data.session !== null) await router.push('/admin');
     } catch (e) {
       toast({
         title: 'Error',

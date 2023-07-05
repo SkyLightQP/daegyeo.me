@@ -3,11 +3,19 @@ import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import Script from 'next/script';
+import { createPagesBrowserClient, Session } from '@supabase/auth-helpers-nextjs';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import GlobalStyle from '../styles/GlobalStyle';
 import Colors from '../styles/Colors';
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({
+  Component,
+  pageProps
+}: AppProps<{
+  initialSession: Session;
+}>) => {
   const [ready, setReady] = useState(false);
+  const [supabaseClient] = useState(() => createPagesBrowserClient());
 
   useEffect(() => setReady(true), []);
 
@@ -37,10 +45,12 @@ const App = ({ Component, pageProps }: AppProps) => {
             `
         }}
       />
-      <ChakraProvider>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <SessionContextProvider supabaseClient={supabaseClient} initialSession={pageProps.initialSession}>
+        <ChakraProvider>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </SessionContextProvider>
     </>
   );
 };
