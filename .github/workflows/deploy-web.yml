@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build a Dockerfile
-        run: docker build -t $NAME:latest .
+        run: docker build -t $NAME:latest $(for i in $(grep -vE '^#|^$' ${{ secrets.ENV_PATH }}); do out+="--build-arg $i " ; done; echo $out;out="") .
 
       - name: If running a container, remove it
         run: docker ps -q --filter "name=$NAME" | grep -q . && docker stop $NAME && docker rm $NAME || true
