@@ -18,11 +18,10 @@ const MoreLink: React.FC = () => {
         <span
           role="button"
           tabIndex={0}
-          onKeyPress={(e) => e.key === 'Enter' && onEmailClick()}
+          onKeyUp={(e) => e.key === 'Enter' && onEmailClick()}
           onClick={onEmailClick}
           css={css`
             cursor: pointer;
-
             &:hover {
               text-decoration: underline;
             }
