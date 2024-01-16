@@ -3,9 +3,37 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faCode, faLink, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../ContentBlock';
 import { Title } from '../Typography';
+
+const links = [
+  {
+    title: 'GitHub',
+    link: 'https://github.com/SkyLightQP/',
+    icon: faGithub
+  },
+  {
+    title: 'Blog',
+    link: 'https://blog.skylightqp.kr/',
+    icon: faLink
+  },
+  {
+    title: 'Baekjoon',
+    link: 'https://www.acmicpc.net/user/combbm',
+    icon: faCode
+  },
+  {
+    title: 'Today I Learned',
+    link: 'https://til.skylightqp.kr/',
+    icon: faPencilAlt
+  },
+  {
+    title: 'Linkedin',
+    link: 'https://www.linkedin.com/in/daegyeom/',
+    icon: faLinkedin
+  }
+];
 
 const MoreLink: React.FC = () => {
   const onEmailClick = () => {
@@ -18,11 +46,10 @@ const MoreLink: React.FC = () => {
         <span
           role="button"
           tabIndex={0}
-          onKeyPress={(e) => e.key === 'Enter' && onEmailClick()}
+          onKeyUp={(e) => e.key === 'Enter' && onEmailClick()}
           onClick={onEmailClick}
           css={css`
             cursor: pointer;
-
             &:hover {
               text-decoration: underline;
             }
@@ -32,29 +59,13 @@ const MoreLink: React.FC = () => {
         </span>
       </Title>
 
-      <Title>
-        <a href="https://github.com/SkyLightQP/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faGithub} size="sm" /> GitHub
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://blog.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faLink} size="sm" /> Blog
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://www.acmicpc.net/user/combbm" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faCode} size="sm" /> Baekjoon
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://til.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learned
-        </a>
-      </Title>
+      {links.map((link) => (
+        <Title key={`links-${link.title.replaceAll(' ', '').toLowerCase()}`}>
+          <a href={link.link} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={link.icon} size="sm" /> {link.title}
+          </a>
+        </Title>
+      ))}
     </ContentBlock>
   );
 };
