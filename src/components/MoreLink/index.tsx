@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faCode, faLink, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../ContentBlock';
 import { Title } from '../Typography';
 
@@ -53,6 +53,12 @@ const MoreLink: React.FC = () => {
       <Title>
         <a href="https://til.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learned
+        </a>
+      </Title>
+
+      <Title>
+        <a href="https://www.linkedin.com/in/daegyeom/" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faLinkedin} size="sm" /> Linkedin
         </a>
       </Title>
     </ContentBlock>
