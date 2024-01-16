@@ -7,6 +7,34 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import ContentBlock from '../ContentBlock';
 import { Title } from '../Typography';
 
+const links = [
+  {
+    title: 'GitHub',
+    link: 'https://github.com/SkyLightQP/',
+    icon: faGithub
+  },
+  {
+    title: 'Blog',
+    link: 'https://blog.skylightqp.kr/',
+    icon: faLink
+  },
+  {
+    title: 'Baekjoon',
+    link: 'https://www.acmicpc.net/user/combbm',
+    icon: faCode
+  },
+  {
+    title: 'Today I Learned',
+    link: 'https://til.skylightqp.kr/',
+    icon: faPencilAlt
+  },
+  {
+    title: 'Linkedin',
+    link: 'https://www.linkedin.com/in/daegyeom/',
+    icon: faLinkedin
+  }
+];
+
 const MoreLink: React.FC = () => {
   const onEmailClick = () => {
     window.open('mailto:combbm@gmail.com');
@@ -31,35 +59,13 @@ const MoreLink: React.FC = () => {
         </span>
       </Title>
 
-      <Title>
-        <a href="https://github.com/SkyLightQP/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faGithub} size="sm" /> GitHub
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://blog.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faLink} size="sm" /> Blog
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://www.acmicpc.net/user/combbm" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faCode} size="sm" /> Baekjoon
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://til.skylightqp.kr/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faPencilAlt} size="sm" /> Today I Learned
-        </a>
-      </Title>
-
-      <Title>
-        <a href="https://www.linkedin.com/in/daegyeom/" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faLinkedin} size="sm" /> Linkedin
-        </a>
-      </Title>
+      {links.map((link) => (
+        <Title key={`links-${link.title.replaceAll(' ', '').toLowerCase()}`}>
+          <a href={link.link} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={link.icon} size="sm" /> {link.title}
+          </a>
+        </Title>
+      ))}
     </ContentBlock>
   );
 };
