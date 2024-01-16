@@ -24,7 +24,7 @@ const App = ({
   return (
     <>
       <Head>
-        <title>Daegyeom Ha | daegyeo.me</title>
+        <title>Daegyeom Ha | resume</title>
       </Head>
       <Script
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
