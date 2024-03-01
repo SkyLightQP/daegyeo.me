@@ -1,4 +1,5 @@
 import React from 'react';
+import { css } from '@emotion/css';
 import ContentBlock from '../ContentBlock';
 
 const Footer: React.FC = () => {
@@ -16,6 +17,13 @@ const Footer: React.FC = () => {
           <b>GitHub</b>
         </a>{' '}
         에서 코드를 확인할 수 있습니다.
+      </p>
+      <p
+        className={css(`
+        margin-top: 10px;
+      `)}
+      >
+        Copyright 2022-{new Date().getFullYear()}. Daegyeom Ha. All rights reserved.
       </p>
     </ContentBlock>
   );
