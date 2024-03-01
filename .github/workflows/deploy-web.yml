@@ -9,6 +9,20 @@ env:
   NAME: daegyeome
 
 jobs:
+  check-lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout the source code.
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run eslint
+        run: yarn run lint
   deploy:
     runs-on: self-hosted
     steps:

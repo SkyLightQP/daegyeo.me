@@ -1,5 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css } from '@emotion/css';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faCode, faLink, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -48,7 +47,7 @@ const MoreLink: React.FC = () => {
           tabIndex={0}
           onKeyUp={(e) => e.key === 'Enter' && onEmailClick()}
           onClick={onEmailClick}
-          css={css`
+          className={css`
             cursor: pointer;
             &:hover {
               text-decoration: underline;
