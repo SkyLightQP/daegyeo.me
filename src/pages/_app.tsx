@@ -24,7 +24,8 @@ const App = ({
   return (
     <>
       <Head>
-        <title>Daegyeom Ha | resume</title>
+        <title>하대겸 | Daegyeom Ha</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Script
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
