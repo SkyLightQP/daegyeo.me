@@ -69,7 +69,7 @@ const Login: React.FC = () => {
         return;
       }
       if (data.user !== null && data.session !== null) await router.push('/admin');
-    } catch (e) {
+    } catch (e: any) {
       toast({
         title: 'Error',
         description: e.message,

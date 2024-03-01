@@ -38,7 +38,7 @@ const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
           <Thead>
             <Tr>
               {columns.map(({ key, label }) => (
-                <Th key={`label-${key}`}>{label}</Th>
+                <Th key={`label-${String(key)}`}>{label}</Th>
               ))}
               <Th />
             </Tr>
@@ -58,14 +58,14 @@ const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
                         {columns.map(({ key, isDate, render }) => {
                           if (isDate)
                             return (
-                              <Td key={`column-${key}-${item.id}`}>
+                              <Td key={`column-${String(key)}-${item.id}`}>
                                 {new Date(String(item[key])).toLocaleDateString()}
                               </Td>
                             );
                           if (render) {
-                            return <Fragment key={`column-${key}-${item.id}`}>{render(item)}</Fragment>;
+                            return <Fragment key={`column-${String(key)}-${item.id}`}>{render(item)}</Fragment>;
                           }
-                          return <Td key={`column-${key}-${item.id}`}>{String(item[key])}</Td>;
+                          return <Td key={`column-${String(key)}-${item.id}`}>{String(item[key])}</Td>;
                         })}
                         <Td isNumeric>
                           <ButtonGroup isAttached>
