@@ -69,12 +69,14 @@ const Login: React.FC = () => {
         return;
       }
       if (data.user !== null && data.session !== null) await router.push('/admin');
-    } catch (e: any) {
-      toast({
-        title: 'Error',
-        description: e.message,
-        status: 'error'
-      });
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        toast({
+          title: 'Error',
+          description: e.message,
+          status: 'error'
+        });
+      }
     }
   };
 

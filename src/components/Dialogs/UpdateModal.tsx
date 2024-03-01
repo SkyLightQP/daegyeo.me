@@ -16,6 +16,8 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import VerticalGap from '../VerticalGap';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface FieldType {
   readonly id: string;
   readonly label: string;
