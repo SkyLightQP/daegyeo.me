@@ -13,6 +13,8 @@ const Document = () => {
         <meta name="keywords" content="Daegyeom Ha, 하대겸, Resume, Portfolio, 포트폴리오" />
         <meta name="theme-color" content={Colors.PRIMARY} />
         <meta name="description" content="Resume of Daegyeom Ha" />
+        <meta property="og:site_name" content="하대겸 | Daegyeom Ha" />
+        <meta property="og:type" content="website" />
         <meta property="og:title" content="하대겸 | Daegyeom Ha" />
         <meta property="og:description" content="Resume of Daegyeom Ha" />
         <meta property="og:url" content="https://daegyeo.me/" />
