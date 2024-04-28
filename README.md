@@ -1,4 +1,4 @@
-# daegyeo.me [![CodeFactor](https://www.codefactor.io/repository/github/skylightqp/daegyeo.me/badge)](https://www.codefactor.io/repository/github/skylightqp/daegyeo.me)
+# daegyeo.me [![deploy-web](https://github.com/SkyLightQP/daegyeo.me/actions/workflows/deploy-web.yml/badge.svg?branch=main)](https://github.com/SkyLightQP/daegyeo.me/actions/workflows/deploy-web.yml) [![CodeFactor](https://www.codefactor.io/repository/github/skylightqp/daegyeo.me/badge)](https://www.codefactor.io/repository/github/skylightqp/daegyeo.me) 
 
 - [daegyeo.me](https://daegyeo.me/)
 - [skylightqp.kr](https://skylightqp.kr/)
