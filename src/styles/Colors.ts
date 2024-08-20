@@ -1,7 +1,9 @@
 const Colors = {
-  PRIMARY: '#303b4d',
-  BACKGROUND: '#f0f4f5',
-  BACKGROUND_DARK: '#1c1c1c'
+  PRIMARY: '#35425A',
+  SECONDARY: '#F0F3F3',
+  BLACK: '#1E1E1E',
+  GRAY: '#D2D2D2',
+  GRAY_DARKEN: '#929292'
 };
 
 export default Object.freeze(Colors);
