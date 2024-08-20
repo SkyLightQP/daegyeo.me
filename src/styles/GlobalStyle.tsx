@@ -6,26 +6,7 @@ const GlobalStyle: React.FC = () => {
   return (
     <Global
       styles={css`
-        @font-face {
-          font-family: 'IBMPlexSansKR';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Light.woff')
-            format('woff');
-          font-weight: 300;
-        }
-
-        @font-face {
-          font-family: 'IBMPlexSansKR';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff')
-            format('woff');
-          font-weight: normal;
-        }
-
-        @font-face {
-          font-family: 'IBMPlexSansKR';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Bold.woff')
-            format('woff');
-          font-weight: bold;
-        }
+        @import url('https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css');
 
         * {
           margin: 0;
@@ -35,13 +16,15 @@ const GlobalStyle: React.FC = () => {
 
         html,
         body {
-          font-family: 'IBMPlexSansKR', sans-serif;
-          background-color: ${Colors.BACKGROUND};
+          font-family: 'SUIT Variable', sans-serif;
+          font-weight: 500;
+          background-color: ${Colors.SECONDARY};
         }
 
         a {
           text-decoration: none;
           color: inherit;
+          cursor: pointer;
 
           &:hover {
             text-decoration: underline;
@@ -49,13 +32,13 @@ const GlobalStyle: React.FC = () => {
         }
 
         ::selection {
-          background-color: ${Colors.BACKGROUND_DARK};
-          color: ${Colors.BACKGROUND};
+          background-color: ${Colors.GRAY_DARKEN};
+          color: ${Colors.SECONDARY};
         }
 
         ::-moz-selection {
-          background-color: ${Colors.BACKGROUND_DARK};
-          color: ${Colors.BACKGROUND};
+          background-color: ${Colors.GRAY_DARKEN};
+          color: ${Colors.SECONDARY};
         }
       `}
     />
