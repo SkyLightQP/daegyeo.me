@@ -4,7 +4,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useToast } from '@chakra-ui/react';
-import Header from '../components/Header';
+import Landing from '../components/Landing';
 import MoreLink from '../components/MoreLink';
 import Footer from '../components/Footer';
 import Colors from '../styles/Colors';
@@ -61,7 +61,7 @@ const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof
 
   return (
     <>
-      <Header />
+      <Landing />
 
       <Container>
         <Content sections={sections} />
