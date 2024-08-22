@@ -19,6 +19,7 @@ const GlobalStyle: React.FC = () => {
           font-family: 'SUIT Variable', sans-serif;
           font-weight: 500;
           background-color: ${Colors.SECONDARY};
+          color: ${Colors.BLACK};
         }
 
         a {
