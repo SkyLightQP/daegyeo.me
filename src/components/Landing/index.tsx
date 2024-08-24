@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { RiArrowDownWideLine, RiArticleLine, RiGithubFill, RiMailLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import { IconLink } from '../Link/IconLink';
+import Breakpoint from '../../styles/Breakpoint';
 
 const Container = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const Title = styled.h1`
   font-size: 36px;
   line-height: 1.32;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 24px;
   }
 `;
@@ -40,7 +41,7 @@ const HintedTitle = styled.span`
   color: ${Colors.GRAY};
   font-size: 24px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 16px;
   }
 `;
@@ -56,7 +57,7 @@ const IntroduceText = styled.p`
 
   word-break: keep-all;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 16px;
   }
 `;
@@ -71,10 +72,6 @@ const IconList = styled.div`
 
   & > *:last-child {
     margin-right: 0;
-  }
-
-  @media screen and (max-width: 700px) {
-    justify-content: center;
   }
 `;
 
@@ -92,7 +89,7 @@ const ScrollDownText = styled.p`
     margin-left: 4px;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
     margin-top: 330px;
     font-size: 14px;
     justify-content: center;
