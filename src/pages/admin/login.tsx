@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
 import { Title } from '../../components/Typography';
-import VerticalGap from '../../components/VerticalGap';
 import Colors from '../../styles/Colors';
 import { useSupabase } from '../../utils/supabase';
+import { Space } from '../../components/Space';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -83,14 +83,14 @@ const Login: React.FC = () => {
   return (
     <Container>
       <Title>Admin Login</Title>
-      <VerticalGap gap={16} />
+      <Space y={16} />
       <Input
         type="email"
         placeholder="Email"
         value={input.email}
         onChange={(e) => setInput((prev) => ({ ...prev, email: e.target.value }))}
       />
-      <VerticalGap gap={10} />
+      <Space y={10} />
       <Input
         type="password"
         placeholder="Password"
@@ -100,7 +100,7 @@ const Login: React.FC = () => {
           if (e.key === 'Enter') login();
         }}
       />
-      <VerticalGap gap={10} />
+      <Space y={10} />
       <LoginButton onClick={login}>Login</LoginButton>
     </Container>
   );
