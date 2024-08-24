@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
-import { RemixiconComponentType, RiGithubFill } from '@remixicon/react';
+import { RemixiconComponentType } from '@remixicon/react';
 
 interface IconLinkProps {
   readonly href: string;
@@ -26,7 +26,7 @@ const StyledLink = styled.a`
 
 export const IconLink: FC<PropsWithChildren<IconLinkProps>> = ({ href, icon: Icon, children }) => {
   return (
-    <StyledLink href={href} target="_blank" rel="noreferrer">
+    <StyledLink href={href} target="_blank" rel="noopener">
       <Icon size={22} /> {children}
     </StyledLink>
   );
