@@ -2,8 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAlignJustify, faHeading, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { RiHeading, RiHome3Line, RiListCheck, RiLogoutBoxLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
 import { useSupabase } from '../../utils/supabase';
@@ -46,21 +45,21 @@ const Navigation: React.FC = () => {
     <Container>
       <Link href="/">
         <NavigationItem tabIndex={0}>
-          <FontAwesomeIcon icon={faHome} size="sm" /> 홈
+          <RiHome3Line size={16} /> 홈
         </NavigationItem>
       </Link>
       <Link href="/admin">
         <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
-          <FontAwesomeIcon icon={faHeading} size="sm" /> 섹션
+          <RiHeading size={16} /> 섹션
         </NavigationItem>
       </Link>
       <Link href="/admin/content">
         <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
-          <FontAwesomeIcon icon={faAlignJustify} size="sm" /> 컨텐츠
+          <RiListCheck size={16} /> 컨텐츠
         </NavigationItem>
       </Link>
       <NavigationItem tabIndex={0} onClick={onLogoutClick}>
-        <FontAwesomeIcon icon={faSignOutAlt} size="sm" /> 로그아웃
+        <RiLogoutBoxLine size={16} /> 로그아웃
       </NavigationItem>
     </Container>
   );
