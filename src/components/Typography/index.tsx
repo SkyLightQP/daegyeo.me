@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Colors from '../../styles/Colors';
+import Breakpoint from '../../styles/Breakpoint';
 
 /* Legacy */
 export const Title = styled.p`
@@ -17,10 +18,18 @@ export const SectionTitle = styled.h1`
   font-size: 24px;
   font-weight: 700;
   color: ${Colors.PRIMARY};
+
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
+    font-size: 22px;
+  }
 `;
 
 export const LargeContentText = styled.p`
   font-size: 20px;
+
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
+    font-size: 18px;
+  }
 `;
 
 export const LargeHintedText = styled.span`
@@ -38,5 +47,9 @@ export const ContentListItem = styled.li`
 
   &::before {
     content: '- ';
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 300px;
   }
 `;

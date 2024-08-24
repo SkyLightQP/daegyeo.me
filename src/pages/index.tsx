@@ -11,6 +11,7 @@ import { Space } from '../components/Space';
 import { ExternalLink } from '../components/Link/ExternalLink';
 import { ContentListItem, LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
 import { SocialLink } from '../components/Link/SocialLink';
+import Breakpoint from '../styles/Breakpoint';
 
 const Container = styled.div`
   margin: 10rem 172px;
@@ -25,6 +26,10 @@ const Container = styled.div`
 
   & > div:last-child {
     margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 6rem 36px;
   }
 `;
 
@@ -62,6 +67,10 @@ const ImageGroup = styled.div`
   & > img:last-child {
     margin-right: 0;
   }
+
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
+    overflow-x: auto;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -74,6 +83,10 @@ const SocialLinkGroup = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 0.15fr);
   grid-row-gap: 4px;
+
+  @media screen and (max-width: ${Breakpoint.MOBILE}) {
+    grid-column-gap: 6px;
+  }
 `;
 
 export const getServerSideProps: GetServerSideProps = async () => {
