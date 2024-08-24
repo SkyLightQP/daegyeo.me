@@ -9,7 +9,6 @@ import NavigationItem from './NavigationItem';
 import { useSupabase } from '../../utils/supabase';
 
 const Container = styled.div`
-  width: 100vw;
   height: 60px;
 
   background-color: ${Colors.PRIMARY};
