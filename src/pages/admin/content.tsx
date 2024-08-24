@@ -218,7 +218,6 @@ const AdminContent: React.FC = () => {
           useLinkControl
           data={data}
           columns={[
-            { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
             { key: 'sections', label: '섹션', render: (item) => <Td>{item.sections.title}</Td> },
             { key: 'createdAt', label: '생성일', isDate: true }

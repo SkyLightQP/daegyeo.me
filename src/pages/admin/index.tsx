@@ -107,7 +107,6 @@ const Admin: React.FC = () => {
         <DraggableTable
           data={data}
           columns={[
-            { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
