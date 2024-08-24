@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
-import { Title } from '../../components/Typography';
+import { SectionTitle, Title } from '../../components/Typography';
 import Colors from '../../styles/Colors';
 import { useSupabase } from '../../utils/supabase';
 import { Space } from '../../components/Space';
@@ -19,7 +19,7 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-  width: 240px;
+  width: 280px;
   height: 40px;
 
   border: 1px solid #e7e7e7;
@@ -82,25 +82,27 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <Title>Admin Login</Title>
-      <Space y={16} />
+      <SectionTitle>daegyeo.me</SectionTitle>
+      <SectionTitle>관리자 로그인</SectionTitle>
+      <Space y={20} />
       <Input
         type="email"
-        placeholder="Email"
+        placeholder="이메일"
         value={input.email}
         onChange={(e) => setInput((prev) => ({ ...prev, email: e.target.value }))}
       />
-      <Space y={10} />
+      <Space y={14} />
       <Input
         type="password"
-        placeholder="Password"
+        placeholder="비밀번호"
         value={input.password}
         onChange={(e) => setInput((prev) => ({ ...prev, password: e.target.value }))}
         onKeyUp={(e) => {
           if (e.key === 'Enter') login();
         }}
+        autoComplete="off"
       />
-      <Space y={10} />
+      <Space y={20} />
       <LoginButton onClick={login}>Login</LoginButton>
     </Container>
   );
