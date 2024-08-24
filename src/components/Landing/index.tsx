@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { RiArrowDownWideLine, RiArticleLine, RiGithubFill, RiMailLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
-import { IconLink } from '../IconLink';
+import { IconLink } from '../Link/IconLink';
 
 const Container = styled.div`
   display: flex;
