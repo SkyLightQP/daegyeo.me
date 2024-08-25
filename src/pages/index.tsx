@@ -81,7 +81,7 @@ const StyledImage = styled.img`
 
 const SocialLinkGroup = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 0.15fr);
+  grid-template-columns: repeat(3, max(10vmin, 100px));
   grid-row-gap: 4px;
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
