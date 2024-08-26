@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Breakpoint from '../../../styles/Breakpoint';
 
 interface ImageViewProps {
-  readonly url: string[];
+  readonly urls: string[];
 }
 
 const ImageGroup = styled.div`
@@ -30,10 +30,10 @@ const StyledImage = styled(Image)`
   border-radius: 10px;
 `;
 
-export const ImageView: FC<ImageViewProps> = ({ url }) => {
+export const ImageView: FC<ImageViewProps> = ({ urls }) => {
   return (
     <ImageGroup>
-      {url.map((src) => (
+      {urls.map((src) => (
         <StyledImage key={src} src={src} alt="프로젝트 썸네일" width="147" height="80" />
       ))}
     </ImageGroup>
