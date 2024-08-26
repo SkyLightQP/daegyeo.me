@@ -20,7 +20,7 @@ const SocialLinkGroup = styled.div`
   grid-row-gap: 4px;
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
-    grid-column-gap: 6px;
+    grid-template-columns: repeat(2, 170px);
   }
 `;
 
