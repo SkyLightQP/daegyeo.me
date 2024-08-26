@@ -25,7 +25,7 @@ interface ServerSideProps {
 }
 
 const Container = styled.div`
-  margin: 10rem 172px;
+  margin: 8rem 172px;
 
   :lang(ko) {
     word-break: keep-all;
