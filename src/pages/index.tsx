@@ -1,30 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useToast } from '@chakra-ui/react';
-import Header from '../components/Header';
-import MoreLink from '../components/MoreLink';
-import Footer from '../components/Footer';
-import Colors from '../styles/Colors';
-import Content from '../components/Content';
+import Landing from '../components/Landing';
 import { supabaseClient } from '../utils/supabase';
+import { Space } from '../components/Space';
+import { LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
+import { SchemaType } from '../types/type-util';
+import { SocialLinkView } from '../components/SocialLinkView';
+import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
+import { DescriptionView } from '../components/ContentView/DescriptionView';
+
+type SectionType = Array<
+  SchemaType<'sections'> & {
+    contents: Array<SchemaType<'contents'> & { links: SchemaType<'links'>[] }>;
+  }
+>;
+
+interface ServerSideProps {
+  readonly sections: SectionType;
+  readonly error: unknown;
+}
 
 const Container = styled.div`
-  margin: 3rem 10rem 0;
-  color: ${Colors.PRIMARY};
+  margin: 8rem 172px;
 
   :lang(ko) {
     word-break: keep-all;
   }
 
-  @media screen and (max-width: 420px) {
-    margin: 3rem 2rem 0 2rem;
+  & > div {
+    margin-bottom: 64px;
+  }
+
+  & > div:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin: 6rem 36px;
   }
 `;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
   const { data, error } = await supabaseClient
     .from('sections')
     .select('*, contents(*, links(*))')
@@ -32,13 +52,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
     .order('id', { ascending: true });
   return {
     props: {
-      sections: data,
+      sections: data as SectionType,
       error
     }
   };
 };
 
-const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Index: React.FC<ServerSideProps> = ({
+  sections,
+  error
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const toast = useToast({
     isClosable: true,
@@ -61,12 +84,36 @@ const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof
 
   return (
     <>
-      <Header />
+      <Landing />
 
       <Container>
-        <Content sections={sections} />
-        <MoreLink />
-        <Footer />
+        {(sections as SectionType)
+          .sort((a, b) => a.order - b.order)
+          .map(
+            (section) =>
+              section.contents.length > 0 && (
+                <div key={section.id}>
+                  <SectionTitle>{section.title}</SectionTitle>
+                  <Space y={6} />
+                  {section.contents
+                    .sort((a, b) => a.order - b.order)
+                    .map((content) => (
+                      <div>
+                        <LargeContentText>
+                          {content.title} <LargeHintedText>{content.subtitle}</LargeHintedText>
+                        </LargeContentText>
+                        <DescriptionView description={content.description} />
+                        {/* <Space y={6} /> */}
+                        {/* <ImageView urls={[]} /> */}
+                        {content.links.length > 0 && <Space y={6} />}
+                        <ExternalLinkView links={content.links} />
+                        {content.hasMargin && <Space y={26} />}
+                      </div>
+                    ))}
+                </div>
+              )
+          )}
+        <SocialLinkView />
       </Container>
     </>
   );

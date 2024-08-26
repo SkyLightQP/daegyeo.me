@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { RiDeleteBin2Line, RiEditLine, RiLink } from '@remixicon/react';
 
 interface Column<T> {
   readonly label: string;
@@ -73,20 +72,20 @@ const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
                               <IconButton
                                 aria-label="Edit"
                                 size="xs"
-                                icon={<FontAwesomeIcon icon={faLink} />}
+                                icon={<RiLink size={16} />}
                                 onClick={() => onTableLinkClick && onTableLinkClick(item)}
                               />
                             )}
                             <IconButton
                               aria-label="Edit"
                               size="xs"
-                              icon={<FontAwesomeIcon icon={faEdit} />}
+                              icon={<RiEditLine size={16} />}
                               onClick={() => onTableUpdateClick(item)}
                             />
                             <IconButton
                               aria-label="Delete"
                               size="xs"
-                              icon={<FontAwesomeIcon icon={faTrash} />}
+                              icon={<RiDeleteBin2Line size={16} />}
                               onClick={() => onTableDeleteClick(item)}
                             />
                           </ButtonGroup>

@@ -20,10 +20,12 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-no-useless-fragment': 'off',
+    'react/require-default-props': 'off',
 
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
 
     'prettier/prettier': 'error'
   }

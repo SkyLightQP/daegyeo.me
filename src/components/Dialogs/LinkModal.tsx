@@ -16,13 +16,12 @@ import {
 } from '@chakra-ui/react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faBars, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import VerticalGap from '../VerticalGap';
+import { RiArrowRightLine, RiDeleteBin2Line, RiMenuLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import { SchemaType } from '../../types/type-util';
 import { useSupabase } from '../../utils/supabase';
+import { Space } from '../Space';
 
 const LinkList = styled.div`
   display: flex;
@@ -155,13 +154,13 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
             <IconButton
               colorScheme="blue"
               aria-label="Add Link"
-              icon={<FontAwesomeIcon icon={faArrowRight} />}
+              icon={<RiArrowRightLine size={20} />}
               onClick={handleSubmit(onAddClick)}
             />
           </LinkRow>
-          <VerticalGap gap={10} />
+          <Space y={10} />
           <Divider />
-          <VerticalGap gap={10} />
+          <Space y={10} />
           <DragDropContext onDragEnd={onChangeData}>
             <Droppable droppableId="link-droppable">
               {(provided) => (
@@ -174,13 +173,13 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
                           {...innerProvided.draggableProps}
                           {...innerProvided.dragHandleProps}
                         >
-                          <FontAwesomeIcon icon={faBars} size="sm" color={Colors.BACKGROUND_DARK} />
+                          <RiMenuLine size={36} color={Colors.GRAY_DARKEN} />
                           <Input type="text" placeholder="제목" width={160} {...linkRegister(`link.${index}.name`)} />
                           <Input type="url" placeholder="링크" {...linkRegister(`link.${index}.href`)} />
                           <IconButton
                             colorScheme="red"
-                            aria-label="Add Link"
-                            icon={<FontAwesomeIcon icon={faTrash} />}
+                            aria-label="Delete Link"
+                            icon={<RiDeleteBin2Line size={20} />}
                             onClick={() => onDeleteClick(Number(link.id))}
                           />
                         </LinkRow>
