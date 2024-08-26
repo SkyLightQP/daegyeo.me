@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
-import { SectionTitle, Title } from '../../components/Typography';
+import { SectionTitle } from '../../components/Typography';
 import Colors from '../../styles/Colors';
 import { useSupabase } from '../../utils/supabase';
 import { Space } from '../../components/Space';
