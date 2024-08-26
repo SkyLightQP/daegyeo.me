@@ -36,20 +36,3 @@ export const LargeHintedText = styled.span`
   font-size: 16px;
   color: ${Colors.GRAY_DARKEN};
 `;
-
-export const ContentListItem = styled.li`
-  width: 630px;
-  font-size: 16px;
-  word-break: break-all;
-  padding-left: 12px;
-  text-indent: -12px;
-  list-style-type: none;
-
-  &::before {
-    content: '- ';
-  }
-
-  @media screen and (max-width: 700px) {
-    width: 300px;
-  }
-`;
