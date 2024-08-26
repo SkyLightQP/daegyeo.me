@@ -1,17 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useToast } from '@chakra-ui/react';
-import { RiPagesLine } from '@remixicon/react';
 import Landing from '../components/Landing';
 import { supabaseClient } from '../utils/supabase';
 import { Space } from '../components/Space';
-import { ExternalLink } from '../components/Link/ExternalLink';
-import { ContentListItem, LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
-import { SocialLink } from '../components/Link/SocialLink';
-import Breakpoint from '../styles/Breakpoint';
+import { LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
+import { SchemaType } from '../types/type-util';
+import { SocialLinkView } from '../components/SocialLinkView';
+import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
+import { DescriptionView } from '../components/ContentView/DescriptionView';
+
+type SectionType = Array<
+  SchemaType<'sections'> & {
+    contents: Array<SchemaType<'contents'> & { links: SchemaType<'links'>[] }>;
+  }
+>;
+
+interface ServerSideProps {
+  readonly sections: SectionType;
+  readonly error: unknown;
+}
 
 const Container = styled.div`
   margin: 10rem 172px;
@@ -33,63 +44,7 @@ const Container = styled.div`
   }
 `;
 
-const ContentList = styled.div`
-  & > div {
-    margin-bottom: 28px;
-  }
-
-  & > div:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const ExternalLinkGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  & > a {
-    margin-right: 6px;
-  }
-
-  & > a:last-child {
-    margin-right: 0;
-  }
-`;
-
-const ImageGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  & > img {
-    margin-right: 16px;
-  }
-
-  & > img:last-child {
-    margin-right: 0;
-  }
-
-  @media screen and (max-width: ${Breakpoint.MOBILE}) {
-    overflow-x: auto;
-  }
-`;
-
-const StyledImage = styled.img`
-  width: auto;
-  height: 80px;
-  border-radius: 10px;
-`;
-
-const SocialLinkGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, max(10vmin, 100px));
-  grid-row-gap: 4px;
-
-  @media screen and (max-width: ${Breakpoint.MOBILE}) {
-    grid-column-gap: 6px;
-  }
-`;
-
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
   const { data, error } = await supabaseClient
     .from('sections')
     .select('*, contents(*, links(*))')
@@ -97,13 +52,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
     .order('id', { ascending: true });
   return {
     props: {
-      sections: data,
+      sections: data as SectionType,
       error
     }
   };
 };
 
-const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Index: React.FC<ServerSideProps> = ({
+  sections,
+  error
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
   const toast = useToast({
     isClosable: true,
@@ -129,60 +87,33 @@ const Index: React.FC = ({ sections, error }: InferGetServerSidePropsType<typeof
       <Landing />
 
       <Container>
-        <div>
-          <SectionTitle>이러한 기술을 활용합니다. — 기술스택</SectionTitle>
-          <Space y={6} />
-          <LargeContentText>- TypeScript, Kotlin, Java</LargeContentText>
-          <LargeContentText>- TypeScript, Kotlin, Java</LargeContentText>
-          <LargeContentText>- TypeScript, Kotlin, Java</LargeContentText>
-        </div>
-        <div>
-          <SectionTitle>이러한 곳에서 함께 했습니다. — 경력</SectionTitle>
-          <Space y={6} />
-          <ContentList>
-            <div>
-              <LargeContentText>
-                개발자 <LargeHintedText>(개발팀, 2024.01. ~ 2024.04.)</LargeHintedText>
-              </LargeContentText>
-              <ContentListItem>
-                이곳에는 리스트 형태의 내용이 들어갑니다. 마크다운에서는 * 또는 -으로 표현할 수 있습니다.
-              </ContentListItem>
-              <Space y={6} />
-              <ImageGroup>
-                <StyledImage src="https://via.placeholder.com/1920x1080" alt="이미지" />
-                <StyledImage src="https://via.placeholder.com/1920x1080" alt="이미지" />
-                <StyledImage src="https://via.placeholder.com/1920" alt="이미지" />
-                <StyledImage src="https://via.placeholder.com/1920" alt="이미지" />
-                <StyledImage src="https://via.placeholder.com/1920" alt="이미지" />
-              </ImageGroup>
-              <Space y={6} />
-              <ExternalLinkGroup>
-                <ExternalLink href="#">블로그</ExternalLink>
-                <ExternalLink href="#">홈페이지</ExternalLink>
-              </ExternalLinkGroup>
-            </div>
-          </ContentList>
-        </div>
-        <div>
-          <SectionTitle>더 궁금하시다면,</SectionTitle>
-          <Space y={6} />
-          <LargeContentText>
-            <SocialLinkGroup>
-              <SocialLink href="#" icon={RiPagesLine}>
-                블로그
-              </SocialLink>
-              <SocialLink href="#" icon={RiPagesLine}>
-                블로그
-              </SocialLink>
-              <SocialLink href="#" icon={RiPagesLine}>
-                블로그
-              </SocialLink>
-              <SocialLink href="#" icon={RiPagesLine}>
-                블로그
-              </SocialLink>
-            </SocialLinkGroup>
-          </LargeContentText>
-        </div>
+        {(sections as SectionType)
+          .sort((a, b) => a.order - b.order)
+          .map(
+            (section) =>
+              section.contents.length > 0 && (
+                <div key={section.id}>
+                  <SectionTitle>{section.title}</SectionTitle>
+                  <Space y={6} />
+                  {section.contents
+                    .sort((a, b) => a.order - b.order)
+                    .map((content) => (
+                      <div>
+                        <LargeContentText>
+                          {content.title} <LargeHintedText>{content.subtitle}</LargeHintedText>
+                        </LargeContentText>
+                        <DescriptionView description={content.description} />
+                        {/* <Space y={6} /> */}
+                        {/* <ImageView urls={[]} /> */}
+                        {content.links.length > 0 && <Space y={6} />}
+                        <ExternalLinkView links={content.links} />
+                        {content.hasMargin && <Space y={26} />}
+                      </div>
+                    ))}
+                </div>
+              )
+          )}
+        <SocialLinkView />
       </Container>
     </>
   );
