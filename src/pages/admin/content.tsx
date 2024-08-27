@@ -6,9 +6,7 @@ import { css } from '@emotion/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUserVerify from '../../hooks/useUserVerify';
-import VerticalGap from '../../components/VerticalGap';
 import { HugeTitle } from '../../components/Typography';
-import HorizontalGap from '../../components/HorizontalGap';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
@@ -16,6 +14,7 @@ import AdminLayout from '../../layouts/AdminLayout';
 import LinkModal from '../../components/Dialogs/LinkModal';
 import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
+import { Space } from '../../components/Space';
 
 const Header = styled.div`
   display: grid;
@@ -141,7 +140,7 @@ const AdminContent: React.FC = () => {
     <>
       <AdminLayout>
         <HugeTitle>컨텐츠 관리</HugeTitle>
-        <VerticalGap gap={10} />
+        <Space y={10} />
         <Header>
           <Input
             placeholder="제목"
@@ -214,12 +213,11 @@ const AdminContent: React.FC = () => {
             컨텐츠 추가
           </Button>
         </Header>
-        <VerticalGap gap={20} />
+        <Space y={20} />
         <DraggableTable
           useLinkControl
           data={data}
           columns={[
-            { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
             { key: 'sections', label: '섹션', render: (item) => <Td>{item.sections.title}</Td> },
             { key: 'createdAt', label: '생성일', isDate: true }
@@ -260,12 +258,12 @@ const AdminContent: React.FC = () => {
             linkDialog.onOpen();
           }}
         />
-        <VerticalGap gap={10} />
+        <Space y={10} />
         <Footer>
           <Button colorScheme="green" fontWeight="normal" onClick={() => fetchData().then(() => setBeChange(false))}>
             새로고침
           </Button>
-          <HorizontalGap gap={10} />
+          <Space x={10} />
           <Button disabled={!isChange} colorScheme="blue" fontWeight="normal" onClick={onApplyClick}>
             적용
           </Button>

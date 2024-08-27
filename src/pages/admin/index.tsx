@@ -5,14 +5,13 @@ import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useUserVerify from '../../hooks/useUserVerify';
 import { HugeTitle } from '../../components/Typography';
-import VerticalGap from '../../components/VerticalGap';
-import HorizontalGap from '../../components/HorizontalGap';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
 import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
+import { Space } from '../../components/Space';
 
 const Header = styled.div`
   display: grid;
@@ -90,7 +89,7 @@ const Admin: React.FC = () => {
     <>
       <AdminLayout>
         <HugeTitle>섹션 관리</HugeTitle>
-        <VerticalGap gap={10} />
+        <Space y={10} />
         <Header>
           <Input
             placeholder="섹션 이름"
@@ -104,11 +103,10 @@ const Admin: React.FC = () => {
             섹션 추가
           </Button>
         </Header>
-        <VerticalGap gap={10} />
+        <Space y={10} />
         <DraggableTable
           data={data}
           columns={[
-            { key: 'id', label: '#' },
             { key: 'title', label: '제목' },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
@@ -122,12 +120,12 @@ const Admin: React.FC = () => {
             deleteDialog.onOpen();
           }}
         />
-        <VerticalGap gap={10} />
+        <Space y={10} />
         <Footer>
           <Button colorScheme="green" fontWeight="normal" onClick={() => fetchData().then(() => setBeChange(false))}>
             새로고침
           </Button>
-          <HorizontalGap gap={10} />
+          <Space x={10} />
           <Button disabled={!isChange} colorScheme="blue" fontWeight="normal" onClick={onApplyClick}>
             적용
           </Button>

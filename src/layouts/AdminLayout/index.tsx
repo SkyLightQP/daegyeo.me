@@ -1,8 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import Navigation from '../../components/Navigation';
-import VerticalGap from '../../components/VerticalGap';
+
 import Colors from '../../styles/Colors';
+import { Space } from '../../components/Space';
 
 const Container = styled.div`
   color: ${Colors.PRIMARY};
@@ -19,7 +20,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Navigation />
-      <VerticalGap gap={30} />
+      <Space y={30} />
       <Container>{children}</Container>
     </>
   );

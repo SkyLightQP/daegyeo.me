@@ -14,7 +14,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import VerticalGap from '../VerticalGap';
+import { Space } from '../Space';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -58,7 +58,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
                 <Component id={id} placeholder={label} {...register(id)}>
                   {option && option}
                 </Component>
-                <VerticalGap gap={10} />
+                <Space y={10} />
               </Fragment>
             ))}
           </FormControl>
