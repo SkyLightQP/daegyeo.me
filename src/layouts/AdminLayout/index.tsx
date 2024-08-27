@@ -8,7 +8,7 @@ import { Space } from '../../components/Space';
 const Container = styled.div`
   color: ${Colors.PRIMARY};
 
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
 
   @media screen and (max-width: 420px) {
