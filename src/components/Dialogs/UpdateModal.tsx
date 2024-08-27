@@ -45,7 +45,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
   }, [setValue, fields, defaultValue]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered size="2xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>수정하기</ModalHeader>
