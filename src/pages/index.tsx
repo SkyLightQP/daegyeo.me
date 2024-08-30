@@ -105,7 +105,7 @@ const Index: React.FC<ServerSideProps> = ({
                         <DescriptionView description={content.description} />
                         {/* <Space y={6} /> */}
                         {/* <ImageView urls={[]} /> */}
-                        {content.links.length > 0 && <Space y={6} />}
+                        {/* <Space y={6} /> */}
                         <ExternalLinkView links={content.links} />
                         {content.hasMargin && <Space y={26} />}
                       </div>
