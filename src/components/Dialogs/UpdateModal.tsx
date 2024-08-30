@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import {
   Button,
   ComponentWithAs,
@@ -35,17 +35,29 @@ interface UpdateModalProps {
 const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defaultValue, onUpdateClick }) => {
   const { isOpen, onClose } = modalController;
   const { register, handleSubmit, setValue } = useForm<Record<string, string>>();
+  const isFirstOpen = useRef(false);
 
   useEffect(() => {
-    fields
-      .map(({ id }) => id)
-      .forEach((i, index) => {
-        setValue(i, defaultValue[index]);
-      });
-  }, [setValue, fields, defaultValue]);
+    if (isOpen && !isFirstOpen.current) {
+      fields
+        .map(({ id }) => id)
+        .forEach((i, index) => {
+          setValue(i, defaultValue[index]);
+        });
+      isFirstOpen.current = true;
+    }
+  }, [isFirstOpen, setValue, fields, defaultValue]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered size="2xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose();
+        isFirstOpen.current = false;
+      }}
+      isCentered
+      size="2xl"
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>수정하기</ModalHeader>
@@ -68,7 +80,13 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
           <Button colorScheme="blue" mr={3} fontWeight="normal" onClick={handleSubmit(onUpdateClick)}>
             수정
           </Button>
-          <Button fontWeight="normal" onClick={onClose}>
+          <Button
+            fontWeight="normal"
+            onClick={() => {
+              onClose();
+              isFirstOpen.current = false;
+            }}
+          >
             취소
           </Button>
         </ModalFooter>
