@@ -215,6 +215,7 @@ const AdminContent: React.FC = () => {
         </Header>
         <Space y={20} />
         <DraggableTable
+          useImageControl
           useLinkControl
           data={data}
           columns={[
