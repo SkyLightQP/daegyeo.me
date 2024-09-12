@@ -15,6 +15,7 @@ import LinkModal from '../../components/Dialogs/LinkModal';
 import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
 import { Space } from '../../components/Space';
+import ImageModal from '../../components/Dialogs/ImageModal';
 
 const Header = styled.div`
   display: grid;
@@ -57,6 +58,7 @@ const AdminContent: React.FC = () => {
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
   const linkDialog = useDisclosure();
+  const imageDialog = useDisclosure();
   const supabase = useSupabase();
   const toast = useToast({
     isClosable: true,
@@ -215,6 +217,7 @@ const AdminContent: React.FC = () => {
         </Header>
         <Space y={20} />
         <DraggableTable
+          useImageControl
           useLinkControl
           data={data}
           columns={[
@@ -257,6 +260,10 @@ const AdminContent: React.FC = () => {
             setModalData((prev) => ({ ...prev, id: item.id }));
             linkDialog.onOpen();
           }}
+          onTableImageClick={(item) => {
+            setModalData((prev) => ({ ...prev, id: item.id }));
+            imageDialog.onOpen();
+          }}
         />
         <Space y={10} />
         <Footer>
@@ -279,7 +286,7 @@ const AdminContent: React.FC = () => {
           deleteDialog.onClose();
         }}
       >
-        컨텐츠 삭제 시 링크와 함께 삭제됩니다.
+        {modalData.value.title} 컨텐츠 삭제 시 세부 내용이 함께 삭제됩니다.
       </DeleteModal>
       <UpdateModal
         modalController={updateDialog}
@@ -319,6 +326,7 @@ const AdminContent: React.FC = () => {
         }}
       />
       <LinkModal modalController={linkDialog} dataId={modalData.id} />
+      <ImageModal modalController={imageDialog} dataId={modalData.id} />
     </>
   );
 };

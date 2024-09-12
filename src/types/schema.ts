@@ -9,7 +9,6 @@ export type Database = {
           description: string;
           hasMargin: boolean;
           id: number;
-          images: Json;
           isHidden: boolean;
           order: number;
           sectionId: number;
@@ -23,7 +22,6 @@ export type Database = {
           description: string;
           hasMargin: boolean;
           id?: number;
-          images?: Json;
           isHidden: boolean;
           order: number;
           sectionId: number;
@@ -37,7 +35,6 @@ export type Database = {
           description?: string;
           hasMargin?: boolean;
           id?: number;
-          images?: Json;
           isHidden?: boolean;
           order?: number;
           sectionId?: number;
@@ -52,6 +49,44 @@ export type Database = {
             columns: ['sectionId'];
             isOneToOne: false;
             referencedRelation: 'sections';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
+      images: {
+        Row: {
+          alt: string;
+          contentId: number;
+          createdAt: string;
+          id: number;
+          image_url: string;
+          order: number;
+          updatedAt: string;
+        };
+        Insert: {
+          alt: string;
+          contentId: number;
+          createdAt?: string;
+          id?: number;
+          image_url: string;
+          order: number;
+          updatedAt?: string;
+        };
+        Update: {
+          alt?: string;
+          contentId?: number;
+          createdAt?: string;
+          id?: number;
+          image_url?: string;
+          order?: number;
+          updatedAt?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'images_contentId_fkey';
+            columns: ['contentId'];
+            isOneToOne: false;
+            referencedRelation: 'contents';
             referencedColumns: ['id'];
           }
         ];

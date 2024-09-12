@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import { RiDeleteBin2Line, RiEditLine, RiLink } from '@remixicon/react';
+import { RiDeleteBin2Line, RiEditLine, RiImageCircleFill, RiLink } from '@remixicon/react';
 
 interface Column<T> {
   readonly label: string;
@@ -16,9 +16,10 @@ interface DraggableTableProps<T> {
   readonly onDragEnd: (result: DropResult) => void;
   readonly onTableUpdateClick: (snapshot: T) => void;
   readonly onTableDeleteClick: (snapshot: T) => void;
-  /* eslint-disable react/require-default-props */
   readonly useLinkControl?: boolean;
+  readonly useImageControl?: boolean;
   readonly onTableLinkClick?: (snapshot: T) => void;
+  readonly onTableImageClick?: (snapshot: T) => void;
 }
 
 const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
@@ -28,7 +29,9 @@ const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
   onTableUpdateClick,
   onTableDeleteClick,
   useLinkControl,
-  onTableLinkClick
+  useImageControl,
+  onTableLinkClick,
+  onTableImageClick
 }: DraggableTableProps<T>) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -68,22 +71,30 @@ const DraggableTable = <T extends { id: number; isHidden?: boolean }>({
                         })}
                         <Td isNumeric>
                           <ButtonGroup isAttached>
+                            {useImageControl && (
+                              <IconButton
+                                aria-label="이미지 추가"
+                                size="xs"
+                                icon={<RiImageCircleFill size={16} />}
+                                onClick={() => onTableImageClick?.(item)}
+                              />
+                            )}
                             {useLinkControl && (
                               <IconButton
-                                aria-label="Edit"
+                                aria-label="링크 추가"
                                 size="xs"
                                 icon={<RiLink size={16} />}
-                                onClick={() => onTableLinkClick && onTableLinkClick(item)}
+                                onClick={() => onTableLinkClick?.(item)}
                               />
                             )}
                             <IconButton
-                              aria-label="Edit"
+                              aria-label="내용 수정"
                               size="xs"
                               icon={<RiEditLine size={16} />}
                               onClick={() => onTableUpdateClick(item)}
                             />
                             <IconButton
-                              aria-label="Delete"
+                              aria-label="내용 삭제"
                               size="xs"
                               icon={<RiDeleteBin2Line size={16} />}
                               onClick={() => onTableDeleteClick(item)}

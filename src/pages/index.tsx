@@ -12,10 +12,11 @@ import { SchemaType } from '../types/type-util';
 import { SocialLinkView } from '../components/SocialLinkView';
 import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
 import { DescriptionView } from '../components/ContentView/DescriptionView';
+import { ImageView } from '../components/ContentView/ImageView';
 
 type SectionType = Array<
   SchemaType<'sections'> & {
-    contents: Array<SchemaType<'contents'> & { links: SchemaType<'links'>[] }>;
+    contents: Array<SchemaType<'contents'> & { links: SchemaType<'links'>[]; images: SchemaType<'images'>[] }>;
   }
 >;
 
@@ -47,7 +48,7 @@ const Container = styled.div`
 export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
   const { data, error } = await supabaseClient
     .from('sections')
-    .select('*, contents(*, links(*))')
+    .select('*, contents(*, links(*), images(*))')
     .eq('contents.isHidden', false)
     .order('id', { ascending: true });
   return {
@@ -87,7 +88,7 @@ const Index: React.FC<ServerSideProps> = ({
       <Landing />
 
       <Container>
-        {(sections as SectionType)
+        {sections
           .sort((a, b) => a.order - b.order)
           .map(
             (section) =>
@@ -103,9 +104,20 @@ const Index: React.FC<ServerSideProps> = ({
                           {content.title} <LargeHintedText>{content.subtitle}</LargeHintedText>
                         </LargeContentText>
                         <DescriptionView description={content.description} />
-                        {/* <Space y={6} /> */}
-                        {/* <ImageView urls={[]} /> */}
-                        {/* <Space y={6} /> */}
+                        {content.images.length > 0 && (
+                          <>
+                            <Space y={6} />
+                            <ImageView
+                              images={content.images
+                                .sort((a, b) => a.order - b.order)
+                                .map((i) => ({
+                                  url: i.image_url,
+                                  alt: i.alt
+                                }))}
+                            />
+                            <Space y={6} />
+                          </>
+                        )}
                         <ExternalLinkView links={content.links} />
                         {content.hasMargin && <Space y={26} />}
                       </div>
