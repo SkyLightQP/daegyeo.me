@@ -19,6 +19,7 @@ import styled from '@emotion/styled';
 
 import { RiArrowRightLine } from '@remixicon/react';
 import { GridContextProvider, GridDropZone, GridItem, swap } from 'react-grid-dnd';
+import Image from 'next/image';
 import { SchemaType } from '../../types/type-util';
 import { useSupabase } from '../../utils/supabase';
 import { Space } from '../Space';
@@ -48,7 +49,7 @@ const StyledDropzone = styled(GridDropZone)`
   height: 300px;
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled(Image)`
   width: auto;
   height: 90px;
 
@@ -197,7 +198,13 @@ const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
                       onDeleteClick(image.id);
                     }}
                   >
-                    <StyledImage src={image.image_url} alt={image.alt} onDragStart={(e) => e.preventDefault()} />
+                    <StyledImage
+                      src={image.image_url}
+                      alt={image.alt}
+                      width={200}
+                      height={90}
+                      onDragStart={(e) => e.preventDefault()}
+                    />
                   </GridItem>
                 ))}
               </StyledDropzone>
