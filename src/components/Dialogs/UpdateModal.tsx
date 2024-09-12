@@ -46,7 +46,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         });
       isFirstOpen.current = true;
     }
-  }, [isFirstOpen, setValue, fields, defaultValue]);
+  }, [isOpen, isFirstOpen, setValue, fields, defaultValue]);
 
   return (
     <Modal
@@ -77,7 +77,15 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} fontWeight="normal" onClick={handleSubmit(onUpdateClick)}>
+          <Button
+            colorScheme="blue"
+            mr={3}
+            fontWeight="normal"
+            onClick={() => {
+              handleSubmit(onUpdateClick)();
+              isFirstOpen.current = false;
+            }}
+          >
             수정
           </Button>
           <Button
