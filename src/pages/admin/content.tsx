@@ -286,7 +286,7 @@ const AdminContent: React.FC = () => {
           deleteDialog.onClose();
         }}
       >
-        컨텐츠 삭제 시 링크와 함께 삭제됩니다.
+        {modalData.value.title} 컨텐츠 삭제 시 세부 내용이 함께 삭제됩니다.
       </DeleteModal>
       <UpdateModal
         modalController={updateDialog}
