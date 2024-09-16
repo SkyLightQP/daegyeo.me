@@ -29,7 +29,8 @@
     "react-grid-dnd": "^2.1.2",
     "react-hook-form": "^7.33.1",
     "react-hotkeys-hook": "^3.4.6",
-    "react-markdown": "^8.0.5"
+    "react-markdown": "^8.0.5",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",
