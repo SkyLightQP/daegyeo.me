@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useToast } from '@chakra-ui/react';
+import Head from 'next/head';
 import Landing from '../components/Landing';
 import { supabaseClient } from '../utils/supabase';
 import { Space } from '../components/Space';
@@ -85,6 +86,10 @@ const Index: React.FC<ServerSideProps> = ({
 
   return (
     <>
+      <Head>
+        <title>하대겸 | Daegyeom Ha</title>
+      </Head>
+
       <Landing />
 
       <Container>

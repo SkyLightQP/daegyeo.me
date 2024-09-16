@@ -20,15 +20,16 @@ const Document = () => {
         <link rel="apple-touch-icon" href="favicon.ico" />
 
         <meta name="author" content="하대겸" />
-        <meta name="keywords" content="Daegyeom Ha, 하대겸, daegyeome, daegyeo.me" />
+        <meta name="keywords" content="하대겸, Daegyeom Ha, daegyeome, daegyeo.me" />
         <meta name="theme-color" content={Colors.PRIMARY} />
-        <meta name="description" content="Resume of Daegyeom Ha" />
+        <meta name="description" content="우리 생활을 더 편리하게 만듭니다. 개발자 하대겸입니다." />
 
         <meta property="og:site_name" content="하대겸 | Daegyeom Ha" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="하대겸 | Daegyeom Ha" />
-        <meta property="og:description" content="Resume of Daegyeom Ha" />
-        <meta property="og:url" content="https://daegyeo.me/" />
+        <meta property="og:description" content="우리 생활을 더 편리하게 만듭니다. 개발자 하대겸입니다." />
+        <meta property="og:url" content="https://daegyeo.me" />
+        <meta property="og:image" content="https://daegyeo.me/og-image.png" />
       </Head>
       <body>
         <Main />
