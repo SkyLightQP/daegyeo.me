@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {
-  RiAwardFill,
+  RiCheckLine,
   RiCodeSSlashLine,
   RiGithubFill,
   RiLinkedinBoxFill,
@@ -43,7 +43,7 @@ export const SocialLinkView: FC = () => {
           <SocialLink href="https://www.acmicpc.net/user/combbm/" icon={RiCodeSSlashLine}>
             Baekjoon
           </SocialLink>
-          <SocialLink href="https://solved.ac/profile/combbm/" icon={RiAwardFill}>
+          <SocialLink href="https://solved.ac/profile/combbm/" icon={RiCheckLine}>
             solved.ac
           </SocialLink>
           <SocialLink href="https://til.skylightqp.kr/" icon={RiPencilFill}>
