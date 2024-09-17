@@ -1,4 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow: /
-Allow : /$
+Disallow: /admin
+Disallow: /admin/content
+Allow: /
