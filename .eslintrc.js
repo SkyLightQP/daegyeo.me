@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ['react', 'react-hooks', 'prettier', '@typescript-eslint'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   extends: ['next', 'airbnb', 'prettier', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   globals: {
@@ -21,6 +21,7 @@ module.exports = {
     'react/function-component-definition': 'off',
     'react/jsx-no-useless-fragment': 'off',
     'react/require-default-props': 'off',
+    'react/react-in-jsx-scope': 'off',
 
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
