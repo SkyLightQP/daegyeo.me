@@ -1,30 +1,19 @@
-import React, { useEffect } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useRouter } from 'next/router';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useToast } from '@chakra-ui/react';
-import Head from 'next/head';
+import { PostgrestError } from '@supabase/supabase-js';
+import { useRouter } from 'next/navigation';
 import Landing from '../components/Landing';
-import { supabaseClient } from '../utils/supabase';
 import { Space } from '../components/Space';
 import { LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
-import { SchemaType } from '../types/type-util';
 import { SocialLinkView } from '../components/SocialLinkView';
 import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
 import { DescriptionView } from '../components/ContentView/DescriptionView';
 import { ImageView } from '../components/ContentView/ImageView';
-
-type SectionType = Array<
-  SchemaType<'sections'> & {
-    contents: Array<SchemaType<'contents'> & { links: SchemaType<'links'>[]; images: SchemaType<'images'>[] }>;
-  }
->;
-
-interface ServerSideProps {
-  readonly sections: SectionType;
-  readonly error: unknown;
-}
+import { getPageData, SectionType } from '../acitons/fetch-action';
 
 const Container = styled.div`
   margin: 8rem 172px;
@@ -46,24 +35,11 @@ const Container = styled.div`
   }
 `;
 
-export const getServerSideProps: GetServerSideProps<ServerSideProps> = async () => {
-  const { data, error } = await supabaseClient
-    .from('sections')
-    .select('*, contents(*, links(*), images(*))')
-    .eq('contents.isHidden', false)
-    .order('id', { ascending: true });
-  return {
-    props: {
-      sections: data as SectionType,
-      error
-    }
-  };
-};
-
-const Index: React.FC<ServerSideProps> = ({
-  sections,
-  error
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Page: React.FC = () => {
+  const [{ sections, error }, setData] = useState<{ sections: SectionType; error: PostgrestError | null }>({
+    sections: [],
+    error: null
+  });
   const router = useRouter();
   const toast = useToast({
     isClosable: true,
@@ -73,6 +49,10 @@ const Index: React.FC<ServerSideProps> = ({
   useHotkeys('a+d', () => {
     router.push('/admin');
   });
+
+  useEffect(() => {
+    getPageData().then(setData);
+  }, []);
 
   useEffect(() => {
     if (error !== null) {
@@ -86,10 +66,6 @@ const Index: React.FC<ServerSideProps> = ({
 
   return (
     <>
-      <Head>
-        <title>하대겸 | Daegyeom Ha</title>
-      </Head>
-
       <Landing />
 
       <Container>
@@ -136,4 +112,4 @@ const Index: React.FC<ServerSideProps> = ({
   );
 };
 
-export default Index;
+export default Page;
