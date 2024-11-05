@@ -1,6 +1,6 @@
 import React from 'react';
 import { Head, Html, Main, NextScript } from 'next/document';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
 const Document = () => {
   return (
@@ -11,7 +11,19 @@ const Document = () => {
           crossOrigin="anonymous"
           async
         />
-        <GoogleAnalytics gaId="G-J0FQZH7MNY" />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J0FQZH7MNY" />
+        <Script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+            		window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+            
+                gtag('config', 'G-J0FQZH7MNY');
+            `
+          }}
+        />
         <meta charSet="utf-8" />
         <link rel="icon" href="favicon.ico" />
         <link rel="apple-touch-icon" href="favicon.ico" />
