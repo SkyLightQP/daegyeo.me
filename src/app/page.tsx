@@ -80,7 +80,7 @@ const Page: React.FC = () => {
                   {section.contents
                     .sort((a, b) => a.order - b.order)
                     .map((content) => (
-                      <div>
+                      <div key={content.id}>
                         <LargeContentText>
                           {content.title} <LargeHintedText>{content.subtitle}</LargeHintedText>
                         </LargeContentText>
