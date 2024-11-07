@@ -1,7 +1,7 @@
 'use server';
 
-import { supabaseClient } from '../utils/supabase';
 import { SchemaType } from '../types/type-util';
+import { createSupabaseClient } from '../utils/supabase/server';
 
 export type SectionType = Array<
   SchemaType<'sections'> & {
@@ -10,7 +10,8 @@ export type SectionType = Array<
 >;
 
 export const getPageData = async () => {
-  const { data, error } = await supabaseClient
+  const supabase = await createSupabaseClient();
+  const { data, error } = await supabase
     .from('sections')
     .select('*, contents(*, links(*), images(*))')
     .eq('contents.isHidden', false)

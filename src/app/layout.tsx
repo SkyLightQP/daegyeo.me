@@ -1,10 +1,8 @@
 'use client';
 
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { DefaultSeo } from 'next-seo';
-import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import Script from 'next/script';
 import { DEFAULT_SEO } from '../constants/seo';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -12,7 +10,6 @@ import Colors from '../styles/Colors';
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   const [ready, setReady] = useState(false);
-  const [supabaseClient] = useState(() => createPagesBrowserClient());
 
   useEffect(() => setReady(true), []);
 
@@ -47,12 +44,10 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
         <link rel="apple-touch-icon" href="favicon.ico" />
       </head>
       <body>
-        <SessionContextProvider supabaseClient={supabaseClient}>
-          <ChakraProvider>
-            <GlobalStyle />
-            {children}
-          </ChakraProvider>
-        </SessionContextProvider>
+        <ChakraProvider>
+          <GlobalStyle />
+          {children}
+        </ChakraProvider>
       </body>
     </html>
   );
