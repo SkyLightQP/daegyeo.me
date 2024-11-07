@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -16,14 +18,13 @@ import {
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-
 import { RiArrowRightLine } from '@remixicon/react';
 import { GridContextProvider, GridDropZone, GridItem, swap } from 'react-grid-dnd';
 import Image from 'next/image';
 import { SchemaType } from '../../types/type-util';
-import { useSupabase } from '../../utils/supabase';
 import { Space } from '../Space';
 import Colors from '../../styles/Colors';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const InputContainer = styled.div`
   display: flex;
@@ -86,7 +87,7 @@ const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
   const [data, setData] = useState<SchemaType<'images'>[]>([]);
   const { isOpen, onClose } = modalController;
   const { register, handleSubmit, reset } = useForm<AddForm>();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'

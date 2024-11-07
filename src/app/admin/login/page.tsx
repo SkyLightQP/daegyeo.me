@@ -1,11 +1,13 @@
+'use client';
+
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/router';
 import { useToast } from '@chakra-ui/react';
-import { SectionTitle } from '../../components/Typography';
-import Colors from '../../styles/Colors';
-import { useSupabase } from '../../utils/supabase';
-import { Space } from '../../components/Space';
+import { useRouter } from 'next/navigation';
+import { SectionTitle } from '../../../components/Typography';
+import Colors from '../../../styles/Colors';
+import { Space } from '../../../components/Space';
+import { createSupabaseClient } from '../../../utils/supabase/client';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -45,9 +47,9 @@ const LoginButton = styled.button`
   }
 `;
 
-const Login: React.FC = () => {
+const Page: React.FC = () => {
   const router = useRouter();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const [input, setInput] = useState<{ email: string; password: string }>({
     email: '',
     password: ''
@@ -108,4 +110,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Page;

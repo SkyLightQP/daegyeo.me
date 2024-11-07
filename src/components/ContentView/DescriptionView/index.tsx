@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+'use client';
+
+import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from '@emotion/styled';
 

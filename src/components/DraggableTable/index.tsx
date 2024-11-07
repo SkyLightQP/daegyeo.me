@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react';
+'use client';
+
+import { Fragment } from 'react';
 import { ButtonGroup, IconButton, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { RiDeleteBin2Line, RiEditLine, RiImageCircleFill, RiLink } from '@remixicon/react';

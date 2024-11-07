@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+'use client';
+
+import { FC } from 'react';
 import styled from '@emotion/styled';
 import { ExternalLink } from '../../Link/ExternalLink';
 import { SchemaType } from '../../../types/type-util';

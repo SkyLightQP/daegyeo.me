@@ -1,17 +1,18 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
 import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useUserVerify from '../../hooks/useUserVerify';
 import { HugeTitle } from '../../components/Typography';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
-import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
 import { Space } from '../../components/Space';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const Header = styled.div`
   display: grid;
@@ -24,15 +25,14 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-const Admin: React.FC = () => {
-  useUserVerify();
+const Page: React.FC = () => {
   const [data, setData] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
   const [modalData, setModalData] = useState<{ id: number; title: string }>({ id: -1, title: '' });
   const { register, handleSubmit, reset } = useForm<{ title: string }>();
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'
@@ -94,10 +94,10 @@ const Admin: React.FC = () => {
           <Input
             placeholder="섹션 이름"
             background="white"
-            {...register('title', { required: true })}
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter') handleSubmit(onAddClick)();
             }}
+            {...register('title', { required: true })}
           />
           <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
             섹션 추가
@@ -164,4 +164,4 @@ const Admin: React.FC = () => {
   );
 };
 
-export default Admin;
+export default Page;

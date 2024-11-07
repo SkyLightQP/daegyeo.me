@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -20,8 +22,8 @@ import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautif
 import { RiArrowRightLine, RiDeleteBin2Line, RiMenuLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import { SchemaType } from '../../types/type-util';
-import { useSupabase } from '../../utils/supabase';
 import { Space } from '../Space';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const LinkList = styled.div`
   display: flex;
@@ -59,7 +61,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
     handleSubmit: handleApply
   } = useForm<{ link: AddForm[] }>({ defaultValues: { link: [] } });
   const { fields } = useFieldArray({ control, name: 'link', keyName: 'uuid' });
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'
