@@ -1,6 +1,4 @@
-'use client';
-
-import { FC, PropsWithChildren, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, Suspense } from 'react';
 import Script from 'next/script';
 import { ChakraProvider } from '@chakra-ui/react';
 import type { Metadata, Viewport } from 'next';
@@ -27,6 +25,9 @@ export const metadata: Metadata = {
     ],
     locale: 'ko_KR',
     type: 'website'
+  },
+  icons: {
+    icon: new URL('/favicon.ico', 'https://daegyeo.me')
   }
 };
 
@@ -37,16 +38,11 @@ export const viewport: Viewport = {
 };
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => setReady(true), []);
-
-  if (!ready) return <div style={{ backgroundColor: Colors.PRIMARY }} />;
-
   return (
     <html lang="ko">
       <head>
         <title>하대겸 | Daegyeom Ha</title>
+        <meta charSet="utf-8" />
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
           crossOrigin="anonymous"
@@ -65,14 +61,11 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
             `
           }}
         />
-        <meta charSet="utf-8" />
-        <link rel="icon" href="favicon.ico" />
-        <link rel="apple-touch-icon" href="favicon.ico" />
       </head>
       <body>
         <ChakraProvider>
           <GlobalStyle />
-          {children}
+          <Suspense fallback={<div style={{ backgroundColor: Colors.PRIMARY }} />}>{children}</Suspense>
         </ChakraProvider>
       </body>
     </html>
