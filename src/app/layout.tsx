@@ -1,12 +1,40 @@
 'use client';
 
 import { FC, PropsWithChildren, useEffect, useState } from 'react';
-import { DefaultSeo } from 'next-seo';
-import { ChakraProvider } from '@chakra-ui/react';
 import Script from 'next/script';
-import { DEFAULT_SEO } from '../constants/seo';
+import { ChakraProvider } from '@chakra-ui/react';
+import type { Metadata, Viewport } from 'next';
 import GlobalStyle from '../styles/GlobalStyle';
 import Colors from '../styles/Colors';
+
+export const metadata: Metadata = {
+  title: '하대겸 | Daegyeom Ha',
+  description: '우리 생활을 더 편리하게 만듭니다. 개발자 하대겸입니다.',
+  authors: [{ name: '하대겸' }],
+  metadataBase: new URL('https://daegyeo.me'),
+  openGraph: {
+    url: 'https://daegyeo.me',
+    title: '하대겸 | Daegyeom Ha',
+    description: '우리 생활을 더 편리하게 만듭니다. 개발자 하대겸입니다.',
+    siteName: '하대겸 | Daegyeom Ha',
+    images: [
+      {
+        url: 'https://daegyeo.me/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: '하대겸 프로필 대표 이미지'
+      }
+    ],
+    locale: 'ko_KR',
+    type: 'website'
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: Colors.PRIMARY,
+  width: 'device-width',
+  initialScale: 1
+};
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   const [ready, setReady] = useState(false);
@@ -17,10 +45,8 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <html lang="ko">
-      <DefaultSeo {...DEFAULT_SEO} />
       <head>
         <title>하대겸 | Daegyeom Ha</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
           crossOrigin="anonymous"
