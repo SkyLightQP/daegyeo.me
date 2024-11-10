@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
-import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { DragEndEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 import { HugeTitle } from '../../components/Typography';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
@@ -62,12 +63,14 @@ const Page: React.FC = () => {
     reset({ title: '' });
   };
 
-  const onChangeData = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === Number(active.id));
+    const newIndex = data.findIndex((item) => item.id === Number(over.id));
+
+    const reorderedItems = arrayMove(data, oldIndex, newIndex);
+    setData(reorderedItems);
     setBeChange(true);
   };
 

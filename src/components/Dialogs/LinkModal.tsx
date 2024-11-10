@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import {
   Button,
   Divider,
@@ -18,8 +18,10 @@ import {
 } from '@chakra-ui/react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { RiArrowRightLine, RiDeleteBin2Line, RiMenuLine } from '@remixicon/react';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import Colors from '../../styles/Colors';
 import { SchemaType } from '../../types/type-util';
 import { Space } from '../Space';
@@ -49,6 +51,36 @@ interface LinkModalProps {
   readonly modalController: ReturnType<typeof useDisclosure>;
   readonly dataId: number;
 }
+
+interface LinkItemProps {
+  readonly index: number;
+  readonly linkId: number;
+  readonly linkRegister: ReturnType<typeof useForm<{ link: AddForm[] }>>['register'];
+  readonly onDeleteClick: (id: number) => void;
+}
+
+const LinkItem: FC<LinkItemProps> = ({ index, linkId, linkRegister, onDeleteClick }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: linkId.toString() });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition
+  };
+
+  return (
+    <LinkRow ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <RiMenuLine size={36} color={Colors.GRAY_DARKEN} />
+      <Input type="text" placeholder="제목" width={160} {...linkRegister(`link.${index}.name`)} />
+      <Input type="url" placeholder="링크" {...linkRegister(`link.${index}.href`)} />
+      <IconButton
+        colorScheme="red"
+        aria-label="Delete Link"
+        icon={<RiDeleteBin2Line size={20} />}
+        onClick={() => onDeleteClick(linkId)}
+      />
+    </LinkRow>
+  );
+};
 
 const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
   const [data, setData] = useState<SchemaType<'links'>[]>([]);
@@ -85,13 +117,13 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
     }
   };
 
-  const onChangeData = (result: DropResult) => {
-    if (!data) return;
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === Number(active.id));
+    const newIndex = data.findIndex((item) => item.id === Number(over.id));
+
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
   };
 
   const onAddClick: SubmitHandler<AddForm> = ({ name, href }) => {
@@ -163,36 +195,21 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
           <Space y={10} />
           <Divider />
           <Space y={10} />
-          <DragDropContext onDragEnd={onChangeData}>
-            <Droppable droppableId="link-droppable">
-              {(provided) => (
-                <LinkList {...provided.droppableProps} ref={provided.innerRef}>
-                  {fields.map((link, index) => (
-                    <Draggable key={link.id} draggableId={String(index)} index={index}>
-                      {(innerProvided) => (
-                        <LinkRow
-                          ref={innerProvided.innerRef}
-                          {...innerProvided.draggableProps}
-                          {...innerProvided.dragHandleProps}
-                        >
-                          <RiMenuLine size={36} color={Colors.GRAY_DARKEN} />
-                          <Input type="text" placeholder="제목" width={160} {...linkRegister(`link.${index}.name`)} />
-                          <Input type="url" placeholder="링크" {...linkRegister(`link.${index}.href`)} />
-                          <IconButton
-                            colorScheme="red"
-                            aria-label="Delete Link"
-                            icon={<RiDeleteBin2Line size={20} />}
-                            onClick={() => onDeleteClick(Number(link.id))}
-                          />
-                        </LinkRow>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </LinkList>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <DndContext onDragEnd={onChangeData}>
+            <SortableContext items={data.map((i) => i.id.toString())}>
+              <LinkList>
+                {fields.map((field, index) => (
+                  <LinkItem
+                    key={field.id}
+                    index={index}
+                    linkId={field.id}
+                    linkRegister={linkRegister}
+                    onDeleteClick={onDeleteClick}
+                  />
+                ))}
+              </LinkList>
+            </SortableContext>
+          </DndContext>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} fontWeight="normal" onClick={handleApply(onApplyClick)}>

@@ -1,12 +1,14 @@
+/** @jsxImportSource @emotion/react */
+
 'use client';
 
-/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Checkbox, Input, Select, Td, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
 import { css } from '@emotion/react';
-import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { arrayMove } from '@dnd-kit/sortable';
+import { DragEndEvent } from '@dnd-kit/core';
 import { HugeTitle } from '../../../components/Typography';
 import DraggableTable from '../../../components/DraggableTable';
 import DeleteModal from '../../../components/Dialogs/DeleteModal';
@@ -79,12 +81,14 @@ const Page: React.FC = () => {
     setData(contents.sort((a, b) => a.order - b.order).sort((a, b) => a.sections.order - b.sections.order));
   };
 
-  const onChangeData = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === Number(active.id));
+    const newIndex = data.findIndex((item) => item.id === Number(over.id));
+
+    const reorderedItems = arrayMove(data, oldIndex, newIndex);
+    setData(reorderedItems);
     setBeChange(true);
   };
 
