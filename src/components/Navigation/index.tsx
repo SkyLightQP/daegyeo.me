@@ -36,7 +36,6 @@ const Navigation: React.FC = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
     const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
     if (isLogout) {
-      localStorage.removeItem('accessToken');
       supabase.auth
         .signOut()
         .then(() => router.push('/admin/login'))
