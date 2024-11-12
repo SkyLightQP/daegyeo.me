@@ -11,11 +11,21 @@ interface ImageDetailModalProps {
   readonly image: { url: string; alt: string };
 }
 
+const StyledModalContent = styled(ModalContent)`
+  position: relative;
+  background-color: transparent;
+  box-shadow: none;
+`;
+
+const StyledImage = styled(Image)`
+  border-radius: 6px;
+`;
+
 const ImageLabel = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
-  padding: 8px 0;
-  color: ${Colors.GRAY_DARKEN};
+  padding: 10px 0;
+  color: ${Colors.SECONDARY};
 `;
 
 const ImageDetailModal: React.FC<ImageDetailModalProps> = ({ modalController, image }) => {
@@ -24,13 +34,12 @@ const ImageDetailModal: React.FC<ImageDetailModalProps> = ({ modalController, im
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="4xl">
       <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
+      <StyledModalContent>
         <ModalBody>
-          <Image src={image.url} alt={image.alt} width={1024} height={768} />
+          <StyledImage src={image.url} alt={image.alt} width={1024} height={768} />
           <ImageLabel>{image.alt}</ImageLabel>
         </ModalBody>
-      </ModalContent>
+      </StyledModalContent>
     </Modal>
   );
 };
