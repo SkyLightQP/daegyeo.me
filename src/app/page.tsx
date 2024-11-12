@@ -13,7 +13,7 @@ import { SocialLinkView } from '../components/SocialLinkView';
 import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
 import { DescriptionView } from '../components/ContentView/DescriptionView';
 import { ImageView } from '../components/ContentView/ImageView';
-import { getPageData, SectionType } from '../acitons/fetch-action';
+import { getSectionData, SectionType } from '../acitons/section-data.action';
 
 const Container = styled.div`
   margin: 8rem 172px;
@@ -51,7 +51,7 @@ const Page: React.FC = () => {
   });
 
   useEffect(() => {
-    getPageData().then(setData);
+    getSectionData().then(setData);
   }, []);
 
   useEffect(() => {

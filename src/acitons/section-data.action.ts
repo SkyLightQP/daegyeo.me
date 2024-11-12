@@ -9,7 +9,7 @@ export type SectionType = Array<
   }
 >;
 
-export const getPageData = async () => {
+export const getSectionData = async () => {
   const supabase = await createSupabaseClient();
   const { data, error } = await supabase
     .from('sections')
