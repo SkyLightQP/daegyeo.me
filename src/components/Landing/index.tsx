@@ -2,14 +2,7 @@
 
 import React from 'react';
 import styled from '@emotion/styled';
-import {
-  RiArrowDownWideLine,
-  RiArrowDropDownFill,
-  RiArrowDropDownLine,
-  RiArticleLine,
-  RiGithubFill,
-  RiMailLine
-} from '@remixicon/react';
+import { RiArrowDropDownLine, RiArticleLine, RiGithubFill, RiMailLine } from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import { IconLink } from '../Link/IconLink';
 import Breakpoint from '../../styles/Breakpoint';

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
+import { Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import Colors from '../../styles/Colors';

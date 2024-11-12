@@ -11,7 +11,7 @@ import {
   RiPencilFill
 } from '@remixicon/react';
 import styled from '@emotion/styled';
-import { LargeContentText, SectionTitle } from '../Typography';
+import { SectionTitle } from '../Typography';
 import { Space } from '../Space';
 import { SocialLink } from '../Link/SocialLink';
 import Breakpoint from '../../styles/Breakpoint';
