@@ -116,7 +116,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
         setData(content.links.sort((a, b) => a.order - b.order));
       }
     },
-    [supabase, toast]
+    [supabase]
   );
 
   const onChangeData = ({ active, over }: DragEndEvent) => {

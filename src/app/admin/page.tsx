@@ -50,7 +50,7 @@ const Page: React.FC = () => {
       return;
     }
     setData(sections.sort((a, b) => a.order - b.order));
-  }, [supabase, toast]);
+  }, [supabase]);
 
   useEffect(() => {
     fetchData().then();
@@ -69,8 +69,7 @@ const Page: React.FC = () => {
     const oldIndex = data.findIndex((item) => item.id === Number(active.id));
     const newIndex = data.findIndex((item) => item.id === Number(over.id));
 
-    const reorderedItems = arrayMove(data, oldIndex, newIndex);
-    setData(reorderedItems);
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
     setBeChange(true);
   };
 

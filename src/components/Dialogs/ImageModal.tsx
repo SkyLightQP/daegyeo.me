@@ -137,7 +137,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ modalController, dataId }) => {
         setData(content.images.sort((a, b) => a.order - b.order));
       }
     },
-    [supabase, toast]
+    [supabase]
   );
 
   const onChangeData = ({ active, over }: DragEndEvent) => {

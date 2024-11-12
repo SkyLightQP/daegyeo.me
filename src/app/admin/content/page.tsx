@@ -79,7 +79,7 @@ const Page: React.FC = () => {
     }
     const contents = response as Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>;
     setData(contents.sort((a, b) => a.order - b.order).sort((a, b) => a.sections.order - b.sections.order));
-  }, [supabase, toast]);
+  }, [supabase]);
 
   const onChangeData = ({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) return;
@@ -87,8 +87,7 @@ const Page: React.FC = () => {
     const oldIndex = data.findIndex((item) => item.id === Number(active.id));
     const newIndex = data.findIndex((item) => item.id === Number(over.id));
 
-    const reorderedItems = arrayMove(data, oldIndex, newIndex);
-    setData(reorderedItems);
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
     setBeChange(true);
   };
 
