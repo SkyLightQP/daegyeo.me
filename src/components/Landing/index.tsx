@@ -2,7 +2,14 @@
 
 import React from 'react';
 import styled from '@emotion/styled';
-import { RiArrowDownWideLine, RiArticleLine, RiGithubFill, RiMailLine } from '@remixicon/react';
+import {
+  RiArrowDownWideLine,
+  RiArrowDropDownFill,
+  RiArrowDropDownLine,
+  RiArticleLine,
+  RiGithubFill,
+  RiMailLine
+} from '@remixicon/react';
 import Colors from '../../styles/Colors';
 import { IconLink } from '../Link/IconLink';
 import Breakpoint from '../../styles/Breakpoint';
@@ -88,7 +95,7 @@ const ScrollDownText = styled.p`
   color: ${Colors.GRAY};
 
   & svg {
-    margin-left: 4px;
+    margin-left: 2px;
   }
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
@@ -131,7 +138,7 @@ const Landing: React.FC = () => {
         </IconList>
 
         <ScrollDownText>
-          아래에서 이어지는 이야기를 확인해보세요 <RiArrowDownWideLine />
+          아래에서 이어지는 이야기를 확인해보세요 <RiArrowDropDownLine size={26} />
         </ScrollDownText>
       </MarginContainer>
     </Container>
