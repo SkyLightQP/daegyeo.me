@@ -1,4 +1,6 @@
-import React, { FC, PropsWithChildren } from 'react';
+'use client';
+
+import { FC, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { RiExternalLinkFill } from '@remixicon/react';
 import Colors from '../../../styles/Colors';

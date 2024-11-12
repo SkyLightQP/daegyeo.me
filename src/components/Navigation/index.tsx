@@ -1,11 +1,13 @@
+'use client';
+
 import React from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { RiHeading, RiHome3Line, RiListCheck, RiLogoutBoxLine } from '@remixicon/react';
+import { usePathname, useRouter } from 'next/navigation';
 import Colors from '../../styles/Colors';
 import NavigationItem from './NavigationItem';
-import { useSupabase } from '../../utils/supabase';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const Container = styled.div`
   height: 60px;
@@ -27,13 +29,13 @@ const Container = styled.div`
 
 const Navigation: React.FC = () => {
   const router = useRouter();
-  const supabase = useSupabase();
+  const pathname = usePathname();
+  const supabase = createSupabaseClient();
 
   const onLogoutClick = () => {
     // eslint-disable-next-line no-restricted-globals,no-alert
     const isLogout = confirm('정말로 로그아웃 하시겠습니까?');
     if (isLogout) {
-      localStorage.removeItem('accessToken');
       supabase.auth
         .signOut()
         .then(() => router.push('/admin/login'))
@@ -49,12 +51,12 @@ const Navigation: React.FC = () => {
         </NavigationItem>
       </Link>
       <Link href="/admin">
-        <NavigationItem tabIndex={0} active={router.pathname === '/admin'}>
+        <NavigationItem tabIndex={0} active={pathname === '/admin'}>
           <RiHeading size={16} /> 섹션
         </NavigationItem>
       </Link>
       <Link href="/admin/content">
-        <NavigationItem tabIndex={0} active={router.pathname === '/admin/content'}>
+        <NavigationItem tabIndex={0} active={pathname === '/admin/content'}>
           <RiListCheck size={16} /> 컨텐츠
         </NavigationItem>
       </Link>

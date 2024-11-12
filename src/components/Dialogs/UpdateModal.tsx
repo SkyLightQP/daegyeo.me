@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Fragment, useEffect, useRef } from 'react';
 import {
   Button,

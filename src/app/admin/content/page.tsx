@@ -1,21 +1,24 @@
 /** @jsxImportSource @emotion/react */
+
+'use client';
+
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Checkbox, Input, Select, Td, Textarea, useDisclosure, useToast } from '@chakra-ui/react';
 import { css } from '@emotion/react';
-import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useUserVerify from '../../hooks/useUserVerify';
-import { HugeTitle } from '../../components/Typography';
-import DraggableTable from '../../components/DraggableTable';
-import DeleteModal from '../../components/Dialogs/DeleteModal';
-import UpdateModal from '../../components/Dialogs/UpdateModal';
-import AdminLayout from '../../layouts/AdminLayout';
-import LinkModal from '../../components/Dialogs/LinkModal';
-import { useSupabase } from '../../utils/supabase';
-import { SchemaType } from '../../types/type-util';
-import { Space } from '../../components/Space';
-import ImageModal from '../../components/Dialogs/ImageModal';
+import { arrayMove } from '@dnd-kit/sortable';
+import { DragEndEvent } from '@dnd-kit/core';
+import { HugeTitle } from '../../../components/Typography';
+import DraggableTable from '../../../components/DraggableTable';
+import DeleteModal from '../../../components/Dialogs/DeleteModal';
+import UpdateModal from '../../../components/Dialogs/UpdateModal';
+import AdminLayout from '../../../layouts/AdminLayout';
+import LinkModal from '../../../components/Dialogs/LinkModal';
+import { SchemaType } from '../../../types/type-util';
+import { Space } from '../../../components/Space';
+import ImageModal from '../../../components/Dialogs/ImageModal';
+import { createSupabaseClient } from '../../../utils/supabase/client';
 
 const Header = styled.div`
   display: grid;
@@ -48,8 +51,7 @@ const DEFAULT_VALUE: AddForm = {
   isHidden: false
 };
 
-const AdminContent: React.FC = () => {
-  useUserVerify();
+const Page: React.FC = () => {
   const [data, setData] = useState<Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>>([]);
   const [section, setSection] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
@@ -59,13 +61,13 @@ const AdminContent: React.FC = () => {
   const updateDialog = useDisclosure();
   const linkDialog = useDisclosure();
   const imageDialog = useDisclosure();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'
   });
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const { data: response, error } = await supabase.from('contents').select('*, sections(*)');
     if (error !== null) {
       toast({
@@ -77,14 +79,15 @@ const AdminContent: React.FC = () => {
     }
     const contents = response as Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>;
     setData(contents.sort((a, b) => a.order - b.order).sort((a, b) => a.sections.order - b.sections.order));
-  };
+  }, [supabase]);
 
-  const onChangeData = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === Number(active.id));
+    const newIndex = data.findIndex((item) => item.id === Number(over.id));
+
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
     setBeChange(true);
   };
 
@@ -123,7 +126,7 @@ const AdminContent: React.FC = () => {
       .then(({ data: sections }) => {
         if (sections !== null) setSection(sections);
       });
-  }, [supabase]);
+  }, [fetchData, supabase]);
 
   const SectionOptions = useCallback(
     () => (
@@ -153,7 +156,7 @@ const AdminContent: React.FC = () => {
             {...register('title', { required: true })}
           />
           <Input
-            placeholder="부제목 (2022 / 프론트엔드)"
+            placeholder="부제목 (풀스택, 2024)"
             background="white"
             css={css`
               grid-column: 4 / 6;
@@ -331,4 +334,4 @@ const AdminContent: React.FC = () => {
   );
 };
 
-export default AdminContent;
+export default Page;

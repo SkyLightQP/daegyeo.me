@@ -1,4 +1,6 @@
-import React, { FC, useState } from 'react';
+'use client';
+
+import { FC, useState } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useDisclosure } from '@chakra-ui/react';

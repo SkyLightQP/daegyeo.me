@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
-import { DropResult } from 'react-beautiful-dnd';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import useUserVerify from '../../hooks/useUserVerify';
+import { DragEndEvent } from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 import { HugeTitle } from '../../components/Typography';
 import DraggableTable from '../../components/DraggableTable';
 import DeleteModal from '../../components/Dialogs/DeleteModal';
 import UpdateModal from '../../components/Dialogs/UpdateModal';
 import AdminLayout from '../../layouts/AdminLayout';
-import { useSupabase } from '../../utils/supabase';
 import { SchemaType } from '../../types/type-util';
 import { Space } from '../../components/Space';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const Header = styled.div`
   display: grid;
@@ -24,21 +26,20 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-const Admin: React.FC = () => {
-  useUserVerify();
+const Page: React.FC = () => {
   const [data, setData] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
   const [modalData, setModalData] = useState<{ id: number; title: string }>({ id: -1, title: '' });
   const { register, handleSubmit, reset } = useForm<{ title: string }>();
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'
   });
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const { data: sections, error } = await supabase.from('sections').select('*');
     if (sections === null || error !== null) {
       toast({
@@ -49,11 +50,11 @@ const Admin: React.FC = () => {
       return;
     }
     setData(sections.sort((a, b) => a.order - b.order));
-  };
+  }, [supabase]);
 
   useEffect(() => {
     fetchData().then();
-  }, []);
+  }, [fetchData]);
 
   const onAddClick: SubmitHandler<{ title: string }> = async (values) => {
     if (values.title.trim() === '') return;
@@ -62,12 +63,13 @@ const Admin: React.FC = () => {
     reset({ title: '' });
   };
 
-  const onChangeData = (result: DropResult) => {
-    if (!result.destination) return;
-    const items = [...data];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setData(items);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === Number(active.id));
+    const newIndex = data.findIndex((item) => item.id === Number(over.id));
+
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
     setBeChange(true);
   };
 
@@ -94,10 +96,10 @@ const Admin: React.FC = () => {
           <Input
             placeholder="섹션 이름"
             background="white"
-            {...register('title', { required: true })}
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter') handleSubmit(onAddClick)();
             }}
+            {...register('title', { required: true })}
           />
           <Button colorScheme="blue" fontWeight="normal" onClick={handleSubmit(onAddClick)}>
             섹션 추가
@@ -164,4 +166,4 @@ const Admin: React.FC = () => {
   );
 };
 
-export default Admin;
+export default Page;

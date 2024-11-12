@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+'use client';
+
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import {
   Button,
   Divider,
@@ -16,14 +18,15 @@ import {
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
-
 import { RiArrowRightLine } from '@remixicon/react';
-import { GridContextProvider, GridDropZone, GridItem, swap } from 'react-grid-dnd';
 import Image from 'next/image';
+import { arrayMove, rectSortingStrategy, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { closestCenter, DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SchemaType } from '../../types/type-util';
-import { useSupabase } from '../../utils/supabase';
 import { Space } from '../Space';
 import Colors from '../../styles/Colors';
+import { createSupabaseClient } from '../../utils/supabase/client';
 
 const InputContainer = styled.div`
   display: flex;
@@ -37,16 +40,10 @@ const StyledFileInput = styled(Input)`
   padding-top: 5px;
 `;
 
-const DropzoneContainer = styled.div`
-  display: flex;
-  touch-action: none;
-  width: 100%;
-  height: 100%;
-`;
-
-const StyledDropzone = styled(GridDropZone)`
-  flex: 1;
-  height: 300px;
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
 `;
 
 const StyledImage = styled(Image)`
@@ -77,23 +74,55 @@ interface AddForm {
   readonly alt: string;
 }
 
-interface LinkModalProps {
+interface ImageModalProps {
   readonly modalController: ReturnType<typeof useDisclosure>;
   readonly dataId: number;
 }
 
-const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
+interface ImageItemProps {
+  readonly onDeleteClick: (id: number) => void;
+  readonly imageId: number;
+  readonly imageUrl: string;
+  readonly alt: string;
+}
+
+const ImageItem: FC<ImageItemProps> = ({ onDeleteClick, imageId, imageUrl, alt }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: imageId });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onDeleteClick(imageId);
+      }}
+      {...attributes}
+      {...listeners}
+    >
+      <StyledImage src={imageUrl} alt={alt} width={200} height={90} onDragStart={(e) => e.preventDefault()} />
+    </div>
+  );
+};
+
+const ImageModal: React.FC<ImageModalProps> = ({ modalController, dataId }) => {
   const [data, setData] = useState<SchemaType<'images'>[]>([]);
   const { isOpen, onClose } = modalController;
   const { register, handleSubmit, reset } = useForm<AddForm>();
-  const supabase = useSupabase();
+  const supabase = createSupabaseClient();
   const toast = useToast({
     isClosable: true,
     position: 'top-left'
   });
 
-  const fetchData = async (id: number) => {
-    if (id > 0) {
+  const fetchData = useCallback(
+    async (id: number) => {
+      if (id <= 0) return;
       const { data: contents, error } = await supabase.from('contents').select('*, images(*)').match({ id });
       if (error !== null) {
         toast({
@@ -107,12 +136,17 @@ const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
         const content = contents[0];
         setData(content.images.sort((a, b) => a.order - b.order));
       }
-    }
-  };
+    },
+    [supabase]
+  );
 
-  const onChangeData = (sourceId: string, sourceIndex: number, targetIndex: number) => {
-    const nextState = swap(data, sourceIndex, targetIndex);
-    setData(nextState);
+  const onChangeData = ({ active, over }: DragEndEvent) => {
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = data.findIndex((item) => item.id === active.id);
+    const newIndex = data.findIndex((item) => item.id === over.id);
+
+    setData((prev) => arrayMove(prev, oldIndex, newIndex));
   };
 
   const onAddClick: SubmitHandler<AddForm> = async ({ file, alt }) => {
@@ -164,7 +198,7 @@ const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
 
   useEffect(() => {
     fetchData(dataId).then();
-  }, [dataId]);
+  }, [fetchData, dataId]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
@@ -187,29 +221,15 @@ const ImageModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
           <Space y={10} />
           <Divider />
           <Space y={10} />
-          <GridContextProvider onChange={onChangeData}>
-            <DropzoneContainer>
-              <StyledDropzone id="images" boxesPerRow={3} rowHeight={100} disableDrag={false} disableDrop={false}>
-                {data.map((image) => (
-                  <GridItem
-                    key={image.id}
-                    onContextMenu={(e) => {
-                      e.preventDefault();
-                      onDeleteClick(image.id);
-                    }}
-                  >
-                    <StyledImage
-                      src={image.image_url}
-                      alt={image.alt}
-                      width={200}
-                      height={90}
-                      onDragStart={(e) => e.preventDefault()}
-                    />
-                  </GridItem>
+          <DndContext collisionDetection={closestCenter} onDragEnd={onChangeData}>
+            <SortableContext items={data} strategy={rectSortingStrategy}>
+              <GridContainer>
+                {data.map(({ id, image_url: imageUrl, alt }) => (
+                  <ImageItem key={id} imageId={id} imageUrl={imageUrl} alt={alt} onDeleteClick={onDeleteClick} />
                 ))}
-              </StyledDropzone>
-            </DropzoneContainer>
-          </GridContextProvider>
+              </GridContainer>
+            </SortableContext>
+          </DndContext>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} fontWeight="normal" onClick={onApplyClick}>
