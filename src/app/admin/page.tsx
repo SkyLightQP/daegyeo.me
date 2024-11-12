@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -39,7 +39,7 @@ const Page: React.FC = () => {
     position: 'top-left'
   });
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const { data: sections, error } = await supabase.from('sections').select('*');
     if (sections === null || error !== null) {
       toast({
@@ -50,11 +50,11 @@ const Page: React.FC = () => {
       return;
     }
     setData(sections.sort((a, b) => a.order - b.order));
-  };
+  }, [supabase, toast]);
 
   useEffect(() => {
     fetchData().then();
-  }, []);
+  }, [fetchData]);
 
   const onAddClick: SubmitHandler<{ title: string }> = async (values) => {
     if (values.title.trim() === '') return;

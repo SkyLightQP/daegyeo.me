@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import {
   Button,
   Divider,
@@ -43,7 +43,7 @@ const StyledFileInput = styled(Input)`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 6px;
 `;
 
 const StyledImage = styled(Image)`
@@ -120,8 +120,9 @@ const ImageModal: React.FC<ImageModalProps> = ({ modalController, dataId }) => {
     position: 'top-left'
   });
 
-  const fetchData = async (id: number) => {
-    if (id > 0) {
+  const fetchData = useCallback(
+    async (id: number) => {
+      if (id <= 0) return;
       const { data: contents, error } = await supabase.from('contents').select('*, images(*)').match({ id });
       if (error !== null) {
         toast({
@@ -135,8 +136,9 @@ const ImageModal: React.FC<ImageModalProps> = ({ modalController, dataId }) => {
         const content = contents[0];
         setData(content.images.sort((a, b) => a.order - b.order));
       }
-    }
-  };
+    },
+    [supabase, toast]
+  );
 
   const onChangeData = ({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) return;
@@ -196,7 +198,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ modalController, dataId }) => {
 
   useEffect(() => {
     fetchData(dataId).then();
-  }, [dataId]);
+  }, [fetchData, dataId]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">

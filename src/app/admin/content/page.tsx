@@ -67,7 +67,7 @@ const Page: React.FC = () => {
     position: 'top-left'
   });
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const { data: response, error } = await supabase.from('contents').select('*, sections(*)');
     if (error !== null) {
       toast({
@@ -79,7 +79,7 @@ const Page: React.FC = () => {
     }
     const contents = response as Array<SchemaType<'contents'> & { sections: SchemaType<'sections'> }>;
     setData(contents.sort((a, b) => a.order - b.order).sort((a, b) => a.sections.order - b.sections.order));
-  };
+  }, [supabase, toast]);
 
   const onChangeData = ({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) return;
@@ -127,7 +127,7 @@ const Page: React.FC = () => {
       .then(({ data: sections }) => {
         if (sections !== null) setSection(sections);
       });
-  }, [supabase]);
+  }, [fetchData, supabase]);
 
   const SectionOptions = useCallback(
     () => (

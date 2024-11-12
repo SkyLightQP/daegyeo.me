@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import {
   Button,
   Divider,
@@ -99,8 +99,9 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
     position: 'top-left'
   });
 
-  const fetchData = async (id: number) => {
-    if (id > 0) {
+  const fetchData = useCallback(
+    async (id: number) => {
+      if (id <= 0) return;
       const { data: contents, error } = await supabase.from('contents').select('*, links(*)').match({ id });
       if (error !== null) {
         toast({
@@ -114,8 +115,9 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
         const content = contents[0];
         setData(content.links.sort((a, b) => a.order - b.order));
       }
-    }
-  };
+    },
+    [supabase, toast]
+  );
 
   const onChangeData = ({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) return;
@@ -166,7 +168,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
 
   useEffect(() => {
     fetchData(dataId).then();
-  }, [dataId]);
+  }, [fetchData, dataId]);
 
   useEffect(() => {
     if (data !== undefined) {
