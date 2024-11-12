@@ -157,7 +157,7 @@ const Page: React.FC = () => {
             {...register('title', { required: true })}
           />
           <Input
-            placeholder="부제목 (2022 / 프론트엔드)"
+            placeholder="부제목 (풀스택, 2024)"
             background="white"
             css={css`
               grid-column: 4 / 6;
