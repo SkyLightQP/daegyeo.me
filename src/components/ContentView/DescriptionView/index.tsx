@@ -33,6 +33,11 @@ export const MarkdownWrapper = styled.div`
       width: 300px;
     }
   }
+
+  & summary {
+    cursor: pointer;
+    padding-left: 2px;
+  }
 `;
 
 export const DescriptionView: FC<DescriptionViewProps> = ({ description }) => {
