@@ -23,6 +23,10 @@ export const MarkdownWrapper = styled.div`
       content: '- ';
     }
 
+    &:lang(ko) {
+      word-break: keep-all;
+    }
+
     @media screen and (max-width: 700px) {
       width: 300px;
     }
