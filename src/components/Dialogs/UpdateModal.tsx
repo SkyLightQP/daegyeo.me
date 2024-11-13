@@ -1,9 +1,8 @@
 'use client';
 
-import React, { cloneElement, FC, Fragment, useEffect, useRef } from 'react';
+import React, { cloneElement, Fragment, useEffect, useRef } from 'react';
 import {
   Button,
-  ComponentWithAs,
   FormControl,
   FormLabel,
   Modal,
