@@ -294,13 +294,13 @@ const Page: React.FC = () => {
       <UpdateModal
         modalController={updateDialog}
         fields={[
-          { id: 'title', label: '제목', component: Input },
-          { id: 'subtitle', label: '부제목', component: Input },
-          { id: 'description', label: '내용', component: Textarea },
-          { id: 'stack', label: '스택', component: Input },
-          { id: 'section', label: '섹션', component: Select, option: <SectionOptions /> },
-          { id: 'hasMargin', label: '컨텐츠 간 간격 추가', component: Checkbox },
-          { id: 'isHidden', label: '숨김', component: Checkbox }
+          { id: 'title', label: '제목', component: <Input /> },
+          { id: 'subtitle', label: '부제목', component: <Input /> },
+          { id: 'description', label: '내용', component: <Textarea /> },
+          { id: 'stack', label: '스택', component: <Input /> },
+          { id: 'section', label: '섹션', component: <Select />, option: <SectionOptions /> },
+          { id: 'hasMargin', label: '컨텐츠 간 간격 추가', component: <Checkbox /> },
+          { id: 'isHidden', label: '숨김', component: <Checkbox /> }
         ]}
         defaultValue={[
           modalData.value.title,

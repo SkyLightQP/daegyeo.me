@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment, useEffect, useRef } from 'react';
+import React, { cloneElement, FC, Fragment, useEffect, useRef } from 'react';
 import {
   Button,
   ComponentWithAs,
@@ -23,7 +23,7 @@ import { Space } from '../Space';
 interface FieldType {
   readonly id: string;
   readonly label: string;
-  readonly component: ComponentWithAs<any>;
+  readonly component: JSX.Element;
   readonly option?: JSX.Element;
 }
 
@@ -66,12 +66,10 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
-            {fields.map(({ id, label, component: Component, option }) => (
+            {fields.map(({ id, label, component, option }) => (
               <Fragment key={id}>
                 <FormLabel htmlFor={id}>{label}</FormLabel>
-                <Component id={id} placeholder={label} {...register(id)}>
-                  {option && option}
-                </Component>
+                {cloneElement(component, { id, placeholder: label, ...register(id), children: option && option })}
                 <Space y={10} />
               </Fragment>
             ))}

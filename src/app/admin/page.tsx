@@ -151,7 +151,7 @@ const Page: React.FC = () => {
           {
             id: 'title',
             label: '제목',
-            component: Input
+            component: <Input />
           }
         ]}
         defaultValue={[modalData.title]}
