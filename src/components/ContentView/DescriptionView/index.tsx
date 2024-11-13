@@ -4,6 +4,8 @@ import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from '@emotion/styled';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 interface DescriptionViewProps {
   readonly description: string;
@@ -36,7 +38,9 @@ export const MarkdownWrapper = styled.div`
 export const DescriptionView: FC<DescriptionViewProps> = ({ description }) => {
   return (
     <MarkdownWrapper>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{description}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+        {description}
+      </ReactMarkdown>
     </MarkdownWrapper>
   );
 };
