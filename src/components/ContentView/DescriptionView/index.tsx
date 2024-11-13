@@ -3,6 +3,9 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from '@emotion/styled';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 
 interface DescriptionViewProps {
   readonly description: string;
@@ -22,16 +25,27 @@ export const MarkdownWrapper = styled.div`
       content: '- ';
     }
 
+    &:lang(ko) {
+      word-break: keep-all;
+    }
+
     @media screen and (max-width: 700px) {
       width: 300px;
     }
+  }
+
+  & summary {
+    cursor: pointer;
+    padding-left: 2px;
   }
 `;
 
 export const DescriptionView: FC<DescriptionViewProps> = ({ description }) => {
   return (
     <MarkdownWrapper>
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSanitize]}>
+        {description}
+      </ReactMarkdown>
     </MarkdownWrapper>
   );
 };
