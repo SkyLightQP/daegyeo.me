@@ -58,7 +58,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ modalController, fields, defa
         isFirstOpen.current = false;
       }}
       isCentered
-      size="2xl"
+      size="4xl"
     >
       <ModalOverlay />
       <ModalContent>
