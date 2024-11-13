@@ -3,6 +3,7 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from '@emotion/styled';
+import remarkGfm from 'remark-gfm';
 
 interface DescriptionViewProps {
   readonly description: string;
@@ -31,7 +32,7 @@ export const MarkdownWrapper = styled.div`
 export const DescriptionView: FC<DescriptionViewProps> = ({ description }) => {
   return (
     <MarkdownWrapper>
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{description}</ReactMarkdown>
     </MarkdownWrapper>
   );
 };
