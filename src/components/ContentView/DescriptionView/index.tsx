@@ -38,6 +38,11 @@ export const MarkdownWrapper = styled.div`
     cursor: pointer;
     padding-left: 2px;
   }
+
+  & details ul,
+  p {
+    padding-left: 12px;
+  }
 `;
 
 export const DescriptionView: FC<DescriptionViewProps> = ({ description }) => {
