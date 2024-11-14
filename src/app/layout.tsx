@@ -43,6 +43,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       <head>
         <title>하대겸 | Daegyeom Ha</title>
         <meta charSet="utf-8" />
+        <meta name="naver-site-verification" content="dbd9d288a0e114ae1755011385c261259e8a67a2" />
         <Script
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2490453096003621"
           crossOrigin="anonymous"
