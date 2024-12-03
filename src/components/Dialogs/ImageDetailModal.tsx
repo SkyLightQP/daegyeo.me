@@ -36,7 +36,14 @@ const ImageDetailModal: React.FC<ImageDetailModalProps> = ({ modalController, im
       <ModalOverlay />
       <StyledModalContent>
         <ModalBody>
-          <StyledImage src={image.url} alt={image.alt} width={1024} height={768} />
+          <StyledImage
+            src={image.url}
+            alt={image.alt}
+            width={1024}
+            height={768}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP0rAcAARcAyjleRTkAAAAASUVORK5CYII="
+          />
           <ImageLabel>{image.alt}</ImageLabel>
         </ModalBody>
       </StyledModalContent>
