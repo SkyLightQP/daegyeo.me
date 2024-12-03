@@ -19,9 +19,9 @@ import {
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { RiArrowRightLine, RiDeleteBin2Line, RiMenuLine } from '@remixicon/react';
-import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import Colors from '../../styles/Colors';
 import { SchemaType } from '../../types/type-util';
 import { Space } from '../Space';
@@ -98,6 +98,16 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
     isClosable: true,
     position: 'top-left'
   });
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5
+      }
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates
+    })
+  );
 
   const fetchData = useCallback(
     async (id: number) => {
@@ -197,7 +207,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ modalController, dataId }) => {
           <Space y={10} />
           <Divider />
           <Space y={10} />
-          <DndContext onDragEnd={onChangeData}>
+          <DndContext onDragEnd={onChangeData} sensors={sensors}>
             <SortableContext items={data.map((i) => i.id.toString())}>
               <LinkList>
                 {fields.map((field, index) => (
