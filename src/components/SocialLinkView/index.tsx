@@ -48,12 +48,6 @@ export const SocialLinkView: FC = () => {
         <SocialLink href="https://www.acmicpc.net/user/combbm/" icon={RiCodeSSlashLine}>
           Baekjoon
         </SocialLink>
-        <SocialLink href="https://solved.ac/profile/combbm/" icon={RiCheckLine}>
-          solved.ac
-        </SocialLink>
-        <SocialLink href="https://til.skylightqp.kr/" icon={RiPencilFill}>
-          Today I Learned
-        </SocialLink>
         <SocialLink href="https://www.linkedin.com/in/daegyeom/" icon={RiLinkedinBoxFill}>
           Linkedin
         </SocialLink>
