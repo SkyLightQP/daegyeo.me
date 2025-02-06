@@ -1,15 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import {
-  RiCheckLine,
-  RiCodeSSlashLine,
-  RiGithubFill,
-  RiLinkedinBoxFill,
-  RiMailLine,
-  RiPagesLine,
-  RiPencilFill
-} from '@remixicon/react';
+import { RiCodeSSlashLine, RiGithubFill, RiLinkedinBoxFill, RiMailLine, RiPagesLine } from '@remixicon/react';
 import styled from '@emotion/styled';
 import { SectionTitle } from '../Typography';
 import { Space } from '../Space';
