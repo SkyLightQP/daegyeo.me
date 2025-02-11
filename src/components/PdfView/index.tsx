@@ -18,7 +18,7 @@ const PdfWrapper = styled.div`
 
   @page {
     size: A4;
-    margin: 2cm 0;
+    margin: 1.8cm 0;
   }
 `;
 
@@ -145,7 +145,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
                   {section.contents
                     .sort((a, b) => a.order - b.order)
                     .map((content) => (
-                      <div key={content.id}>
+                      <div key={content.id} style={{ breakInside: 'avoid' }}>
                         <LargeContentText>
                           {content.title} <LargeHintedText>{content.subtitle}</LargeHintedText>
                         </LargeContentText>
