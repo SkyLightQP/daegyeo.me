@@ -157,6 +157,10 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
                 </section>
               )
           )}
+
+        <p style={{ fontSize: '14px', marginTop: '6rem' }}>
+          이 이력서 원본은 <a href="https://daegyeo.me">daegyeo.me</a>에서 확인하실 수 있습니다.
+        </p>
       </PdfContainer>
     </PdfWrapper>
   );
