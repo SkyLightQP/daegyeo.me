@@ -48,18 +48,29 @@ const Page: React.FC = () => {
     position: 'top-left'
   });
   const pdfRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef: pdfRef });
+  const handlePrint = useReactToPrint({ contentRef: pdfRef });
 
   useHotkeys('a+d', () => {
     router.push('/admin');
   });
 
-  useHotkeys('p', () => {
-    reactToPrintFn();
-  });
-
   useEffect(() => {
     getSectionData().then(setData);
+  }, []);
+
+  useEffect(() => {
+    const printKeyListener = (e: KeyboardEvent) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        handlePrint();
+      }
+    };
+
+    window.addEventListener('keydown', printKeyListener);
+
+    return () => {
+      window.removeEventListener('keydown', printKeyListener);
+    };
   }, []);
 
   useEffect(() => {
