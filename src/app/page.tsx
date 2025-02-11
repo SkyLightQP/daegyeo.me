@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useToast } from '@chakra-ui/react';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
+import { useReactToPrint } from 'react-to-print';
+import styled from '@emotion/styled';
 import Landing from '../components/Landing';
 import { Space } from '../components/Space';
 import { LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
@@ -14,6 +15,7 @@ import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
 import { DescriptionView } from '../components/ContentView/DescriptionView';
 import { ImageView } from '../components/ContentView/ImageView';
 import { getSectionData, SectionType } from '../acitons/section-data.action';
+import { PdfView } from '../components/PdfView';
 
 const Container = styled.div`
   margin: 8rem 172px;
@@ -45,6 +47,8 @@ const Page: React.FC = () => {
     isClosable: true,
     position: 'top-left'
   });
+  const pdfRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({ contentRef: pdfRef });
 
   useHotkeys('a+d', () => {
     router.push('/admin');
@@ -52,6 +56,21 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     getSectionData().then(setData);
+  }, []);
+
+  useEffect(() => {
+    const printKeyListener = (e: KeyboardEvent) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        handlePrint();
+      }
+    };
+
+    window.addEventListener('keydown', printKeyListener);
+
+    return () => {
+      window.removeEventListener('keydown', printKeyListener);
+    };
   }, []);
 
   useEffect(() => {
@@ -108,6 +127,8 @@ const Page: React.FC = () => {
           )}
         <SocialLinkView />
       </Container>
+
+      <PdfView ref={pdfRef} />
     </>
   );
 };

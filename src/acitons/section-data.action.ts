@@ -21,3 +21,18 @@ export const getSectionData = async () => {
     error
   };
 };
+
+export const getPdfSectionData = async () => {
+  const supabase = await createSupabaseClient();
+  const { data, error } = await supabase
+    .from('sections')
+    .select('*, contents(*, links(*), images(*))')
+    .eq('showPdf', true)
+    .eq('contents.isHidden', false)
+    .eq('contents.showPdf', true)
+    .order('id', { ascending: true });
+  return {
+    sections: data as SectionType,
+    error
+  };
+};
