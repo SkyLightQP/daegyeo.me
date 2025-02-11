@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import styled from '@emotion/styled';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useToast } from '@chakra-ui/react';
 import { PostgrestError } from '@supabase/supabase-js';
@@ -14,26 +13,7 @@ import { ExternalLinkView } from '../components/ContentView/ExternalLinkView';
 import { DescriptionView } from '../components/ContentView/DescriptionView';
 import { ImageView } from '../components/ContentView/ImageView';
 import { getSectionData, SectionType } from '../acitons/section-data.action';
-
-const Container = styled.div`
-  margin: 8rem 172px;
-
-  :lang(ko) {
-    word-break: keep-all;
-  }
-
-  & > div {
-    margin-bottom: 64px;
-  }
-
-  & > div:last-child {
-    margin-bottom: 0;
-  }
-
-  @media screen and (max-width: 700px) {
-    margin: 6rem 36px;
-  }
-`;
+import { Container } from '../components/Container';
 
 const Page: React.FC = () => {
   const [{ sections, error }, setData] = useState<{ sections: SectionType; error: PostgrestError | null }>({
