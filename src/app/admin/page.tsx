@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, useDisclosure, useToast } from '@chakra-ui/react';
+import { Button, Checkbox, Input, useDisclosure, useToast } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { DragEndEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
@@ -29,8 +29,12 @@ const Footer = styled.div`
 const Page: React.FC = () => {
   const [data, setData] = useState<Array<SchemaType<'sections'>>>([]);
   const [isChange, setBeChange] = useState(false);
-  const [modalData, setModalData] = useState<{ id: number; title: string }>({ id: -1, title: '' });
-  const { register, handleSubmit, reset } = useForm<{ title: string }>();
+  const [modalData, setModalData] = useState<{ id: number; title: string; showPdf: boolean }>({
+    id: -1,
+    title: '',
+    showPdf: false
+  });
+  const { register, handleSubmit, reset } = useForm<{ title: string; showPdf: boolean }>();
   const deleteDialog = useDisclosure();
   const updateDialog = useDisclosure();
   const supabase = createSupabaseClient();
@@ -110,15 +114,16 @@ const Page: React.FC = () => {
           data={data}
           columns={[
             { key: 'title', label: '제목' },
+            { key: 'showPdf', label: 'PDF 보이기' },
             { key: 'createdAt', label: '생성일', isDate: true }
           ]}
           onDragEnd={onChangeData}
           onTableUpdateClick={(item) => {
-            setModalData({ id: item.id, title: item.title });
+            setModalData({ id: item.id, title: item.title, showPdf: item.showPdf });
             updateDialog.onOpen();
           }}
           onTableDeleteClick={(item) => {
-            setModalData({ id: item.id, title: item.title });
+            setModalData({ id: item.id, title: item.title, showPdf: item.showPdf });
             deleteDialog.onOpen();
           }}
         />
@@ -148,16 +153,16 @@ const Page: React.FC = () => {
       <UpdateModal
         modalController={updateDialog}
         fields={[
-          {
-            id: 'title',
-            label: '제목',
-            component: <Input />
-          }
+          { id: 'title', label: '제목', component: <Input /> },
+          { id: 'showPdf', label: 'PDF 보이기', component: <Checkbox /> }
         ]}
-        defaultValue={[modalData.title]}
+        defaultValue={[modalData.title, modalData.showPdf]}
         onUpdateClick={async (values) => {
           if (values.title.trim() === '') return;
-          await supabase.from('sections').update({ title: values.title }).match({ id: modalData.id });
+          await supabase
+            .from('sections')
+            .update({ title: values.title, showPdf: values.showPdf })
+            .match({ id: modalData.id });
           await fetchData();
           updateDialog.onClose();
         }}
