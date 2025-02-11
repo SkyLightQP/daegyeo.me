@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://daegyeo.me",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
@@ -22,7 +22,7 @@
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.46.1",
     "framer-motion": "^6.3.12",
-    "next": "^15.0.2",
+    "next": "^15.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
