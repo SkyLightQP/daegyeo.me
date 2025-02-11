@@ -2,7 +2,7 @@
 
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { getSectionData, SectionType } from '../../acitons/section-data.action';
+import { getPdfSectionData, getSectionData, SectionType } from '../../acitons/section-data.action';
 
 import { LargeContentText, LargeHintedText, SectionTitle } from '../Typography';
 import { Space } from '../Space';
@@ -10,14 +10,21 @@ import { DescriptionView } from '../ContentView/DescriptionView';
 import { ExternalLinkView } from '../ContentView/ExternalLinkView';
 
 const PdfWrapper = styled.div`
-  display: none;
+  display: block;
+
   @media print {
     display: block;
+  }
+
+  @page {
+    size: A4;
+    margin: 2cm 0;
   }
 `;
 
 const PdfContainer = styled.div`
-  margin: 4rem 10px;
+  background-color: white;
+  padding: 0 4rem;
 
   :lang(ko) {
     word-break: keep-all;
@@ -38,7 +45,14 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
   });
 
   useEffect(() => {
-    getSectionData().then(setData);
+    getPdfSectionData().then(setData);
+  }, []);
+
+  useEffect(() => {
+    const details = document.querySelectorAll('details');
+    details.forEach((detail) => {
+      detail.setAttribute('open', '');
+    });
   }, []);
 
   return (
