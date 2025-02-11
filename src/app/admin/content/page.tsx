@@ -309,7 +309,8 @@ const Page: React.FC = () => {
           modalData.value.description,
           modalData.value.section,
           modalData.value.hasMargin,
-          modalData.value.isHidden
+          modalData.value.isHidden,
+          modalData.value.showPdf
         ]}
         onUpdateClick={async (values) => {
           await supabase
