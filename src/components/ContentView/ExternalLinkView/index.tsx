@@ -7,6 +7,7 @@ import { SchemaType } from '../../../types/type-util';
 
 interface ExternalLinkViewProps {
   readonly links: SchemaType<'links'>[];
+  readonly isPrint?: boolean;
 }
 
 const ExternalLinkGroup = styled.div`
@@ -22,14 +23,14 @@ const ExternalLinkGroup = styled.div`
   }
 `;
 
-export const ExternalLinkView: FC<ExternalLinkViewProps> = ({ links }) => {
+export const ExternalLinkView: FC<ExternalLinkViewProps> = ({ links, isPrint }) => {
   return (
     <ExternalLinkGroup>
       {links
         .sort((a, b) => a.order - b.order)
         .map((link) => (
           <ExternalLink key={link.id} href={link.href}>
-            {link.name}
+            {isPrint ? `${link.name}: ${link.href}` : link.name}
           </ExternalLink>
         ))}
     </ExternalLinkGroup>
