@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useToast } from '@chakra-ui/react';
 import { PostgrestError } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
+import { useReactToPrint } from 'react-to-print';
 import Landing from '../components/Landing';
 import { Space } from '../components/Space';
 import { LargeContentText, LargeHintedText, SectionTitle } from '../components/Typography';
@@ -14,6 +15,7 @@ import { DescriptionView } from '../components/ContentView/DescriptionView';
 import { ImageView } from '../components/ContentView/ImageView';
 import { getSectionData, SectionType } from '../acitons/section-data.action';
 import { Container } from '../components/Container';
+import { PdfView } from '../components/PdfView';
 
 const Page: React.FC = () => {
   const [{ sections, error }, setData] = useState<{ sections: SectionType; error: PostgrestError | null }>({
@@ -25,9 +27,15 @@ const Page: React.FC = () => {
     isClosable: true,
     position: 'top-left'
   });
+  const pdfRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef: pdfRef });
 
   useHotkeys('a+d', () => {
     router.push('/admin');
+  });
+
+  useHotkeys('p', () => {
+    reactToPrintFn();
   });
 
   useEffect(() => {
@@ -88,6 +96,8 @@ const Page: React.FC = () => {
           )}
         <SocialLinkView />
       </Container>
+
+      <PdfView ref={pdfRef} />
     </>
   );
 };
