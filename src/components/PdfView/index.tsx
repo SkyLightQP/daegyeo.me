@@ -3,7 +3,7 @@
 import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { getSectionData, SectionType } from '../../acitons/section-data.action';
-import { Container } from '../Container';
+
 import { LargeContentText, LargeHintedText, SectionTitle } from '../Typography';
 import { Space } from '../Space';
 import { DescriptionView } from '../ContentView/DescriptionView';
@@ -13,6 +13,22 @@ const PdfWrapper = styled.div`
   display: none;
   @media print {
     display: block;
+  }
+`;
+
+const PdfContainer = styled.div`
+  margin: 4rem 10px;
+
+  :lang(ko) {
+    word-break: keep-all;
+  }
+
+  & > div {
+    margin-bottom: 64px;
+  }
+
+  & > div:last-child {
+    margin-bottom: 0;
   }
 `;
 
@@ -27,7 +43,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
 
   return (
     <PdfWrapper>
-      <Container ref={ref}>
+      <PdfContainer ref={ref}>
         {sections
           .sort((a, b) => a.order - b.order)
           .map(
@@ -51,7 +67,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
                 </div>
               )
           )}
-      </Container>
+      </PdfContainer>
     </PdfWrapper>
   );
 });
