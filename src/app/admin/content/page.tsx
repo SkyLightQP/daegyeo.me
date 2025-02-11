@@ -38,6 +38,7 @@ interface AddForm {
   readonly section: string;
   readonly hasMargin: boolean;
   readonly isHidden: boolean;
+  readonly showPdf: boolean;
 }
 
 const DEFAULT_VALUE: AddForm = {
@@ -46,7 +47,8 @@ const DEFAULT_VALUE: AddForm = {
   description: '',
   section: '',
   hasMargin: true,
-  isHidden: false
+  isHidden: false,
+  showPdf: false
 };
 
 const Page: React.FC = () => {
@@ -161,12 +163,20 @@ const Page: React.FC = () => {
             `}
             {...register('subtitle')}
           />
-          <Select placeholder="섹션" background="white" {...register('section', { required: true })}>
-            <SectionOptions />
-          </Select>
+
+          <div
+            style={{
+              gridColumn: '1 / 3',
+              marginRight: '26px'
+            }}
+          >
+            <Select placeholder="섹션" background="white" {...register('section', { required: true })}>
+              <SectionOptions />
+            </Select>
+          </div>
           <Checkbox
             css={css`
-              grid-column: 4 / 5;
+              grid-column: 3 / 4;
             `}
             {...register('hasMargin')}
           >
@@ -174,11 +184,19 @@ const Page: React.FC = () => {
           </Checkbox>
           <Checkbox
             css={css`
-              grid-column: 5 / 6;
+              grid-column: 4 / 5;
             `}
             {...register('isHidden')}
           >
             숨김
+          </Checkbox>
+          <Checkbox
+            css={css`
+              grid-column: 5 / 6;
+            `}
+            {...register('showPdf')}
+          >
+            PDF 보이기
           </Checkbox>
           <Textarea
             placeholder="내용"
@@ -221,7 +239,8 @@ const Page: React.FC = () => {
                 description: item.description,
                 section: String(item.sections.id),
                 hasMargin: item.hasMargin,
-                isHidden: item.isHidden
+                isHidden: item.isHidden,
+                showPdf: item.showPdf
               }
             });
             updateDialog.onOpen();
@@ -235,7 +254,8 @@ const Page: React.FC = () => {
                 description: item.description,
                 section: String(item.sections.id),
                 hasMargin: item.hasMargin,
-                isHidden: item.isHidden
+                isHidden: item.isHidden,
+                showPdf: item.showPdf
               }
             });
             deleteDialog.onOpen();
@@ -280,7 +300,8 @@ const Page: React.FC = () => {
           { id: 'description', label: '내용', component: <Textarea height="sm" /> },
           { id: 'section', label: '섹션', component: <Select />, option: <SectionOptions /> },
           { id: 'hasMargin', label: '컨텐츠 간 간격 추가', component: <Checkbox /> },
-          { id: 'isHidden', label: '숨김', component: <Checkbox /> }
+          { id: 'isHidden', label: '숨김', component: <Checkbox /> },
+          { id: 'showPdf', label: 'PDF 보이기', component: <Checkbox /> }
         ]}
         defaultValue={[
           modalData.value.title,
@@ -299,7 +320,8 @@ const Page: React.FC = () => {
               description: values.description,
               sectionId: Number(values.section),
               hasMargin: values.hasMargin,
-              isHidden: values.isHidden
+              isHidden: values.isHidden,
+              showPdf: values.showPdf
             })
             .match({ id: modalData.id });
           await fetchData();
