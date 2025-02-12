@@ -91,7 +91,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
 
   useEffect(() => {
     setInterval(() => {
-      const details = document.querySelectorAll('details');
+      const details = document.querySelectorAll('.pdf-view details');
       details.forEach((detail) => {
         detail.setAttribute('open', '');
       });
@@ -99,7 +99,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
   }, []);
 
   return (
-    <PdfWrapper>
+    <PdfWrapper className="pdf-view">
       <PdfContainer ref={ref}>
         <Title>
           우리 생활을 더 편리하게 만듭니다
