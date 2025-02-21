@@ -104,16 +104,16 @@ const Landing: React.FC = () => {
       <MarginContainer>
         <div>
           <Title>
-            우리 생활을 더 편리하게 만듭니다
+            생활을 더 편리하게 만듭니다
             <br />
             개발자 <HighlightedTitle>하대겸</HighlightedTitle> <HintedTitle>Daegyeom Ha</HintedTitle>
           </Title>
         </div>
 
         <IntroduceText>
-          우리 주변의 문제를 글이 아닌 기술로 표현합니다.
+          주변의 문제를 기술로 해결할 수 있는 방법을 찾고 구현합니다.
           <br />
-          문제를 기술로 해결하기 위해 노력하고 있습니다.
+          문제를 해결할 때 기술보다 문제 본질에 더욱 집중하기 위해 노력합니다.
         </IntroduceText>
 
         <IconList>
