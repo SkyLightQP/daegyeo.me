@@ -34,6 +34,15 @@ export const MarkdownWrapper = styled.div`
     }
   }
 
+  & blockquote > p {
+    padding-left: 14px;
+    text-indent: -14px;
+
+    &::before {
+      content: '> ';
+    }
+  }
+
   & summary {
     cursor: pointer;
     padding-left: 2px;
