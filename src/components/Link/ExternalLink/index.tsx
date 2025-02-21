@@ -7,6 +7,7 @@ import Colors from '../../../styles/Colors';
 
 interface ExternalLinkProps {
   readonly href: string;
+  readonly isPrint?: boolean;
 }
 
 const StyledLink = styled.a`
@@ -22,10 +23,10 @@ const StyledLink = styled.a`
   }
 `;
 
-export const ExternalLink: FC<PropsWithChildren<ExternalLinkProps>> = ({ href, children }) => {
+export const ExternalLink: FC<PropsWithChildren<ExternalLinkProps>> = ({ href, isPrint, children }) => {
   return (
     <StyledLink href={href} target="_blank" rel="noopener">
-      {children} <RiExternalLinkFill size={18} />
+      {children} {!isPrint && <RiExternalLinkFill size={18} />}
     </StyledLink>
   );
 };
