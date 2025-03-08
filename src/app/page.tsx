@@ -119,7 +119,7 @@ const Page: React.FC = () => {
                           </>
                         )}
                         <ExternalLinkView links={content.links} />
-                        {content.hasMargin && <Space y={48} />}
+                        {content.hasMargin ? <Space y={48} /> : <Space y={4} />}
                       </div>
                     ))}
                 </div>
