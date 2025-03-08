@@ -10,9 +10,9 @@ interface ExternalLinkViewProps {
   readonly isPrint?: boolean;
 }
 
-const ExternalLinkGroup = styled.div`
+const ExternalLinkGroup = styled.div<{ isPrint?: boolean }>`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${({ isPrint }) => (isPrint ? 'column' : 'row')};
 
   & > a {
     margin-right: 6px;
@@ -25,12 +25,12 @@ const ExternalLinkGroup = styled.div`
 
 export const ExternalLinkView: FC<ExternalLinkViewProps> = ({ links, isPrint }) => {
   return (
-    <ExternalLinkGroup>
+    <ExternalLinkGroup isPrint={isPrint}>
       {links
         .sort((a, b) => a.order - b.order)
         .map((link) => (
           <ExternalLink key={link.id} href={link.href} isPrint={isPrint}>
-            {isPrint ? `${link.name}: ${link.href}` : link.name}
+            {isPrint ? `(${link.name}) ${link.href}` : link.name}
           </ExternalLink>
         ))}
     </ExternalLinkGroup>
