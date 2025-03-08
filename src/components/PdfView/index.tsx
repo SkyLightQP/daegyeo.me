@@ -31,7 +31,7 @@ const PdfContainer = styled.div`
   }
 
   & > section {
-    margin-bottom: 64px;
+    margin-bottom: 5rem;
   }
 
   & > section:last-child {
