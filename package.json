@@ -22,7 +22,7 @@
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.46.1",
     "framer-motion": "^6.3.12",
-    "next": "^15.1.7",
+    "next": "^15.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
