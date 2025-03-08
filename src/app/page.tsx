@@ -25,7 +25,7 @@ const Container = styled.div`
   }
 
   & > div {
-    margin-bottom: 64px;
+    margin-bottom: 5rem;
   }
 
   & > div:last-child {
@@ -95,7 +95,7 @@ const Page: React.FC = () => {
               section.contents.length > 0 && (
                 <div key={section.id}>
                   <SectionTitle>{section.title}</SectionTitle>
-                  <Space y={6} />
+                  <Space y={8} />
                   {section.contents
                     .sort((a, b) => a.order - b.order)
                     .map((content) => (
@@ -106,7 +106,7 @@ const Page: React.FC = () => {
                         <DescriptionView description={content.description} />
                         {content.images.length > 0 && (
                           <>
-                            <Space y={6} />
+                            <Space y={10} />
                             <ImageView
                               images={content.images
                                 .sort((a, b) => a.order - b.order)
@@ -115,11 +115,11 @@ const Page: React.FC = () => {
                                   alt: i.alt
                                 }))}
                             />
-                            <Space y={6} />
+                            <Space y={10} />
                           </>
                         )}
                         <ExternalLinkView links={content.links} />
-                        {content.hasMargin && <Space y={26} />}
+                        {content.hasMargin && <Space y={48} />}
                       </div>
                     ))}
                 </div>

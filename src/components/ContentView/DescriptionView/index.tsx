@@ -19,7 +19,7 @@ export const MarkdownWrapper = styled.div`
     padding-left: 12px;
     text-indent: -12px;
     list-style-type: none;
-    line-height: 1.6;
+    line-height: 1.75;
 
     &::before {
       content: '- ';
