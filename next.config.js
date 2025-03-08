@@ -1,4 +1,5 @@
 module.exports = {
+  output: 'standalone',
   reactStrictMode: process.env.NODE_ENV === 'production',
   eslint: {
     ignoreDuringBuilds: true

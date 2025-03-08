@@ -31,7 +31,7 @@ const PdfContainer = styled.div`
   }
 
   & > section {
-    margin-bottom: 64px;
+    margin-bottom: 5rem;
   }
 
   & > section:last-child {
@@ -147,7 +147,7 @@ export const PdfView = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
                         </LargeContentText>
                         <DescriptionView description={content.description} />
                         <ExternalLinkView links={content.links} isPrint />
-                        {content.hasMargin && <Space y={26} />}
+                        {content.hasMargin ? <Space y={48} /> : <Space y={4} />}
                       </div>
                     ))}
                 </section>
