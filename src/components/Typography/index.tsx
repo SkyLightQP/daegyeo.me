@@ -3,11 +3,6 @@ import Colors from '../../styles/Colors';
 import Breakpoint from '../../styles/Breakpoint';
 
 /* Legacy */
-export const Title = styled.p`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
 export const HugeTitle = styled.p`
   font-size: 30px;
   font-weight: bold;
