@@ -3,11 +3,6 @@ import Colors from '../../styles/Colors';
 import Breakpoint from '../../styles/Breakpoint';
 
 /* Legacy */
-export const Title = styled.p`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
 export const HugeTitle = styled.p`
   font-size: 30px;
   font-weight: bold;
@@ -26,6 +21,7 @@ export const SectionTitle = styled.h1`
 
 export const LargeContentText = styled.p`
   font-size: 20px;
+  font-weight: 600;
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 18px;
