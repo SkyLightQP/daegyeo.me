@@ -26,6 +26,7 @@ export const SectionTitle = styled.h1`
 
 export const LargeContentText = styled.p`
   font-size: 20px;
+  font-weight: 600;
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 18px;
