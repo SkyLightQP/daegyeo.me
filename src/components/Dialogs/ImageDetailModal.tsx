@@ -15,10 +15,15 @@ const StyledModalContent = styled(ModalContent)`
   position: relative;
   background-color: transparent;
   box-shadow: none;
+
+  display: flex;
+  align-items: center;
 `;
 
 const StyledImage = styled(Image)`
   border-radius: 6px;
+  width: auto;
+  max-height: 85vh;
 `;
 
 const ImageLabel = styled.p`
