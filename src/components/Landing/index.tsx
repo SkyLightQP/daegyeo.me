@@ -32,6 +32,7 @@ const Title = styled.h1`
 
   @media screen and (max-width: ${Breakpoint.MOBILE}) {
     font-size: 24px;
+    word-break: keep-all;
   }
 `;
 
