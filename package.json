@@ -14,7 +14,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.1",
-    "next": "^16.2.2",
+    "next": "^16.2.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
@@ -27,7 +27,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "prettier": "^3.8.2",
-    "supabase": "^2.89.1",
     "typescript": "^6.0.2",
     "typescript-eslint": "^8.58.1"
   },
