@@ -67,6 +67,50 @@ export type Database = {
           },
         ]
       }
+      contents_dev: {
+        Row: {
+          created_at: string
+          description: string
+          id: number
+          is_hidden: boolean
+          priority: number
+          section_id: number
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: number
+          is_hidden?: boolean
+          priority: number
+          section_id: number
+          subtitle: string
+          title: string
+          updated_at: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: number
+          is_hidden?: boolean
+          priority?: number
+          section_id?: number
+          subtitle?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contents_dev_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "sections_dev"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       images: {
         Row: {
           alt: string
@@ -167,6 +211,33 @@ export type Database = {
           showPdf?: boolean
           title?: string
           updatedAt?: string
+        }
+        Relationships: []
+      }
+      sections_dev: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          priority: number
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          priority: number
+          type: string
+          updated_at: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          priority?: number
+          type?: string
+          updated_at?: string
         }
         Relationships: []
       }
