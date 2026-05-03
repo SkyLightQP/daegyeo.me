@@ -12,6 +12,12 @@ export default defineConfig([
       'no-console': 'error',
     },
   },
+  {
+    files: ['src/app/api/**/*.ts', 'src/lib/**/*.ts'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
   prettier,
   globalIgnores(['.next/**', 'out/**', 'build/**', 'dist/**', 'node_modules/**']),
 ]);
