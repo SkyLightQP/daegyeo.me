@@ -1,10 +1,10 @@
 import React from 'react';
-import SectionEntry from '../components/SectionEntry';
-import SocialLinks from '../components/blocks/SocialLinks';
-import { Introduce } from '../components/blocks/Introduce';
-import StackBlock from '../components/blocks/StackBlock';
-import ArticleBlock from '../components/blocks/ArticleBlock';
-import Footer from '../components/Footer';
+import SectionEntry from '@/src/components/SectionEntry';
+import SocialLinks from '@/src/components/blocks/SocialLinks';
+import { Introduce } from '@/src/components/blocks/Introduce';
+import StackBlock from '@/src/components/blocks/StackBlock';
+import ArticleBlock from '@/src/components/blocks/ArticleBlock';
+import Footer from '@/src/components/Footer';
 
 const Page: React.FC = () => {
   return (
