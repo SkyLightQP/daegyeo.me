@@ -70,6 +70,7 @@ export type Database = {
       contents_dev: {
         Row: {
           created_at: string
+          date_range: string
           description: string
           id: number
           is_hidden: boolean
@@ -81,6 +82,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          date_range: string
           description: string
           id?: number
           is_hidden?: boolean
@@ -92,6 +94,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          date_range?: string
           description?: string
           id?: number
           is_hidden?: boolean

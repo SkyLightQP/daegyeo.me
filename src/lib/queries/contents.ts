@@ -6,6 +6,7 @@ export const ContentSchema = z.object({
   title: z.string().min(1),
   subtitle: z.string().min(1),
   description: z.string().min(1),
+  date_range: z.string().min(1),
   section_id: z.number().int().positive(),
   priority: z.number().int().positive(),
   is_hidden: z.boolean().optional().default(false),
