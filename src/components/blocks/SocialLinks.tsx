@@ -2,7 +2,7 @@ import { AtSign, Globe } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import React, { HTMLAttributes } from 'react';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/lib/utils';
 
 const SocialLinks = ({ className }: HTMLAttributes<HTMLDivElement>) => {
   return (
