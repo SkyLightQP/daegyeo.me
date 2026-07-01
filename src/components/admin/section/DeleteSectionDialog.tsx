@@ -8,8 +8,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
+} from '../../ui/dialog';
+import { Button } from '../../ui/button';
 
 type DeleteSectionDialogProps = {
   open: boolean;

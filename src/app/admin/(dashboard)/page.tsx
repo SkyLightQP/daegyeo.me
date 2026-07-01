@@ -23,9 +23,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { GripVertical, Pencil, Plus, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import AddSectionDialog, { AddSectionValue, sectionTypeOptions } from '@/components/admin/AddSectionDialog';
-import EditSectionDialog from '@/components/admin/EditSectionDialog';
-import DeleteSectionDialog from '@/components/admin/DeleteSectionDialog';
+import AddSectionDialog, { AddSectionValue, sectionTypeOptions } from '@/components/admin/section/AddSectionDialog';
+import EditSectionDialog from '@/components/admin/section/EditSectionDialog';
+import DeleteSectionDialog from '@/components/admin/section/DeleteSectionDialog';
 
 type Section = {
   id: number;
