@@ -34,7 +34,7 @@ export function AdminSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="px-4 py-6">
-        <span className="text-sm font-bold text-foreground">asdf</span>
+        <span className="text-sm font-bold text-foreground">daegyeo.me | ADMIN</span>
       </SidebarHeader>
 
       <SidebarContent>

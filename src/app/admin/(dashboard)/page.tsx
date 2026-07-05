@@ -23,6 +23,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { GripVertical, Pencil, Plus, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
 import AddSectionDialog, { AddSectionValue, sectionTypeOptions } from '@/components/admin/section/AddSectionDialog';
 import EditSectionDialog from '@/components/admin/section/EditSectionDialog';
 import DeleteSectionDialog from '@/components/admin/section/DeleteSectionDialog';
@@ -95,6 +96,33 @@ const SortableRow: FC<SortableRowProps> = ({ section, index, onEdit, onDelete })
     </TableRow>
   );
 };
+
+const SkeletonRows: FC = () => (
+  <>
+    {Array.from({ length: 4 }).map((_, i) => (
+      <TableRow key={i} className="h-12 text-center">
+        <TableCell>
+          <Skeleton className="mx-auto h-4 w-4" />
+        </TableCell>
+        <TableCell>
+          <Skeleton className="mx-auto h-4 w-5" />
+        </TableCell>
+        <TableCell>
+          <Skeleton className="mx-auto h-5 w-16 rounded-full" />
+        </TableCell>
+        <TableCell>
+          <Skeleton className="h-4 w-40" />
+        </TableCell>
+        <TableCell>
+          <div className="flex justify-center gap-1">
+            <Skeleton className="h-7 w-7 rounded-md" />
+            <Skeleton className="h-7 w-7 rounded-md" />
+          </div>
+        </TableCell>
+      </TableRow>
+    ))}
+  </>
+);
 
 const Page: FC = () => {
   const [open, setOpen] = useState(false);
@@ -223,7 +251,7 @@ const Page: FC = () => {
     <>
       <div className="mb-8">
         <h2 className="font-semibold text-xl">섹션 관리</h2>
-        <p className="text-sm">페이지에 들어가는 섹션과 섹션 타입을 설정합니다.</p>
+        <p className="text-sm text-gray-500">페이지에 들어가는 섹션과 섹션 타입을 설정합니다.</p>
 
         <div className="mt-4 flex">
           <Button size="lg" onClick={() => setOpen(true)}>
@@ -235,36 +263,32 @@ const Page: FC = () => {
 
       {error && <p className="mb-4 text-sm text-red-500">{error}</p>}
 
-      <Table className="w-full table-fixed">
-        <TableHeader>
-          <TableRow className="text-center">
-            <TableHead className="w-[50px]" />
-            <TableHead className="w-[50px] text-center">#</TableHead>
-            <TableHead className="w-[200px] text-center">타입</TableHead>
-            <TableHead className="text-left">제목</TableHead>
-            <TableHead className="w-[120px] text-center">관리</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {loading ? (
-            <TableRow className="h-12">
-              <TableCell colSpan={5} className="text-center text-sm text-gray-500">
-                불러오는 중...
-              </TableCell>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        modifiers={[restrictToVerticalAxis, restrictToParentElement]}
+        onDragEnd={handleDragEnd}
+      >
+        <Table className="w-full table-fixed">
+          <TableHeader>
+            <TableRow className="text-center">
+              <TableHead className="w-[50px]" />
+              <TableHead className="w-[50px] text-center">#</TableHead>
+              <TableHead className="w-[200px] text-center">타입</TableHead>
+              <TableHead className="text-left">제목</TableHead>
+              <TableHead className="w-[120px] text-center">관리</TableHead>
             </TableRow>
-          ) : sections.length === 0 ? (
-            <TableRow className="h-12">
-              <TableCell colSpan={5} className="text-center text-sm text-gray-500">
-                등록된 섹션이 없습니다.
-              </TableCell>
-            </TableRow>
-          ) : (
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              modifiers={[restrictToVerticalAxis, restrictToParentElement]}
-              onDragEnd={handleDragEnd}
-            >
+          </TableHeader>
+          <TableBody>
+            {loading ? (
+              <SkeletonRows />
+            ) : sections.length === 0 ? (
+              <TableRow className="h-12">
+                <TableCell colSpan={5} className="text-center text-sm text-gray-500">
+                  등록된 섹션이 없습니다.
+                </TableCell>
+              </TableRow>
+            ) : (
               <SortableContext items={sections.map((s) => s.id)} strategy={verticalListSortingStrategy}>
                 {sections.map((section, index) => (
                   <SortableRow
@@ -276,10 +300,10 @@ const Page: FC = () => {
                   />
                 ))}
               </SortableContext>
-            </DndContext>
-          )}
-        </TableBody>
-      </Table>
+            )}
+          </TableBody>
+        </Table>
+      </DndContext>
 
       <AddSectionDialog open={open} onOpenChange={setOpen} onSubmit={handleAddSection} submitting={submitting} />
 
