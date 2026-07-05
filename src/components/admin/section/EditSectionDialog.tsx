@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, SyntheticEvent, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -32,17 +32,19 @@ const typeLabel = (type: string) => sectionTypeOptions.find((option) => option.v
 
 const EditSectionDialog: FC<EditSectionDialogProps> = ({ open, onOpenChange, section, onSubmit, submitting = false }) => {
   const [name, setName] = useState('');
+  const [synced, setSynced] = useState<{ open: boolean; section: EditSectionTarget | null }>({ open, section });
 
-  useEffect(() => {
+  if (open !== synced.open || section !== synced.section) {
+    setSynced({ open, section });
     if (open && section) setName(section.name);
-  }, [open, section]);
+  }
 
   const handleOpenChange = (next: boolean) => {
     if (submitting) return;
     onOpenChange(next);
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     if (!name.trim() || submitting) return;
     onSubmit(name.trim());
