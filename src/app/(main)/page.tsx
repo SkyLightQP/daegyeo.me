@@ -5,10 +5,13 @@ import { Introduce } from '@/components/blocks/Introduce';
 import StackBlock from '@/components/blocks/StackBlock';
 import ArticleBlock from '@/components/blocks/ArticleBlock';
 import Footer from '@/components/Footer';
+import AdminShortcut from '../../components/AdminShortcut';
 
 const Page: React.FC = () => {
   return (
     <>
+      <AdminShortcut />
+
       <Introduce />
       <SocialLinks className="mt-16 py-4" />
 
