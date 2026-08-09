@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { LayoutGrid, FileText, LogOut } from 'lucide-react';
 import {
@@ -34,7 +35,9 @@ export function AdminSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="px-4 py-6">
-        <span className="text-sm font-bold text-foreground">daegyeo.me | ADMIN</span>
+        <Link href="/" className="text-sm font-bold text-foreground">
+          daegyeo.me | ADMIN
+        </Link>
       </SidebarHeader>
 
       <SidebarContent>
