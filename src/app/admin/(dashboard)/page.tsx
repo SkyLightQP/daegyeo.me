@@ -250,10 +250,12 @@ const Page: FC = () => {
   return (
     <>
       <div className="mb-8">
-        <h2 className="font-semibold text-xl">섹션 관리</h2>
-        <p className="text-sm text-gray-500">페이지에 들어가는 섹션과 섹션 타입을 설정합니다.</p>
+        <div className="-mx-6 -mt-8 border-b border-gray-100 px-6 py-5">
+          <h2 className="text-lg font-bold text-gray-900">섹션 관리</h2>
+          <p className="mt-0.5 text-sm text-gray-500">페이지에 들어가는 섹션과 섹션 타입을 설정합니다.</p>
+        </div>
 
-        <div className="mt-4 flex">
+        <div className="mt-5 flex">
           <Button size="lg" onClick={() => setOpen(true)}>
             <Plus data-icon="inline-start" />
             <span className="mt-0.5">섹션 추가</span>
