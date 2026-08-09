@@ -73,7 +73,7 @@ const Page = () => {
               type="button"
               aria-label="toggle password visibility"
               onClick={() => setIsVisible((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
             >
               {isVisible ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
