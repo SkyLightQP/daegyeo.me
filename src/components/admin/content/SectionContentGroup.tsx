@@ -16,6 +16,12 @@ import { Plus } from 'lucide-react';
 import ContentCard, { Content } from './ContentCard';
 import { SectionType } from '../section/AddSectionDialog';
 
+const typeLabel: Record<SectionType, string> = {
+  CONTENT: '컨텐츠',
+  STACK: '스택',
+  ARTICLE: '아티클',
+};
+
 type SectionContentGroupProps = {
   sectionId: number;
   name: string;
@@ -46,7 +52,7 @@ const SectionContentGroup: FC<SectionContentGroupProps> = ({
 
   const isStack = type === 'STACK';
   const addDisabled = isStack && contents.length > 0;
-  const addLabel = isStack ? '스택 추가' : '컨텐츠 추가';
+  const addLabel = `${typeLabel[type]} 추가`;
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -59,7 +65,7 @@ const SectionContentGroup: FC<SectionContentGroupProps> = ({
       <div className="mb-3 flex items-center gap-2">
         <span className="text-xs font-bold tracking-wide text-gray-600">{name}</span>
         <span className="rounded-full border border-gray-200 bg-gray-100 px-2 py-px text-[10px] font-semibold text-gray-500">
-          {isStack ? '스택' : '컨텐츠'}
+          {typeLabel[type]}
         </span>
         <span className="text-[11px] font-semibold text-gray-400">{contents.length}</span>
         <div className="h-px flex-1 bg-gray-100" />

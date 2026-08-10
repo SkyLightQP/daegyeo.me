@@ -64,7 +64,7 @@ const ContentFormDialog: FC<ContentFormDialogProps> = ({
 
   const canSubmit = isStack
     ? !!subtitle.trim() && !submitting
-    : !!title.trim() && !!subtitle.trim() && !!dateRange.trim() && !!description.trim() && !submitting;
+    : !!title.trim() && !!subtitle.trim() && !!dateRange.trim() && !submitting;
 
   const handleOpenChange = (next: boolean) => {
     if (submitting) return;
@@ -170,7 +170,9 @@ const ContentFormDialog: FC<ContentFormDialogProps> = ({
           {!isStack && (
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2">
-                <Label className="text-sm">설명</Label>
+                <Label className="text-sm">
+                  설명 <span className="font-normal text-gray-400">(선택)</span>
+                </Label>
                 <div className="ml-auto flex gap-0.5 rounded-md bg-gray-100 p-0.5">
                   <button
                     type="button"

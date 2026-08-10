@@ -48,7 +48,7 @@ const Page: FC = () => {
       if (!secRes.ok || !conRes.ok) throw new Error('데이터를 불러오지 못했습니다.');
       const [{ data: secData }, { data: conData }] = await Promise.all([secRes.json(), conRes.json()]);
       const editableSections: Section[] = (secData ?? [])
-        .filter((s: Section) => s.type === 'CONTENT' || s.type === 'STACK')
+        .filter((s: Section) => s.type === 'CONTENT' || s.type === 'STACK' || s.type === 'ARTICLE')
         .sort((a: Section, b: Section) => a.priority - b.priority);
       setSections(editableSections);
       setContents(conData ?? []);

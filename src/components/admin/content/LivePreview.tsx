@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Introduce } from '../../blocks/Introduce';
 import SocialLinks from '../../blocks/SocialLinks';
 import StackBlock from '../../blocks/StackBlock';
+import ArticleBlock from '../../blocks/ArticleBlock';
 import SectionEntry from '../../SectionEntry';
 import Footer from '../../Footer';
 import { Content, formatPeriod } from './ContentCard';
@@ -46,28 +47,38 @@ const LivePreview: FC<LivePreviewProps> = ({ sections, contents }) => {
                   );
                 }
 
+                const entries = items.length > 0 && (
+                  <div className="space-y-6">
+                    {items.map((item) => (
+                      <SectionEntry
+                        key={item.id}
+                        title={
+                          <>
+                            {item.title}&nbsp;
+                            <span className="text-sm">{formatPeriod(item.date_range)}</span>
+                          </>
+                        }
+                        subtitle={item.subtitle}
+                      >
+                        {item.description.trim() && <div dangerouslySetInnerHTML={{ __html: item.description }} />}
+                      </SectionEntry>
+                    ))}
+                  </div>
+                );
+
+                if (section.type === 'ARTICLE') {
+                  return (
+                    <ArticleBlock key={section.id} title={section.name}>
+                      {entries}
+                    </ArticleBlock>
+                  );
+                }
+
                 return (
                   <div key={section.id}>
                     <h2 className="mb-3 text-xl font-bold">{section.name}</h2>
 
-                    {items.length > 0 && (
-                      <div className="space-y-6">
-                        {items.map((item) => (
-                          <SectionEntry
-                            key={item.id}
-                            title={
-                              <>
-                                {item.title}&nbsp;
-                                <span className="text-sm">{formatPeriod(item.date_range)}</span>
-                              </>
-                            }
-                            subtitle={item.subtitle}
-                          >
-                            <div dangerouslySetInnerHTML={{ __html: item.description }} />
-                          </SectionEntry>
-                        ))}
-                      </div>
-                    )}
+                    {entries}
                   </div>
                 );
               })}
