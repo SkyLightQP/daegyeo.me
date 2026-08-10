@@ -3,10 +3,10 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../../types/database.types';
 
 export const ContentSchema = z.object({
-  title: z.string().min(1),
+  title: z.string(),
   subtitle: z.string().min(1),
-  description: z.string().min(1),
-  date_range: z.string().min(1),
+  description: z.string(),
+  date_range: z.string(),
   section_id: z.number().int().positive(),
   priority: z.number().int().positive(),
   is_hidden: z.boolean().optional().default(false),

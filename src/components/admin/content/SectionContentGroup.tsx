@@ -14,10 +14,12 @@ import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifi
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Plus } from 'lucide-react';
 import ContentCard, { Content } from './ContentCard';
+import { SectionType } from '../section/AddSectionDialog';
 
 type SectionContentGroupProps = {
   sectionId: number;
   name: string;
+  type: SectionType;
   contents: Content[];
   onReorder: (sectionId: number, activeId: number, overId: number) => void;
   onAdd: (sectionId: number) => void;
@@ -29,6 +31,7 @@ type SectionContentGroupProps = {
 const SectionContentGroup: FC<SectionContentGroupProps> = ({
   sectionId,
   name,
+  type,
   contents,
   onReorder,
   onAdd,
@@ -41,6 +44,10 @@ const SectionContentGroup: FC<SectionContentGroupProps> = ({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
+  const isStack = type === 'STACK';
+  const addDisabled = isStack && contents.length > 0;
+  const addLabel = isStack ? '스택 추가' : '컨텐츠 추가';
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
@@ -52,19 +59,21 @@ const SectionContentGroup: FC<SectionContentGroupProps> = ({
       <div className="mb-3 flex items-center gap-2">
         <span className="text-xs font-bold tracking-wide text-gray-600">{name}</span>
         <span className="rounded-full border border-gray-200 bg-gray-100 px-2 py-px text-[10px] font-semibold text-gray-500">
-          컨텐츠
+          {isStack ? '스택' : '컨텐츠'}
         </span>
         <span className="text-[11px] font-semibold text-gray-400">{contents.length}</span>
         <div className="h-px flex-1 bg-gray-100" />
-        <button
-          type="button"
-          onClick={() => onAdd(sectionId)}
-          className="flex size-6 cursor-pointer items-center justify-center rounded-md border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-          aria-label="컨텐츠 추가"
-          title="컨텐츠 추가"
-        >
-          <Plus size={14} />
-        </button>
+        <span className="flex" title={addDisabled ? '스택 섹션에는 컨텐츠를 1개만 둘 수 있습니다.' : addLabel}>
+          <button
+            type="button"
+            onClick={() => onAdd(sectionId)}
+            disabled={addDisabled}
+            className="flex size-6 cursor-pointer items-center justify-center rounded-md border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-900 disabled:cursor-not-allowed disabled:opacity-40"
+            aria-label={addDisabled ? '스택 섹션에는 컨텐츠를 1개만 둘 수 있습니다.' : addLabel}
+          >
+            <Plus size={14} />
+          </button>
+        </span>
       </div>
 
       {contents.length > 0 && (

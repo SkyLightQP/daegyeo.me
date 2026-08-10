@@ -62,13 +62,15 @@ const ContentCard: FC<ContentCardProps> = ({ content, onToggleHidden, onEdit, on
 
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-2">
-          <p className="truncate text-sm font-bold text-gray-900">{content.title}</p>
+          <p className="truncate text-sm font-bold text-gray-900">{content.title || content.subtitle}</p>
           {content.date_range && (
             <p className="flex-none text-xs font-medium text-gray-400">{formatPeriod(content.date_range)}</p>
           )}
         </div>
 
-        {content.subtitle && <p className="mt-0.5 text-xs font-medium text-gray-600">{content.subtitle}</p>}
+        {content.title && content.subtitle && (
+          <p className="mt-0.5 text-xs font-medium text-gray-600">{content.subtitle}</p>
+        )}
 
         {content.description && (
           <div

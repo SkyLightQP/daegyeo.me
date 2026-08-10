@@ -9,8 +9,9 @@ import SectionContentGroup from '../../../../components/admin/content/SectionCon
 import ContentFormDialog, { ContentFormValue } from '../../../../components/admin/content/ContentFormDialog';
 import DeleteContentDialog from '../../../../components/admin/content/DeleteContentDialog';
 import LivePreview from '../../../../components/admin/content/LivePreview';
+import { SectionType } from '../../../../components/admin/section/AddSectionDialog';
 
-type Section = { id: number; name: string; type: string; priority: number };
+type Section = { id: number; name: string; type: SectionType; priority: number };
 
 type FormTarget = { mode: 'add'; sectionId: number } | { mode: 'edit'; content: Content };
 
@@ -46,10 +47,10 @@ const Page: FC = () => {
       const [secRes, conRes] = await Promise.all([fetch('/api/sections'), fetch('/api/contents')]);
       if (!secRes.ok || !conRes.ok) throw new Error('데이터를 불러오지 못했습니다.');
       const [{ data: secData }, { data: conData }] = await Promise.all([secRes.json(), conRes.json()]);
-      const contentSections: Section[] = (secData ?? [])
-        .filter((s: Section) => s.type === 'CONTENT')
+      const editableSections: Section[] = (secData ?? [])
+        .filter((s: Section) => s.type === 'CONTENT' || s.type === 'STACK')
         .sort((a: Section, b: Section) => a.priority - b.priority);
-      setSections(contentSections);
+      setSections(editableSections);
       setContents(conData ?? []);
     } catch (e) {
       setError(errorMessage(e));
@@ -74,6 +75,9 @@ const Page: FC = () => {
   );
 
   const sectionName = (sectionId: number) => sections.find((s) => s.id === sectionId)?.name;
+
+  const sectionTypeOf = (sectionId: number): SectionType =>
+    sections.find((s) => s.id === sectionId)?.type ?? 'CONTENT';
 
   const handleAddSubmit = async (value: ContentFormValue) => {
     if (formTarget?.mode !== 'add') return;
@@ -212,13 +216,14 @@ const Page: FC = () => {
               <Skeleton className="h-20 w-full rounded-xl" />
             </div>
           ) : sections.length === 0 ? (
-            <p className="text-sm text-gray-500">컨텐츠 타입 섹션이 없습니다. 먼저 섹션을 추가하세요.</p>
+            <p className="text-sm text-gray-500">관리할 섹션이 없습니다. 먼저 섹션을 추가하세요.</p>
           ) : (
             groups.map(({ section, items }) => (
               <SectionContentGroup
                 key={section.id}
                 sectionId={section.id}
                 name={section.name}
+                type={section.type}
                 contents={items}
                 onReorder={handleReorder}
                 onAdd={(sectionId) => setFormTarget({ mode: 'add', sectionId })}
@@ -239,6 +244,13 @@ const Page: FC = () => {
         open={formTarget !== null}
         onOpenChange={(next) => !next && setFormTarget(null)}
         mode={formTarget?.mode ?? 'add'}
+        sectionType={
+          formTarget?.mode === 'edit'
+            ? sectionTypeOf(formTarget.content.section_id)
+            : formTarget?.mode === 'add'
+              ? sectionTypeOf(formTarget.sectionId)
+              : 'CONTENT'
+        }
         sectionName={
           formTarget?.mode === 'edit'
             ? sectionName(formTarget.content.section_id)
@@ -254,7 +266,7 @@ const Page: FC = () => {
       <DeleteContentDialog
         open={deleteTarget !== null}
         onOpenChange={(next) => !next && setDeleteTarget(null)}
-        contentTitle={deleteTarget?.title}
+        contentTitle={deleteTarget ? deleteTarget.title || deleteTarget.subtitle : undefined}
         onConfirm={handleDelete}
         submitting={deleting}
       />
