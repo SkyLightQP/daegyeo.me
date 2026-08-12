@@ -6,7 +6,7 @@ import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 import { Textarea } from '../../ui/textarea';
-import { cn, withSafeLinks } from '../../../lib/utils';
+import { cn, descriptionLinkClass, withSafeLinks } from '../../../lib/utils';
 import { Content } from './ContentCard';
 import { SectionType } from '../section/AddSectionDialog';
 
@@ -208,7 +208,10 @@ const ContentFormDialog: FC<ContentFormDialogProps> = ({
                 />
               ) : (
                 <div
-                  className="min-h-[104px] rounded-md border border-input bg-gray-50 px-3 py-2.5 text-sm leading-relaxed text-gray-600 [&_a]:text-blue-600 [&_a]:underline [&_li]:ml-4 [&_ul]:list-disc"
+                  className={cn(
+                    'min-h-[104px] rounded-md border border-input bg-gray-50 px-3 py-2.5 text-sm leading-relaxed text-gray-600 [&_li]:ml-4 [&_ul]:list-disc',
+                    descriptionLinkClass
+                  )}
                   dangerouslySetInnerHTML={{
                     __html: description.trim()
                       ? withSafeLinks(description)

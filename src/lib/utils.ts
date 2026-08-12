@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** description HTML 안의 <a>를 하이퍼링크로 보이게 하는 공통 스타일 */
+export const descriptionLinkClass =
+  '[&_a]:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-blue-500';
+
 const ATTR_PATTERN = (name: string) => new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i');
 
 const REQUIRED_REL = ['noopener', 'noreferrer'];
