@@ -6,7 +6,7 @@ import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 import { Textarea } from '../../ui/textarea';
-import { cn } from '../../../lib/utils';
+import { cn, withSafeLinks } from '../../../lib/utils';
 import { Content } from './ContentCard';
 import { SectionType } from '../section/AddSectionDialog';
 
@@ -210,7 +210,9 @@ const ContentFormDialog: FC<ContentFormDialogProps> = ({
                 <div
                   className="min-h-[104px] rounded-md border border-input bg-gray-50 px-3 py-2.5 text-sm leading-relaxed text-gray-600 [&_a]:text-blue-600 [&_a]:underline [&_li]:ml-4 [&_ul]:list-disc"
                   dangerouslySetInnerHTML={{
-                    __html: description.trim() || '<span class="text-gray-400">미리볼 내용이 없습니다.</span>',
+                    __html: description.trim()
+                      ? withSafeLinks(description)
+                      : '<span class="text-gray-400">미리볼 내용이 없습니다.</span>',
                   }}
                 />
               )}

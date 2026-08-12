@@ -3,11 +3,9 @@
 import { FC } from 'react';
 import { Introduce } from '../../blocks/Introduce';
 import SocialLinks from '../../blocks/SocialLinks';
-import StackBlock from '../../blocks/StackBlock';
-import ArticleBlock from '../../blocks/ArticleBlock';
-import SectionEntry from '../../SectionEntry';
+import SectionBlocks from '../../SectionBlocks';
 import Footer from '../../Footer';
-import { Content, formatPeriod } from './ContentCard';
+import { Content } from './ContentCard';
 import { SectionType } from '../section/AddSectionDialog';
 
 export type PreviewSection = { id: number; name: string; type: SectionType };
@@ -18,13 +16,6 @@ type LivePreviewProps = {
 };
 
 const LivePreview: FC<LivePreviewProps> = ({ sections, contents }) => {
-  const groups = sections.map((section) => ({
-    section,
-    items: contents
-      .filter((content) => content.section_id === section.id && !content.is_hidden)
-      .sort((a, b) => a.priority - b.priority),
-  }));
-
   return (
     <div className="flex h-full flex-col">
       <div className="flex h-14 flex-none items-center gap-3 border-b border-gray-200 bg-white px-5">
@@ -36,53 +27,8 @@ const LivePreview: FC<LivePreviewProps> = ({ sections, contents }) => {
           <Introduce />
           <SocialLinks className="mt-16 py-4" />
 
-          {groups.length > 0 ? (
-            <div className="mt-16 space-y-16">
-              {groups.map(({ section, items }) => {
-                if (section.type === 'STACK') {
-                  return (
-                    <StackBlock key={section.id} title={section.name}>
-                      {items[0]?.subtitle}
-                    </StackBlock>
-                  );
-                }
-
-                const entries = items.length > 0 && (
-                  <div className="space-y-6">
-                    {items.map((item) => (
-                      <SectionEntry
-                        key={item.id}
-                        title={
-                          <>
-                            {item.title}&nbsp;
-                            <span className="text-sm">{formatPeriod(item.date_range)}</span>
-                          </>
-                        }
-                        subtitle={item.subtitle}
-                      >
-                        {item.description.trim() && <div dangerouslySetInnerHTML={{ __html: item.description }} />}
-                      </SectionEntry>
-                    ))}
-                  </div>
-                );
-
-                if (section.type === 'ARTICLE') {
-                  return (
-                    <ArticleBlock key={section.id} title={section.name}>
-                      {entries}
-                    </ArticleBlock>
-                  );
-                }
-
-                return (
-                  <div key={section.id}>
-                    <h2 className="mb-3 text-xl font-bold">{section.name}</h2>
-
-                    {entries}
-                  </div>
-                );
-              })}
-            </div>
+          {sections.length > 0 ? (
+            <SectionBlocks sections={sections} contents={contents} className="mt-16" />
           ) : (
             <p className="mt-16 text-sm text-gray-400">섹션이 없습니다.</p>
           )}
