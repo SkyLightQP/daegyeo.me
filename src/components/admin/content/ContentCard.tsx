@@ -4,7 +4,7 @@ import { CSSProperties, FC } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Eye, EyeOff, GripVertical, Pencil, Trash2 } from 'lucide-react';
-import { cn, descriptionLinkClass, formatPeriod, withSafeLinks } from '../../../lib/utils';
+import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '../../../lib/utils';
 import { Button } from '../../ui/button';
 import type { ContentData } from '../../../types/content';
 
@@ -64,7 +64,7 @@ const ContentCard: FC<ContentCardProps> = ({ content, onToggleHidden, onEdit, on
               'mt-1.5 line-clamp-2 text-xs leading-relaxed text-gray-500 [&_li]:ml-4 [&_ul]:list-disc',
               descriptionLinkClass
             )}
-            dangerouslySetInnerHTML={{ __html: withSafeLinks(content.description) }}
+            dangerouslySetInnerHTML={{ __html: renderDescription(content.description) }}
           />
         )}
       </div>

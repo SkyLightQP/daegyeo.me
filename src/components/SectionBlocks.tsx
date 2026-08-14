@@ -2,7 +2,7 @@ import { FC } from 'react';
 import SectionEntry from './SectionEntry';
 import StackBlock from './blocks/StackBlock';
 import ArticleBlock from './blocks/ArticleBlock';
-import { cn, descriptionLinkClass, formatPeriod, withSafeLinks } from '../lib/utils';
+import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '../lib/utils';
 import type { ContentData, SectionData } from '../types/content';
 
 type SectionBlocksProps = {
@@ -48,7 +48,7 @@ const SectionBlocks: FC<SectionBlocksProps> = ({ sections, contents, className }
                 {item.description.trim() && (
                   <div
                     className={descriptionLinkClass}
-                    dangerouslySetInnerHTML={{ __html: withSafeLinks(item.description) }}
+                    dangerouslySetInnerHTML={{ __html: renderDescription(item.description) }}
                   />
                 )}
               </SectionEntry>

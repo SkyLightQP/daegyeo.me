@@ -13,7 +13,7 @@ const ATTR_PATTERN = (name: string) => new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*
 
 const REQUIRED_REL = ['noopener', 'noreferrer'];
 
-export const withSafeLinks = (html: string) =>
+const withSafeLinks = (html: string) =>
   html.replace(/<a\b([^>]*)>/gi, (tag, attrs: string) => {
     const href = attrs.match(ATTR_PATTERN('href'));
     const url = href ? (href[1] ?? href[2] ?? href[3] ?? '') : '';
@@ -35,6 +35,23 @@ export const withSafeLinks = (html: string) =>
 
     return `<a${next}>`;
   });
+
+const BLOCK_TAGS = 'p|div|ul|ol|li|h[1-6]|blockquote|pre|hr|br|table|thead|tbody|tr|td|th|section|article';
+
+const CLOSES_BLOCK = new RegExp(`</?(?:${BLOCK_TAGS})\\b[^>]*>\\s*$`, 'i');
+const OPENS_BLOCK = new RegExp(`^\\s*</?(?:${BLOCK_TAGS})\\b`, 'i');
+
+/** textarea에서 친 줄바꿈은 HTML에서 공백으로 접히므로 <br />로 바꿔준다.
+ *  단 블록 태그 사이의 줄바꿈은 HTML 들여쓰기일 뿐이라 그대로 둔다. */
+const withLineBreaks = (html: string) =>
+  html.replace(/\r?\n/g, (match, index: number, source: string) => {
+    const before = source.slice(0, index);
+    const after = source.slice(index + match.length);
+    return CLOSES_BLOCK.test(before) || OPENS_BLOCK.test(after) ? match : `<br />${match}`;
+  });
+
+/** description 문자열을 화면에 뿌릴 HTML로 변환한다 */
+export const renderDescription = (html: string) => withLineBreaks(withSafeLinks(html));
 
 export const formatPeriod = (value: string) => {
   const trimmed = value.trim();

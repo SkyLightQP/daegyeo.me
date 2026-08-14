@@ -6,7 +6,7 @@ import { Button } from '../../ui/button';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 import { Textarea } from '../../ui/textarea';
-import { cn, descriptionLinkClass, withSafeLinks } from '../../../lib/utils';
+import { cn, descriptionLinkClass, renderDescription } from '../../../lib/utils';
 import { Content } from './ContentCard';
 import { SectionType } from '../section/AddSectionDialog';
 
@@ -214,7 +214,7 @@ const ContentFormDialog: FC<ContentFormDialogProps> = ({
                   )}
                   dangerouslySetInnerHTML={{
                     __html: description.trim()
-                      ? withSafeLinks(description)
+                      ? renderDescription(description)
                       : '<span class="text-gray-400">미리볼 내용이 없습니다.</span>',
                   }}
                 />
