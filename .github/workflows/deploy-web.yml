@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - 'LICENSE'
 
 env:
   NAME: daegyeome
@@ -19,6 +23,7 @@ permissions:
 jobs:
   check-lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout the source code.
         uses: actions/checkout@v4
@@ -34,26 +39,67 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: pnpm
 
+      - name: Restore eslint cache
+        uses: actions/cache@v4
+        with:
+          path: .eslintcache
+          key: eslint-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            eslint-${{ runner.os }}-
+
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Run eslint
-        run: pnpm run lint
+        run: pnpm run lint --cache --cache-location .eslintcache
 
   deploy:
     runs-on: self-hosted
+    timeout-minutes: 30
     steps:
       - name: Checkout the source code.
         uses: actions/checkout@v4
 
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
       - name: Build a Dockerfile
-        run: DOCKER_BUILDKIT=1 docker build -t $NAME:latest $(for i in $(grep -vE '^#|^$' ${{ secrets.ENV_PATH }}); do out+="--build-arg $i " ; done; echo $out;out="") .
+        env:
+          ENV_PATH: ${{ secrets.ENV_PATH }}
+        run: |
+          set -euo pipefail
+          build_args=()
+          while IFS= read -r line; do
+            build_args+=(--build-arg "$line")
+          done < <(grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' "$ENV_PATH" || true)
+          DOCKER_BUILDKIT=1 docker build \
+            --build-arg NODE_VERSION="$NODE_VERSION" \
+            "${build_args[@]}" \
+            -t "$NAME:${{ github.sha }}" \
+            -t "$NAME:latest" \
+            .
 
-      - name: If running a container, remove it
-        run: docker ps -q --filter "name=$NAME" | grep -q . && docker stop $NAME && docker rm $NAME || true
+      - name: Restart the container
+        run: |
+          set -euo pipefail
+          docker rm -f "$NAME" 2>/dev/null || true
+          docker run -d \
+            --name "$NAME" \
+            -p ${{ secrets.PORT }}:3000 \
+            --env-file "${{ secrets.ENV_PATH }}" \
+            --restart=unless-stopped \
+            "$NAME:${{ github.sha }}"
 
-      - name: Start a docker container
-        run: docker run -d -p ${{ secrets.PORT }}:3000 --env-file=${{ secrets.ENV_PATH }} --restart=unless-stopped --name $NAME $NAME:latest
+      - name: Wait until the container answers
+        run: |
+          for _ in $(seq 1 30); do
+            if curl -fsS "http://127.0.0.1:${{ secrets.PORT }}/" -o /dev/null; then
+              echo "container is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "container did not respond in 60s"
+          docker logs --tail 100 "$NAME"
+          exit 1
+
+      - name: Remove dangling images
+        if: always()
+        run: docker image prune -f --filter "until=24h"

@@ -6,3 +6,12 @@ node_modules/
 .worktrees/
 worktrees/
 coverage/
+
+# editor / agent / docs — not needed to build the app
+.idea/
+.vscode/
+.claude/
+.superpowers/
+docs/
+*.md
+LICENSE
