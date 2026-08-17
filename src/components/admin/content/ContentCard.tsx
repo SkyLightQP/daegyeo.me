@@ -4,9 +4,9 @@ import { CSSProperties, FC } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Eye, EyeOff, GripVertical, Pencil, Trash2 } from 'lucide-react';
-import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '../../../lib/utils';
-import { Button } from '../../ui/button';
-import type { ContentData } from '../../../types/content';
+import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import type { ContentData } from '@/types/content';
 
 export type Content = ContentData;
 

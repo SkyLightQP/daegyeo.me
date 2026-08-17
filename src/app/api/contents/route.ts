@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { withAdmin } from '../../../lib/supabase/auth';
-import { createServerClient } from '../../../lib/supabase/server';
-import { getContents, createContent, ContentSchema } from '../../../lib/queries/contents';
+import { withAdmin } from '@/lib/supabase/auth';
+import { createServerClient } from '@/lib/supabase/server';
+import { getContents, createContent, ContentSchema } from '@/lib/queries/contents';
 
 export const GET = withAdmin(async () => {
   const supabase = await createServerClient();

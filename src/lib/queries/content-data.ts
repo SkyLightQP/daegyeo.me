@@ -1,7 +1,7 @@
-import { createServerClient } from '../supabase/server';
-import { getSections } from './sections';
-import { getContents } from './contents';
-import type { ContentData, SectionData } from '../../types/content';
+import { createServerClient } from '@/lib/supabase/server';
+import { getSections } from '@/lib/queries/sections';
+import { getContents } from '@/lib/queries/contents';
+import type { ContentData, SectionData } from '@/types/content';
 
 export async function getContentData() {
   const supabase = await createServerClient();

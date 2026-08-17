@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../types/database.types';
+import type { Database } from '@/types/database.types';
 
 export const ContentSchema = z.object({
   title: z.string(),

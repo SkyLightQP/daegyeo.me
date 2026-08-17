@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { withAdmin } from '../../../../lib/supabase/auth';
-import { createServerClient } from '../../../../lib/supabase/server';
-import { deleteSection, getSectionById, SectionSchema, updateSection } from '../../../../lib/queries/sections';
+import { withAdmin } from '@/lib/supabase/auth';
+import { createServerClient } from '@/lib/supabase/server';
+import { deleteSection, getSectionById, SectionSchema, updateSection } from '@/lib/queries/sections';
 
 type Params = { params: Promise<{ id: string }> };
 

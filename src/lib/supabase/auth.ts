@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { type User } from '@supabase/supabase-js';
-import { createServerClient } from './server';
+import { createServerClient } from '@/lib/supabase/server';
 
 async function requireAdmin() {
   const supabase = await createServerClient();

@@ -13,8 +13,8 @@ import {
 import { restrictToParentElement, restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Plus } from 'lucide-react';
-import ContentCard, { Content } from './ContentCard';
-import { SectionType } from '../section/AddSectionDialog';
+import ContentCard, { Content } from '@/components/admin/content/ContentCard';
+import { SectionType } from '@/components/admin/section/AddSectionDialog';
 
 const typeLabel: Record<SectionType, string> = {
   CONTENT: '컨텐츠',

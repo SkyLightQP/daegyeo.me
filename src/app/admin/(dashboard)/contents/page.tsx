@@ -3,13 +3,13 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { arrayMove } from '@dnd-kit/sortable';
 import { toast } from 'sonner';
-import { Skeleton } from '../../../../components/ui/skeleton';
-import { Content } from '../../../../components/admin/content/ContentCard';
-import SectionContentGroup from '../../../../components/admin/content/SectionContentGroup';
-import ContentFormDialog, { ContentFormValue } from '../../../../components/admin/content/ContentFormDialog';
-import DeleteContentDialog from '../../../../components/admin/content/DeleteContentDialog';
-import LivePreview from '../../../../components/admin/content/LivePreview';
-import { SectionType } from '../../../../components/admin/section/AddSectionDialog';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Content } from '@/components/admin/content/ContentCard';
+import SectionContentGroup from '@/components/admin/content/SectionContentGroup';
+import ContentFormDialog, { ContentFormValue } from '@/components/admin/content/ContentFormDialog';
+import DeleteContentDialog from '@/components/admin/content/DeleteContentDialog';
+import LivePreview from '@/components/admin/content/LivePreview';
+import { SectionType } from '@/components/admin/section/AddSectionDialog';
 
 type Section = { id: number; name: string; type: SectionType; priority: number };
 

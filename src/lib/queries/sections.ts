@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../../types/database.types';
+import type { Database } from '@/types/database.types';
 
 export const SectionSchema = z.object({
   name: z.string().min(1),

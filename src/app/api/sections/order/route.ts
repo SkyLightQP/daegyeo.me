@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { withAdmin } from '../../../../lib/supabase/auth';
-import { createServerClient } from '../../../../lib/supabase/server';
-import { reorderSections, ReorderSchema } from '../../../../lib/queries/sections';
+import { withAdmin } from '@/lib/supabase/auth';
+import { createServerClient } from '@/lib/supabase/server';
+import { reorderSections, ReorderSchema } from '@/lib/queries/sections';
 
 export const PATCH = withAdmin(async (req) => {
   const parsed = ReorderSchema.safeParse(await req.json());

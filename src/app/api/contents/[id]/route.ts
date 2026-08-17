@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { withAdmin } from '../../../../lib/supabase/auth';
-import { createServerClient } from '../../../../lib/supabase/server';
-import { getContentById, updateContent, deleteContent, ContentSchema } from '../../../../lib/queries/contents';
+import { withAdmin } from '@/lib/supabase/auth';
+import { createServerClient } from '@/lib/supabase/server';
+import { getContentById, updateContent, deleteContent, ContentSchema } from '@/lib/queries/contents';
 
 type Params = { params: Promise<{ id: string }> };
 

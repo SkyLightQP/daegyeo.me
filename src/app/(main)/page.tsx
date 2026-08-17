@@ -1,11 +1,11 @@
 import React from 'react';
-import SocialLinks from '../../components/blocks/SocialLinks';
-import { Introduce } from '../../components/blocks/Introduce';
-import Footer from '../../components/Footer';
-import SectionBlocks from '../../components/SectionBlocks';
-import AdminShortcut from '../../components/AdminShortcut';
-import AnalyticsBoundary from '../../components/analytics/AnalyticsBoundary';
-import { getContentData } from '../../lib/queries/content-data';
+import SocialLinks from '@/components/blocks/SocialLinks';
+import { Introduce } from '@/components/blocks/Introduce';
+import Footer from '@/components/Footer';
+import SectionBlocks from '@/components/SectionBlocks';
+import AdminShortcut from '@/components/AdminShortcut';
+import AnalyticsBoundary from '@/components/analytics/AnalyticsBoundary';
+import { getContentData } from '@/lib/queries/content-data';
 
 const Page = async () => {
   const { sections, contents } = await getContentData();

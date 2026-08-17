@@ -1,14 +1,14 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../../ui/dialog';
-import { Button } from '../../ui/button';
-import { Input } from '../../ui/input';
-import { Label } from '../../ui/label';
-import { Textarea } from '../../ui/textarea';
-import { cn, descriptionLinkClass, renderDescription } from '../../../lib/utils';
-import { Content } from './ContentCard';
-import { SectionType } from '../section/AddSectionDialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { cn, descriptionLinkClass, renderDescription } from '@/lib/utils';
+import { Content } from '@/components/admin/content/ContentCard';
+import { SectionType } from '@/components/admin/section/AddSectionDialog';
 
 export type ContentFormValue = {
   title: string;

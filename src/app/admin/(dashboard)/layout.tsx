@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { Toaster } from '../../../components/ui/sonner';
+import { Toaster } from '@/components/ui/sonner';
 
 const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   return (

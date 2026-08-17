@@ -1,12 +1,12 @@
 'use client';
 
 import { FC } from 'react';
-import { Introduce } from '../../blocks/Introduce';
-import SocialLinks from '../../blocks/SocialLinks';
-import SectionBlocks from '../../SectionBlocks';
-import Footer from '../../Footer';
-import { Content } from './ContentCard';
-import { SectionType } from '../section/AddSectionDialog';
+import { Introduce } from '@/components/blocks/Introduce';
+import SocialLinks from '@/components/blocks/SocialLinks';
+import SectionBlocks from '@/components/SectionBlocks';
+import Footer from '@/components/Footer';
+import { Content } from '@/components/admin/content/ContentCard';
+import { SectionType } from '@/components/admin/section/AddSectionDialog';
 
 export type PreviewSection = { id: number; name: string; type: SectionType };
 

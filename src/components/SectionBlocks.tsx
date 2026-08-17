@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import SectionEntry from './SectionEntry';
-import StackBlock from './blocks/StackBlock';
-import ArticleBlock from './blocks/ArticleBlock';
-import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '../lib/utils';
-import type { ContentData, SectionData } from '../types/content';
+import SectionEntry from '@/components/SectionEntry';
+import StackBlock from '@/components/blocks/StackBlock';
+import ArticleBlock from '@/components/blocks/ArticleBlock';
+import { cn, descriptionLinkClass, formatPeriod, renderDescription } from '@/lib/utils';
+import type { ContentData, SectionData } from '@/types/content';
 
 type SectionBlocksProps = {
   sections: SectionData[];
