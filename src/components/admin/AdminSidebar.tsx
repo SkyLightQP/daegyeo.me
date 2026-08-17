@@ -20,7 +20,7 @@ import { createClient } from '@/lib/supabase/client';
 const navItems = [
   { label: '섹션', href: '/admin', icon: LayoutGrid, exact: true },
   { label: '컨텐츠', href: '/admin/contents', icon: FileText, exact: false },
-];
+] as const;
 
 export function AdminSidebar() {
   const router = useRouter();
@@ -50,10 +50,10 @@ export function AdminSidebar() {
                 return (
                   <SidebarMenuItem key={href}>
                     <SidebarMenuButton asChild isActive={isActive}>
-                      <a href={href}>
+                      <Link href={href}>
                         <Icon />
                         <span>{label}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

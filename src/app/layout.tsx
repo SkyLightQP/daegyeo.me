@@ -30,7 +30,7 @@ const pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
   display: 'swap',
   weight: '45 920',
-  variable: '--font-sans',
+  variable: '--font-pretendard',
 });
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {

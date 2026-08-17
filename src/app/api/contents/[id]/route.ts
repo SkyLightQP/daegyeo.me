@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { withAdmin } from '@/lib/supabase/auth';
 import { createServerClient } from '@/lib/supabase/server';
+import { readJson } from '@/lib/http';
 import { getContentById, updateContent, deleteContent, ContentSchema } from '@/lib/queries/contents';
 
 type Params = { params: Promise<{ id: string }> };
@@ -31,7 +32,9 @@ export const PUT = withAdmin<Params>(async (req, { params }) => {
   const numId = parseId(id);
   if (!numId) return NextResponse.json({ error: 'Invalid id' }, { status: 400 });
 
-  const parsed = ContentSchema.safeParse(await req.json());
+  const body = await readJson(req);
+  if (!body.ok) return body.response;
+  const parsed = ContentSchema.safeParse(body.data);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten().fieldErrors }, { status: 400 });
 
   const supabase = await createServerClient();

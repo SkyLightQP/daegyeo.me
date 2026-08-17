@@ -23,6 +23,10 @@ export async function getContents(supabase: DbClient) {
   return supabase.from('contents_dev').select('*').order('priority');
 }
 
+export async function getPublicContents(supabase: DbClient) {
+  return supabase.from('contents_dev').select('*').eq('is_hidden', false).order('priority');
+}
+
 export async function getContentById(supabase: DbClient, id: number) {
   return supabase.from('contents_dev').select('*').eq('id', id).maybeSingle();
 }

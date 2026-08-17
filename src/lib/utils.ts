@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import sanitizeHtml from 'sanitize-html';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -50,8 +51,17 @@ const withLineBreaks = (html: string) =>
     return CLOSES_BLOCK.test(before) || OPENS_BLOCK.test(after) ? match : `<br />${match}`;
   });
 
+const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
+  allowedTags: ['p', 'div', 'br', 'strong', 'em', 'b', 'i', 'u', 'ul', 'ol', 'li', 'a', 'blockquote', 'span'],
+  allowedAttributes: { a: ['href', 'title'] },
+  allowedSchemesByTag: { a: ['http', 'https', 'mailto'] },
+};
+
+/** CMS description은 관리자가 직접 입력한 HTML이므로 허용 태그/속성/URL scheme 밖은 모두 제거한다 */
+const sanitizeDescription = (html: string) => sanitizeHtml(html, SANITIZE_OPTIONS);
+
 /** description 문자열을 화면에 뿌릴 HTML로 변환한다 */
-export const renderDescription = (html: string) => withLineBreaks(withSafeLinks(html));
+export const renderDescription = (html: string) => withLineBreaks(withSafeLinks(sanitizeDescription(html)));
 
 export const formatPeriod = (value: string) => {
   const trimmed = value.trim();

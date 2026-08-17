@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { Introduce } from '@/components/blocks/Introduce';
 import SocialLinks from '@/components/blocks/SocialLinks';

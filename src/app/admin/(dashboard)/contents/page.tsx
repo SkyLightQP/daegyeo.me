@@ -185,17 +185,16 @@ const Page: FC = () => {
   };
 
   const handleReorder = (sectionId: number, activeId: number, overId: number) => {
-    setContents((prev) => {
-      const inSection = prev.filter((c) => c.section_id === sectionId).sort((a, b) => a.priority - b.priority);
-      const oldIndex = inSection.findIndex((c) => c.id === activeId);
-      const newIndex = inSection.findIndex((c) => c.id === overId);
-      if (oldIndex === -1 || newIndex === -1) return prev;
+    const inSection = contents.filter((c) => c.section_id === sectionId).sort((a, b) => a.priority - b.priority);
+    const oldIndex = inSection.findIndex((c) => c.id === activeId);
+    const newIndex = inSection.findIndex((c) => c.id === overId);
+    if (oldIndex === -1 || newIndex === -1) return;
 
-      const reordered = arrayMove(inSection, oldIndex, newIndex).map((c, index) => ({ ...c, priority: index + 1 }));
-      const others = prev.filter((c) => c.section_id !== sectionId);
-      persistOrder(reordered, prev);
-      return [...others, ...reordered];
-    });
+    const reordered = arrayMove(inSection, oldIndex, newIndex).map((c, index) => ({ ...c, priority: index + 1 }));
+    const others = contents.filter((c) => c.section_id !== sectionId);
+    const previous = contents;
+    setContents([...others, ...reordered]);
+    persistOrder(reordered, previous);
   };
 
   return (

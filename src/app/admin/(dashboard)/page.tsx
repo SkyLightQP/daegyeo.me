@@ -236,15 +236,14 @@ const Page: FC = () => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    setSections((prev) => {
-      const oldIndex = prev.findIndex((s) => s.id === active.id);
-      const newIndex = prev.findIndex((s) => s.id === over.id);
-      if (oldIndex === -1 || newIndex === -1) return prev;
+    const oldIndex = sections.findIndex((s) => s.id === active.id);
+    const newIndex = sections.findIndex((s) => s.id === over.id);
+    if (oldIndex === -1 || newIndex === -1) return;
 
-      const reordered = arrayMove(prev, oldIndex, newIndex).map((s, index) => ({ ...s, priority: index + 1 }));
-      persistOrder(reordered, prev);
-      return reordered;
-    });
+    const reordered = arrayMove(sections, oldIndex, newIndex).map((s, index) => ({ ...s, priority: index + 1 }));
+    const previous = sections;
+    setSections(reordered);
+    persistOrder(reordered, previous);
   };
 
   return (

@@ -54,6 +54,7 @@ jobs:
         run: pnpm run lint --cache --cache-location .eslintcache
 
   deploy:
+    needs: check-lint
     runs-on: self-hosted
     timeout-minutes: 30
     steps:
@@ -72,6 +73,7 @@ jobs:
           DOCKER_BUILDKIT=1 docker build \
             --build-arg NODE_VERSION="$NODE_VERSION" \
             "${build_args[@]}" \
+            --label "com.daegyeome.app=$NAME" \
             -t "$NAME:${{ github.sha }}" \
             -t "$NAME:latest" \
             .
@@ -100,6 +102,6 @@ jobs:
           docker logs --tail 100 "$NAME"
           exit 1
 
-      - name: Remove dangling images
+      - name: Remove old app images
         if: always()
-        run: docker image prune -f --filter "until=24h"
+        run: docker image prune -af --filter "label=com.daegyeome.app=$NAME" --filter "until=24h"

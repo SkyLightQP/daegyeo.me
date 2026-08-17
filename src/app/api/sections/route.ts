@@ -1,14 +1,15 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { withAdmin } from '@/lib/supabase/auth';
 import { createServerClient } from '@/lib/supabase/server';
+import { readJson } from '@/lib/http';
 import { getSections, createSection, SectionSchema } from '@/lib/queries/sections';
 import type { Database } from '@/types/database.types';
 
 type ContentRow = Database['public']['Tables']['contents_dev']['Row'];
 type SectionWithContents = Database['public']['Tables']['sections_dev']['Row'] & { contents_dev: ContentRow[] };
 
-export async function GET(req: NextRequest) {
+export const GET = withAdmin(async (req) => {
   const supabase = await createServerClient();
   const include = req.nextUrl.searchParams.get('include');
   const includeContents = include === 'contents';
@@ -24,10 +25,12 @@ export async function GET(req: NextRequest) {
       }))
     : data;
   return NextResponse.json({ data: responseData });
-}
+});
 
 export const POST = withAdmin(async (req) => {
-  const parsed = SectionSchema.safeParse(await req.json());
+  const body = await readJson(req);
+  if (!body.ok) return body.response;
+  const parsed = SectionSchema.safeParse(body.data);
   if (!parsed.success) return NextResponse.json({ error: z.flattenError(parsed.error).fieldErrors }, { status: 400 });
 
   const supabase = await createServerClient();

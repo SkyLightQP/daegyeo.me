@@ -28,20 +28,25 @@ const Page = () => {
           setIsLoading(true);
           setError(null);
 
-          const supabase = createClient();
-          const { error } = await supabase.auth.signInWithPassword({
-            email: form.email,
-            password: form.password,
-          });
+          try {
+            const supabase = createClient();
+            const { error } = await supabase.auth.signInWithPassword({
+              email: form.email,
+              password: form.password,
+            });
 
-          if (error) {
-            setError(error.message);
+            if (error) {
+              setError(error.message);
+              return;
+            }
+
+            router.refresh();
+            router.push('/admin');
+          } catch {
+            setError('로그인 요청에 실패했습니다.');
+          } finally {
             setIsLoading(false);
-            return;
           }
-
-          router.refresh();
-          router.push('/admin');
         }}
         className="flex flex-col gap-4"
       >

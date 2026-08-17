@@ -25,7 +25,7 @@ pnpm start
 # Build docker image (you can change tag or container name.)
 DOCKER_BUILDKIT=1 docker build \
   --build-arg NEXT_PUBLIC_SUPABASE_URL=https://example.supabase.co \
-  --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY=example-anon-key \
+  --build-arg NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=example-publishable-key \
   -t resume .
 
 # Run docker container

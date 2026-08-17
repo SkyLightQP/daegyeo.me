@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
 import { withAdmin } from '@/lib/supabase/auth';
 import { createServerClient } from '@/lib/supabase/server';
+import { readJson } from '@/lib/http';
 import { reorderSections, ReorderSchema } from '@/lib/queries/sections';
 
 export const PATCH = withAdmin(async (req) => {
-  const parsed = ReorderSchema.safeParse(await req.json());
+  const body = await readJson(req);
+  if (!body.ok) return body.response;
+  const parsed = ReorderSchema.safeParse(body.data);
   if (!parsed.success) return NextResponse.json({ error: parsed.error.flatten().fieldErrors }, { status: 400 });
 
   const supabase = await createServerClient();
