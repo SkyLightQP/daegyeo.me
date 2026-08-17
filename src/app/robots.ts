@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin/', '/admin/content/', '/admin/login/']
     },
-    sitemap: 'https://daegyeo.me/sitemap.xml',
+    sitemap: 'https://daegyeo.me/sitemap.xml'
   };
 }
