@@ -8,9 +8,10 @@ interface SectionEntryProps {
   title: ReactNode;
   subtitle?: ReactNode;
   children?: ReactNode;
+  analyticsLabel?: string;
 }
 
-const SectionEntry = ({ title, subtitle, children }: SectionEntryProps) => {
+const SectionEntry = ({ title, subtitle, children, analyticsLabel }: SectionEntryProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChildren = !!children;
 
@@ -19,6 +20,13 @@ const SectionEntry = ({ title, subtitle, children }: SectionEntryProps) => {
       <button
         onClick={() => hasChildren && setIsOpen(!isOpen)}
         className={cn('w-full text-left group', hasChildren && 'cursor-pointer')}
+        {...(hasChildren
+          ? {
+              'data-analytics-event': 'description_expand',
+              'data-analytics-label': analyticsLabel,
+              'aria-expanded': isOpen,
+            }
+          : {})}
       >
         <p className="font-medium flex items-center">
           {title}

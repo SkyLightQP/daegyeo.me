@@ -37,6 +37,7 @@ const SectionBlocks: FC<SectionBlocksProps> = ({ sections, contents, className }
             {items.map((item) => (
               <SectionEntry
                 key={item.id}
+                analyticsLabel={item.title}
                 title={
                   <>
                     {item.title}&nbsp;

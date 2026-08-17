@@ -4,13 +4,14 @@ import { Introduce } from '../../components/blocks/Introduce';
 import Footer from '../../components/Footer';
 import SectionBlocks from '../../components/SectionBlocks';
 import AdminShortcut from '../../components/AdminShortcut';
+import AnalyticsBoundary from '../../components/analytics/AnalyticsBoundary';
 import { getContentData } from '../../lib/queries/content-data';
 
 const Page = async () => {
   const { sections, contents } = await getContentData();
 
   return (
-    <>
+    <AnalyticsBoundary>
       <AdminShortcut />
 
       <Introduce />
@@ -19,7 +20,7 @@ const Page = async () => {
       <SectionBlocks sections={sections} contents={contents} className="mt-16" />
 
       <Footer />
-    </>
+    </AnalyticsBoundary>
   );
 };
 
