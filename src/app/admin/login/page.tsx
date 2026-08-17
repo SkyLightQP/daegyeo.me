@@ -1,96 +1,112 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
+import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { createClient } from '@/lib/supabase/client';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { SectionTitle } from '../../../components/Typography';
+import Colors from '../../../styles/Colors';
+import { Space } from '../../../components/Space';
+import { createSupabaseClient } from '../../../utils/supabase/client';
 
-const Page = () => {
-  const [form, setForm] = useState<{ email: string; password: string }>({
-    email: '',
-    password: '',
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const Container = styled.div`
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: ${Colors.PRIMARY};
+`;
+
+const Input = styled.input`
+  width: 280px;
+  height: 40px;
+
+  border: 1px solid #e7e7e7;
+  border-radius: 10px;
+
+  padding: 0.5rem 1rem;
+`;
+
+const LoginButton = styled.button`
+  width: 100px;
+  height: 40px;
+
+  color: white;
+  background-color: ${Colors.PRIMARY};
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const Page: React.FC = () => {
   const router = useRouter();
+  const supabase = createSupabaseClient();
+  const [input, setInput] = useState<{ email: string; password: string }>({
+    email: '',
+    password: ''
+  });
+  const toast = useToast({
+    isClosable: true,
+    position: 'top-left'
+  });
+
+  const login = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email: input.email, password: input.password });
+      if (error !== null) {
+        toast({
+          title: 'Credential Error',
+          description: error.message,
+          status: 'error'
+        });
+        return;
+      }
+      if (data.user !== null && data.session !== null) await router.push('/admin');
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        toast({
+          title: 'Error',
+          description: e.message,
+          status: 'error'
+        });
+      }
+    }
+  };
 
   return (
-    <div className="w-full max-w-sm rounded-xl border border-border bg-white p-8 shadow-sm">
-      <h3 className="font-semibold text-lg mb-8">Login</h3>
-
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          setIsLoading(true);
-          setError(null);
-
-          try {
-            const supabase = createClient();
-            const { error } = await supabase.auth.signInWithPassword({
-              email: form.email,
-              password: form.password,
-            });
-
-            if (error) {
-              setError(error.message);
-              return;
-            }
-
-            router.refresh();
-            router.push('/admin');
-          } catch {
-            setError('로그인 요청에 실패했습니다.');
-          } finally {
-            setIsLoading(false);
-          }
+    <Container>
+      <SectionTitle>daegyeo.me</SectionTitle>
+      <SectionTitle>관리자 로그인</SectionTitle>
+      <Space y={20} />
+      <Input
+        type="email"
+        placeholder="이메일"
+        value={input.email}
+        onChange={(e) => setInput((prev) => ({ ...prev, email: e.target.value }))}
+      />
+      <Space y={14} />
+      <Input
+        type="password"
+        placeholder="비밀번호"
+        value={input.password}
+        onChange={(e) => setInput((prev) => ({ ...prev, password: e.target.value }))}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') login();
         }}
-        className="flex flex-col gap-4"
-      >
-        {error && <p className="text-sm text-destructive">{error}</p>}
-
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="email">이메일</Label>
-          <Input
-            id="email"
-            type="email"
-            value={form.email}
-            onChange={(e) => setForm((prev) => ({ ...prev, email: e.target.value }))}
-            required
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor="password">비밀번호</Label>
-          <div className="relative">
-            <Input
-              id="password"
-              type={isVisible ? 'text' : 'password'}
-              value={form.password}
-              onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))}
-              required
-              className="pr-10"
-            />
-            <button
-              type="button"
-              aria-label="toggle password visibility"
-              onClick={() => setIsVisible((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {isVisible ? <EyeOff size={16} /> : <Eye size={16} />}
-            </button>
-          </div>
-        </div>
-
-        <Button type="submit" disabled={isLoading} className="mt-2 w-full h-9">
-          {isLoading && <Loader2 size={14} className="animate-spin mr-2" />}
-          로그인
-        </Button>
-      </form>
-    </div>
+        autoComplete="off"
+      />
+      <Space y={20} />
+      <LoginButton onClick={login}>Login</LoginButton>
+    </Container>
   );
 };
 
