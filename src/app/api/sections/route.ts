@@ -6,8 +6,8 @@ import { readJson } from '@/lib/http';
 import { getSections, createSection, SectionSchema } from '@/lib/queries/sections';
 import type { Database } from '@/types/database.types';
 
-type ContentRow = Database['public']['Tables']['contents_dev']['Row'];
-type SectionWithContents = Database['public']['Tables']['sections_dev']['Row'] & { contents_dev: ContentRow[] };
+type ContentRow = Database['public']['Tables']['contents']['Row'];
+type SectionWithContents = Database['public']['Tables']['sections']['Row'] & { contents: ContentRow[] };
 
 export const GET = withAdmin(async (req) => {
   const supabase = await createServerClient();
@@ -19,9 +19,9 @@ export const GET = withAdmin(async (req) => {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
   const responseData = includeContents
-    ? (data as unknown as SectionWithContents[]).map(({ contents_dev, ...section }) => ({
+    ? (data as unknown as SectionWithContents[]).map(({ contents, ...section }) => ({
         ...section,
-        contents: contents_dev,
+        contents,
       }))
     : data;
   return NextResponse.json({ data: responseData });

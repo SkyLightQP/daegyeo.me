@@ -16,59 +16,6 @@ export type Database = {
     Tables: {
       contents: {
         Row: {
-          createdAt: string
-          description: string
-          hasMargin: boolean
-          id: number
-          isHidden: boolean
-          order: number
-          sectionId: number
-          showPdf: boolean
-          stack: string
-          subtitle: string
-          title: string
-          updatedAt: string
-        }
-        Insert: {
-          createdAt?: string
-          description: string
-          hasMargin: boolean
-          id?: number
-          isHidden: boolean
-          order: number
-          sectionId: number
-          showPdf?: boolean
-          stack: string
-          subtitle: string
-          title: string
-          updatedAt?: string
-        }
-        Update: {
-          createdAt?: string
-          description?: string
-          hasMargin?: boolean
-          id?: number
-          isHidden?: boolean
-          order?: number
-          sectionId?: number
-          showPdf?: boolean
-          stack?: string
-          subtitle?: string
-          title?: string
-          updatedAt?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "contents_sectionId_fkey"
-            columns: ["sectionId"]
-            isOneToOne: false
-            referencedRelation: "sections"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      contents_dev: {
-        Row: {
           created_at: string
           date_range: string
           description: string
@@ -106,118 +53,15 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "contents_dev_section_id_fkey"
+            foreignKeyName: "contents_section_id_fkey"
             columns: ["section_id"]
             isOneToOne: false
-            referencedRelation: "sections_dev"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      images: {
-        Row: {
-          alt: string
-          contentId: number
-          createdAt: string
-          id: number
-          image_url: string
-          order: number
-          updatedAt: string
-        }
-        Insert: {
-          alt: string
-          contentId: number
-          createdAt?: string
-          id?: number
-          image_url: string
-          order: number
-          updatedAt?: string
-        }
-        Update: {
-          alt?: string
-          contentId?: number
-          createdAt?: string
-          id?: number
-          image_url?: string
-          order?: number
-          updatedAt?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "images_contentId_fkey"
-            columns: ["contentId"]
-            isOneToOne: false
-            referencedRelation: "contents"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      links: {
-        Row: {
-          contentId: number
-          createdAt: string
-          href: string
-          id: number
-          name: string
-          order: number
-          updatedAt: string
-        }
-        Insert: {
-          contentId: number
-          createdAt?: string
-          href: string
-          id?: number
-          name: string
-          order: number
-          updatedAt?: string
-        }
-        Update: {
-          contentId?: number
-          createdAt?: string
-          href?: string
-          id?: number
-          name?: string
-          order?: number
-          updatedAt?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "links_contentId_fkey"
-            columns: ["contentId"]
-            isOneToOne: false
-            referencedRelation: "contents"
+            referencedRelation: "sections"
             referencedColumns: ["id"]
           },
         ]
       }
       sections: {
-        Row: {
-          createdAt: string
-          id: number
-          order: number
-          showPdf: boolean
-          title: string
-          updatedAt: string
-        }
-        Insert: {
-          createdAt?: string
-          id?: number
-          order: number
-          showPdf?: boolean
-          title: string
-          updatedAt?: string
-        }
-        Update: {
-          createdAt?: string
-          id?: number
-          order?: number
-          showPdf?: boolean
-          title?: string
-          updatedAt?: string
-        }
-        Relationships: []
-      }
-      sections_dev: {
         Row: {
           created_at: string
           id: number
